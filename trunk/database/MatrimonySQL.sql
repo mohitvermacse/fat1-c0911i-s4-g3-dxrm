@@ -33,7 +33,7 @@ CREATE TABLE users(
 	email NVARCHAR(50),
 	phoneNumber NVARCHAR(20),
 	maritalStatus NVARCHAR(50),
-	height INT,	
+	height NTEXT,	
 	cityID INT FOREIGN KEY REFERENCES city(cityID) not null,
 	languages NVARCHAR(100),
 	caste NVARCHAR(10),
