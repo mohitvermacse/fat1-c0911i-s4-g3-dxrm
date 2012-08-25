@@ -4,8 +4,7 @@
  */
 package controller;
 
-import bean.UserAccess;
-import bean.Validate;
+import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -14,25 +13,63 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author nvc
+ * @author SENJURO
  */
 public class RegisterForm extends org.apache.struts.action.ActionForm {
-
-    private String userName, password, firstName, lastName, address, gender, birthDay, email, phoneNumber, maritalStatus;
-    private String city,movies;
+    
+    private String name;
+    private int number;
+    private String submit;
+    private String userName;
+    private String password;
+    private String fullName;
+    private String address;
+    private String gender;
+    private String birthDay;
+    private String email;
+    private String phoneNumber;
+    private String maritalStatus;
+    private String height;
+    private String cityName;
     private String languages;
     private String caste;
-    private String familyDetail;
+    private String familyDetails;
     private String qualification;
     private String workingAt;
     private String hobbies;
     private String favoriteMusic;
+    private String movies;
     private String cuisine;
     private String books;
-    private String height;
-    private String action;
-    private String amount;
-    private String premium,map;
+
+    /**
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param string
+     */
+    public void setName(String string) {
+        name = string;
+    }
+
+    /**
+     * @return
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * @param i
+     */
+    public void setNumber(int i) {
+        number = i;
+    }
+
     /**
      *
      */
@@ -50,40 +87,53 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-
-        Validate valid = new Validate();
-        UserAccess ua = new UserAccess();
-
-        if (!valid.checkUserName(getUserName())) {
-            errors.add("userNameEr", new ActionMessage("error.userNameEr.required"));
+        UserManager userManager = new UserManager();
+        
+        /*if (getName() == null || getName().length() < 1) {
+            errors.add("name", new ActionMessage("error.name.required"));
+            // TODO: add 'error.name.required' key to your resources
+        }*/
+        
+        if (getUserName() == null || getUserName().length() < 6) {
+            errors.add("userNameError", new ActionMessage("errors.userName.error"));
+            return errors;
+        } else {
+            if (!userManager.checkUserName(userName)) {
+                errors.add("existed", new ActionMessage("errors.userName.existed"));
+                return errors;
+            }
         }
-        if (!valid.checkPassword(getPassword())) {
-            errors.add("passwordEr", new ActionMessage("error.passwordEr.required"));
+        
+        if (getPassword() == null || getPassword().length() < 6) {
+            errors.add("passwordError", new ActionMessage("error.password.required"));
+            return errors;
         }
-        if (!valid.checkFirstName(getFirstName())) {
-            errors.add("firstNameEr", new ActionMessage("error.firstNameEr.required"));
+        
+        if (getFullName() == null || getFullName().length() < 4) {
+            errors.add("fullNameError", new ActionMessage("error.fullName.required"));
+            return errors;
         }
-        if (!valid.checkLastName(getLastName())) {
-            errors.add("lastNameEr", new ActionMessage("error.lastNameEr.required"));
+        
+        if (getAddress() == null || getAddress().length() < 5) {
+            errors.add("addressError", new ActionMessage("error.Address.required"));
+            return errors;
         }
-        if (gender.equalsIgnoreCase("Select")) {
-            errors.add("genderEr", new ActionMessage("error.genderEr.required"));
-        }
-        if (!valid.isValidEmailAddress(getEmail())) {
-            errors.add("emailEr", new ActionMessage("error.emailEr.required"));
-        }
-        if (valid.checkPhone(getPhoneNumber())) {
-            errors.add("phoneEr", new ActionMessage("error.phoneEr.required"));
-        }
-        if (!ua.checkUserName(userName)) {
-            errors.add("userEmailEr", new ActionMessage("error.userEmailEr.required"));
-        }
-        if (!ua.checkEmail(email)) {
-            errors.add("EmailEr", new ActionMessage("error.EmailEr.required"));
-        }if(getCity().equalsIgnoreCase("Seleect")){
-            errors.add("cityEr", new ActionMessage("error.cityEr.required"));
-        }
+        
         return errors;
+    }
+
+    /**
+     * @return the submit
+     */
+    public String getSubmit() {
+        return submit;
+    }
+
+    /**
+     * @param submit the submit to set
+     */
+    public void setSubmit(String submit) {
+        this.submit = submit;
     }
 
     /**
@@ -115,31 +165,17 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     }
 
     /**
-     * @return the firstName
+     * @return the fullName
      */
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
     /**
-     * @param firstName the firstName to set
+     * @param fullName the fullName to set
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     /**
@@ -227,17 +263,31 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     }
 
     /**
-     * @return the city
+     * @return the height
      */
-    public String getCity() {
-        return city;
+    public String getHeight() {
+        return height;
     }
 
     /**
-     * @param city the city to set
+     * @param height the height to set
      */
-    public void setCity(String city) {
-        this.city = city;
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    /**
+     * @return the cityName
+     */
+    public String getCityName() {
+        return cityName;
+    }
+
+    /**
+     * @param cityName the cityName to set
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     /**
@@ -269,17 +319,17 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     }
 
     /**
-     * @return the familyDetail
+     * @return the familyDetails
      */
-    public String getFamilyDetail() {
-        return familyDetail;
+    public String getFamilyDetails() {
+        return familyDetails;
     }
 
     /**
-     * @param familyDetail the familyDetail to set
+     * @param familyDetails the familyDetails to set
      */
-    public void setFamilyDetail(String familyDetail) {
-        this.familyDetail = familyDetail;
+    public void setFamilyDetails(String familyDetails) {
+        this.familyDetails = familyDetails;
     }
 
     /**
@@ -339,6 +389,20 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     }
 
     /**
+     * @return the movies
+     */
+    public String getMovies() {
+        return movies;
+    }
+
+    /**
+     * @param movies the movies to set
+     */
+    public void setMovies(String movies) {
+        this.movies = movies;
+    }
+
+    /**
      * @return the cuisine
      */
     public String getCuisine() {
@@ -364,89 +428,5 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
      */
     public void setBooks(String books) {
         this.books = books;
-    }
-
-    /**
-     * @return the height
-     */
-    public String getHeight() {
-        return height;
-    }
-
-    /**
-     * @param height the height to set
-     */
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    /**
-     * @return the movies
-     */
-    public String getMovies() {
-        return movies;
-    }
-
-    /**
-     * @param movies the movies to set
-     */
-    public void setMovies(String movies) {
-        this.movies = movies;
-    }
-
-    /**
-     * @return the action
-     */
-    public String getAction() {
-        return action;
-    }
-
-    /**
-     * @param action the action to set
-     */
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    /**
-     * @return the amount
-     */
-    public String getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    /**
-     * @return the premium
-     */
-    public String getPremium() {
-        return premium;
-    }
-
-    /**
-     * @param premium the premium to set
-     */
-    public void setPremium(String premium) {
-        this.premium = premium;
-    }
-
-    /**
-     * @return the map
-     */
-    public String getMap() {
-        return map;
-    }
-
-    /**
-     * @param map the map to set
-     */
-    public void setMap(String map) {
-        this.map = map;
     }
 }
