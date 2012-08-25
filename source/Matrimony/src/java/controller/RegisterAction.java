@@ -4,18 +4,17 @@
  */
 package controller;
 
-import bean.UserAccess;
-import entity.Users;
-import java.util.ArrayList;
+import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author nvc
+ * @author SENJURO
  */
 public class RegisterAction extends org.apache.struts.action.Action {
 
@@ -38,48 +37,43 @@ public class RegisterAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        Users u = new Users();
-        RegisterForm register = (RegisterForm) form;
-        UserAccess ua = new UserAccess();
-        String map = register.getMap(), action;
-        action = register.getAction();
-
-        String fullName = register.getFirstName() + " " + register.getLastName();
-        u.setUserName(register.getUserName());
-        u.setPassword(register.getPassword());
-        u.setFullName(fullName);
-        u.setAddress(register.getAddress());
-        u.setGender(register.getGender());
-        u.setBirthDay(register.getBirthDay());
-        u.setEmail(register.getEmail());
-        u.setPhoneNumber(register.getPhoneNumber());
-        u.setMaritalStatus(register.getMaritalStatus());
-        u.setHeight(Integer.parseInt(register.getHeight()));
-        u.setCityId(Integer.parseInt(register.getCity()));
-        u.setLanguages(register.getLanguages());
-        u.setCaste(register.getCaste());
-        u.setFamilyDetail(register.getFamilyDetail());
-        u.setQualification(register.getQualification());
-        u.setWorkingAt(register.getWorkingAt());
-        u.setHobbies(register.getHobbies());
-        u.setFavorite(register.getFavoriteMusic());
-        u.setMovies(register.getMovies());
-        u.setCuisine(register.getCuisine());
-        u.setBook(register.getBooks());
-        u.setStatus("Pending");
-        if (action.equalsIgnoreCase("Register")) {
-            if (ua.insertUser(u)) {
-                map = "pay";
-                ArrayList arrayPrmium = (ArrayList) ua.getAllPremium();
-                request.setAttribute("listPremium", arrayPrmium);
-                System.out.println("   MAP 1 ::::::: " + map + " " + register.getUserName() + " " + register.getEmail());
-            }
-
+        
+        HttpSession session = request.getSession(false);
+        UserManager userManager = new UserManager();
+        userManager.getCityList();
+        session.setAttribute("cityList", userManager);
+        RegisterForm registerForm = (RegisterForm) form;
+        
+        if(registerForm.getSubmit().equalsIgnoreCase("Register")) {
+            String userName = registerForm.getUserName();
+            String password = registerForm.getPassword();
+            String fullName = registerForm.getFullName();
+            String address = registerForm.getAddress();
+            String gender = registerForm.getGender();
+            String birthDay = registerForm.getBirthDay();
+            String email = registerForm.getEmail();
+            String phoneNumber = registerForm.getPhoneNumber();
+            String maritalStatus = registerForm.getMaritalStatus();
+            String height = registerForm.getHeight();
+            String cityName = registerForm.getCityName();
+            String languages = registerForm.getLanguages();
+            String caste = registerForm.getCaste();
+            String familyDetails = registerForm.getFamilyDetails();
+            String qualification = registerForm.getQualification();
+            String workingAt = registerForm.getWorkingAt();
+            String hobbies = registerForm.getHobbies();
+            String favoriteMusic = registerForm.getFavoriteMusic();
+            String movies = registerForm.getMovies();
+            String cuisine = registerForm.getCuisine();
+            String books = registerForm.getBooks();
+            boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, "01/01/2013", "Paid User");
+            if(flag) {
+                return mapping.findForward("success");
+            } else {
+                return mapping.findForward("error");
+                }
+        } else {
+            return mapping.findForward("register");
         }
-        if (action.equalsIgnoreCase("Pay ment")) {
-            System.out.println("PayMent Success.." + register.getUserName() + " Amount: " + register.getAmount() +" PreID: "+ register.getPremium());
-        }
-       
-        return mapping.findForward(map);
     }
 }
