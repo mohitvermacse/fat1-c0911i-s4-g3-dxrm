@@ -34,6 +34,7 @@ CREATE TABLE users(
 	phoneNumber NVARCHAR(20),
 	maritalStatus NVARCHAR(50),
 	height NTEXT,	
+	countryID INT FOREIGN KEY REFERENCES country(countryID) not null,
 	cityID INT FOREIGN KEY REFERENCES city(cityID) not null,
 	languages NVARCHAR(100),
 	caste NVARCHAR(10),
