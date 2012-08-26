@@ -154,3 +154,8 @@ CREATE PROC InsertImage
 	@image nvarchar(100)
 AS
 INSERT INTO images(userID,images) VALUES (@id,@image)
+GO
+CREATE PROC DisplayImage
+	@id int	
+AS
+SELECT imageID, images FROM images WHERE userID = @id
