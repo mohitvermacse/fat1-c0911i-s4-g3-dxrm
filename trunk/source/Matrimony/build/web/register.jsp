@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="cityList" class="bean.UserManager" scope="session"/>
+        <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
         <html:form action="RegisterAction" >
             <table>
                 <tr>
@@ -71,10 +71,21 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td>Country: </td>
+                    <td>
+                        <html:select property="countryName">
+                            <logic:iterate id="country" collection="${userManager.countryList}">
+                                <html:option value="${country}"/>
+                            </logic:iterate>
+                        </html:select>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td>City: </td>
                     <td>
                         <html:select property="cityName">
-                            <logic:iterate id="city" collection="${cityList.cityList}">
+                            <logic:iterate id="city" collection="${userManager.cityList}">
                                 <html:option value="${city}"/>
                             </logic:iterate>
                         </html:select>

@@ -30,6 +30,7 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     private String phoneNumber;
     private String maritalStatus;
     private String height;
+    private String countryName;
     private String cityName;
     private String languages;
     private String caste;
@@ -69,6 +70,20 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     public void setNumber(int i) {
         number = i;
     }
+    
+    /**
+     * @return the submit
+     */
+    public String getSubmit() {
+        return submit;
+    }
+
+    /**
+     * @param submit the submit to set
+     */
+    public void setSubmit(String submit) {
+        this.submit = submit;
+    }
 
     /**
      *
@@ -77,6 +92,8 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
 
     /**
      * This is the action called from the Struts framework.
@@ -89,10 +106,10 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
         ActionErrors errors = new ActionErrors();
         UserManager userManager = new UserManager();
         
-        /*if (getName() == null || getName().length() < 1) {
+        if (getSubmit() == null || getSubmit().length() < 1) {
             errors.add("name", new ActionMessage("error.name.required"));
             // TODO: add 'error.name.required' key to your resources
-        }*/
+        }
         
         if (getUserName() == null || getUserName().length() < 6) {
             errors.add("userNameError", new ActionMessage("errors.userName.error"));
@@ -120,20 +137,6 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
         }
         
         return errors;
-    }
-
-    /**
-     * @return the submit
-     */
-    public String getSubmit() {
-        return submit;
-    }
-
-    /**
-     * @param submit the submit to set
-     */
-    public void setSubmit(String submit) {
-        this.submit = submit;
     }
 
     /**
@@ -428,5 +431,19 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
      */
     public void setBooks(String books) {
         this.books = books;
+    }
+
+    /**
+     * @return the countryName
+     */
+    public String getCountryName() {
+        return countryName;
+    }
+
+    /**
+     * @param countryName the countryName to set
+     */
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
     }
 }

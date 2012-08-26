@@ -92,7 +92,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.LinkTag _jspx_th_html_link_0 = (org.apache.struts.taglib.html.LinkTag) _jspx_tagPool_html_link_page.get(org.apache.struts.taglib.html.LinkTag.class);
     _jspx_th_html_link_0.setPageContext(_jspx_page_context);
     _jspx_th_html_link_0.setParent(null);
-    _jspx_th_html_link_0.setPage("/RegisterAction.do");
+    _jspx_th_html_link_0.setPage("/TempAction.page");
     int _jspx_eval_html_link_0 = _jspx_th_html_link_0.doStartTag();
     if (_jspx_eval_html_link_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_html_link_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
