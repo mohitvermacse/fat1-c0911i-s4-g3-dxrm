@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
+import entity.Image;
 /**
  *
  * @author UTAN
@@ -32,15 +33,15 @@ public class ImageBus {
             Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList getImage (int id){
+    public ArrayList<Image> getImage (int id){
         ConnectDB da = new ConnectDB();
-        ArrayList ar = new ArrayList();
+        ArrayList<Image> ar = new ArrayList<Image>();
         try {
-            ps = da.getConnect().prepareCall("{call GetImage(?)}");        
+            ps = da.getConnect().prepareCall("{call DisplayImage(?)}");        
             ps.setInt(1, id);            
             rs = ps.executeQuery();
             while (rs.next()){
-                ar.add(rs.getString(2));
+                ar.add(new Image(rs.getInt(1), rs.getString(2)));
             }
             ps.close();
             da.closeConnect();
