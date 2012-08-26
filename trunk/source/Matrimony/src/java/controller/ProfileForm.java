@@ -104,7 +104,12 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
         }
         
         if (getAddress() == null || getAddress().length() < 5) {
-            errors.add("addressError", new ActionMessage("error.Address.required"));
+            errors.add("addressError", new ActionMessage("error.address.required"));
+            return errors;
+        }
+        
+        if (getGender() == null) {
+            errors.add("genderError", new ActionMessage("error.gender.required"));
             return errors;
         }
         return errors;
