@@ -38,8 +38,11 @@ public class TempAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
         UserManager userManager = new UserManager();
+        userManager.fillCityList();
+        userManager.fillCountryList();
+        userManager.fillUserProfile(1);
         session.setAttribute("userManager", userManager);
         return mapping.findForward("register");
     }

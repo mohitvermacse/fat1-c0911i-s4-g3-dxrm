@@ -17,5 +17,7 @@
     </head>
     <body>
         <html:link page="/TempAction.page">Register</html:link>
+        <br>
+        <html:link page="/profile.jsp">Profile</html:link>
     </body>
 </html>
