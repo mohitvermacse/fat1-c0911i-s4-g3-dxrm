@@ -16,6 +16,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <html:link page="/RegisterAction.page">Register</html:link>
+        <html:link page="/TempAction.page">Register</html:link>
     </body>
 </html>

@@ -40,40 +40,37 @@ public class RegisterAction extends org.apache.struts.action.Action {
         
         HttpSession session = request.getSession(false);
         UserManager userManager = new UserManager();
-        userManager.getCityList();
-        session.setAttribute("cityList", userManager);
         RegisterForm registerForm = (RegisterForm) form;
         
-        if(registerForm.getSubmit().equalsIgnoreCase("Register")) {
-            String userName = registerForm.getUserName();
-            String password = registerForm.getPassword();
-            String fullName = registerForm.getFullName();
-            String address = registerForm.getAddress();
-            String gender = registerForm.getGender();
-            String birthDay = registerForm.getBirthDay();
-            String email = registerForm.getEmail();
-            String phoneNumber = registerForm.getPhoneNumber();
-            String maritalStatus = registerForm.getMaritalStatus();
-            String height = registerForm.getHeight();
-            String cityName = registerForm.getCityName();
-            String languages = registerForm.getLanguages();
-            String caste = registerForm.getCaste();
-            String familyDetails = registerForm.getFamilyDetails();
-            String qualification = registerForm.getQualification();
-            String workingAt = registerForm.getWorkingAt();
-            String hobbies = registerForm.getHobbies();
-            String favoriteMusic = registerForm.getFavoriteMusic();
-            String movies = registerForm.getMovies();
-            String cuisine = registerForm.getCuisine();
-            String books = registerForm.getBooks();
-            boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, "01/01/2013", "Paid User");
-            if(flag) {
-                return mapping.findForward("success");
-            } else {
-                return mapping.findForward("error");
-                }
+        String userName = registerForm.getUserName();
+        String password = registerForm.getPassword();
+        String fullName = registerForm.getFullName();
+        String address = registerForm.getAddress();
+        String gender = registerForm.getGender();
+        String birthDay = registerForm.getBirthDay();
+        String email = registerForm.getEmail();
+        String phoneNumber = registerForm.getPhoneNumber();
+        String maritalStatus = registerForm.getMaritalStatus();
+        int height = Integer.parseInt(registerForm.getHeight());
+        String countryName = registerForm.getCountryName();
+        String cityName = registerForm.getCityName();
+        String languages = registerForm.getLanguages();
+        String caste = registerForm.getCaste();
+        String familyDetails = registerForm.getFamilyDetails();
+        String qualification = registerForm.getQualification();
+        String workingAt = registerForm.getWorkingAt();
+        String hobbies = registerForm.getHobbies();
+        String favoriteMusic = registerForm.getFavoriteMusic();
+        String movies = registerForm.getMovies();
+        String cuisine = registerForm.getCuisine();
+        String books = registerForm.getBooks();
+        
+        boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, "01/01/2013", "Paid User");
+        System.out.println("CDCM: " + flag);
+        if(flag) {
+            return mapping.findForward("success");
         } else {
-            return mapping.findForward("register");
+            return mapping.findForward("error");
         }
     }
 }

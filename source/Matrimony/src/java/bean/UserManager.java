@@ -18,14 +18,16 @@ public class UserManager {
     ConnectDB conn;
     private ArrayList userList = new ArrayList();
     ArrayList cityList = new ArrayList();
+    ArrayList countryList = new ArrayList();
     
-    public boolean addNewUser(String userName, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, String height, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
+    public boolean addNewUser(String userName, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
         boolean flag = false;
         conn = new ConnectDB();
         int cityID = getCityID(cityName);
+        int countryID = getCountryID(countryName);
         boolean checkUserName = checkUserName(userName);
         try {
-            String query = "INSERT INTO users(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, cityID, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryID, cityID, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, userName);
             prs.setString(2, password);
@@ -36,20 +38,21 @@ public class UserManager {
             prs.setString(7, email);
             prs.setString(8, phoneNumber);
             prs.setString(9, maritalStatus);
-            prs.setString(10, height);
-            prs.setInt(11, cityID);
-            prs.setString(12, languages);
-            prs.setString(13, caste);
-            prs.setString(14, familyDetails);
-            prs.setString(15, qualification);
-            prs.setString(16, workingAt);
-            prs.setString(17, hobbies);
-            prs.setString(18, favoriteMusic);
-            prs.setString(19, movies);
-            prs.setString(20, cuisine);
-            prs.setString(21, books);
-            prs.setString(22, expireDate);
-            prs.setString(23, status);
+            prs.setInt(10, height);
+            prs.setInt(11, countryID);
+            prs.setInt(12, cityID);
+            prs.setString(13, languages);
+            prs.setString(14, caste);
+            prs.setString(15, familyDetails);
+            prs.setString(16, qualification);
+            prs.setString(17, workingAt);
+            prs.setString(18, hobbies);
+            prs.setString(19, favoriteMusic);
+            prs.setString(20, movies);
+            prs.setString(21, cuisine);
+            prs.setString(22, books);
+            prs.setString(23, expireDate);
+            prs.setString(24, status);
             prs.executeUpdate();
             prs.close();
             conn.closeConnect();
@@ -169,6 +172,64 @@ public class UserManager {
             ex.printStackTrace();
         } 
         return this.cityList;
+    }
+    
+    public int getCountryID(String countryName) {
+        conn = new ConnectDB();
+        int countryID = 0;
+        try {
+            String query = "SELECT countryID FROM country WHERE countryName = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setString(1, countryName);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                countryID = rs.getInt(1);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return countryID;
+    }
+    
+    public String getCountryName(int countryID) {
+        conn = new ConnectDB();
+        String countryName = "";
+        try {
+            String query = "SELECT countryName FROM country WHERE countryID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, countryID);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                countryName = rs.getString(1);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return countryName;
+    }
+    
+    public ArrayList getCountryList() {
+        conn = new ConnectDB();
+        try {
+            String query = "SELECT countryName FROM country";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            ResultSet rs = prs.executeQuery();
+            while(rs.next()) {
+                countryList.add(rs.getString(1));
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return this.countryList;
     }
     
     public boolean checkUserName(String userName) {
