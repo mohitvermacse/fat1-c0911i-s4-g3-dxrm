@@ -92,12 +92,7 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <button type=\"reset\" class=\"btn btn-warning cancel\">\n");
       out.write("                            <i class=\"icon-ban-circle icon-white\"></i>\n");
       out.write("                            <span>Cancel upload</span>\n");
-      out.write("                        </button>\n");
-      out.write("                        <button type=\"button\" class=\"btn btn-danger delete\">\n");
-      out.write("                            <i class=\"icon-trash icon-white\"></i>\n");
-      out.write("                            <span>Delete</span>\n");
-      out.write("                        </button>\n");
-      out.write("                        <input type=\"checkbox\" class=\"toggle\">\n");
+      out.write("                        </button>                        \n");
       out.write("                    </div>\n");
       out.write("                    <!-- The global progress information -->\n");
       out.write("                    <div class=\"span5 fileupload-progress fade\">\n");
@@ -203,13 +198,7 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <td class=\"size\"><span>{%=o.formatFileSize(file.size)%}</span></td>\n");
       out.write("            <td colspan=\"2\"></td>\n");
       out.write("            {% } %}\n");
-      out.write("            <td class=\"delete\">\n");
-      out.write("                <button class=\"btn btn-danger\" data-type=\"{%=file.delete_type%}\" data-url=\"{%=file.delete_url%}\">\n");
-      out.write("                    <i class=\"icon-trash icon-white\"></i>\n");
-      out.write("                    <span>{%=locale.fileupload.destroy%}</span>\n");
-      out.write("                </button>\n");
-      out.write("                <input type=\"checkbox\" name=\"delete\" value=\"1\">\n");
-      out.write("            </td>\n");
+      out.write("            \n");
       out.write("        </tr>\n");
       out.write("        {% } %}\n");
       out.write("    </script>\n");

@@ -51,6 +51,9 @@
             <forward name="fail" path="/error.jsp"/>
             <forward name="register" path="/register.jsp"/>
         </action>
+        <action path="/ViewAlbum" type="controller.ViewAlbum">
+            <forward name="success" path="/album.jsp"/>
+        </action>
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
