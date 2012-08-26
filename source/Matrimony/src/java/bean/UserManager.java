@@ -64,7 +64,7 @@ public class UserManager {
         return flag;
     }
     
-    /*public boolean fillUserProfile(int userID) {
+    public boolean fillUserProfile(int userID) {
         conn = new ConnectDB();
         boolean flag = false;
         try {
@@ -74,31 +74,32 @@ public class UserManager {
             ResultSet rs = prs.executeQuery();
             if(rs.next()) {
                 Users user = new Users();
-                user.setUserID(rs.getInt(1));
+                user.setUserId(rs.getInt(1));
                 user.setUserName(rs.getString(2));
                 user.setPassword(rs.getString(3));
                 user.setFullName(rs.getString(4));
                 user.setAddress(rs.getString(5));
                 user.setGender(rs.getString(6));
-                user.setBirthDay(rs.getDate(7));
+                user.setBirthDay(rs.getDate(7).toString());
                 user.setEmail(rs.getString(8));
                 user.setPhoneNumber(rs.getString(9));
                 user.setMaritalStatus(rs.getString(10));
-                user.setHeight(rs.getString(11));
-                user.setCityName(getCityName(rs.getInt(12)));
-                user.setLanguages(rs.getString(13));
-                user.setCaste(rs.getString(14));
-                user.setFamilyDetails(rs.getString(15));
-                user.setQualification(rs.getString(16));
-                user.setWorkingAt(rs.getString(17));
-                user.setHobbies(rs.getString(18));
-                user.setFavoriteMusic(rs.getString(19));
-                user.setMovies(rs.getString(20));
-                user.setCuisine(rs.getString(21));
-                user.setBooks(rs.getString(22));
-                user.setRegisterDate(rs.getDate(23));
-                user.setExpireDate(rs.getDate(24));
-                user.setStatus(rs.getString(25));
+                user.setHeight(rs.getInt(11));
+                user.setCountryName(getCountryName(rs.getInt(12)));
+                user.setCityName(getCityName(rs.getInt(13)));
+                user.setLanguages(rs.getString(14));
+                user.setCaste(rs.getString(15));
+                user.setFamilyDetail(rs.getString(16));
+                user.setQualification(rs.getString(17));
+                user.setWorkingAt(rs.getString(18));
+                user.setHobbies(rs.getString(19));
+                user.setFavorite(rs.getString(20));
+                user.setMovies(rs.getString(21));
+                user.setCuisine(rs.getString(22));
+                user.setBook(rs.getString(23));
+                user.setRegisterDate(rs.getDate(24));
+                user.setExpireDate(rs.getDate(25));
+                user.setStatus(rs.getString(26));
                 getUserList().add(user);
             }
             prs.close();
@@ -110,10 +111,47 @@ public class UserManager {
             flag = false;
         } 
         return flag;
-    }*/
+    }
     
-    public boolean updateProfile() {
-        return true;
+    public boolean updateProfile(int userID, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
+        boolean flag = false;
+        conn = new ConnectDB();
+        int cityID = getCityID(cityName);
+        int countryID = getCountryID(countryName);
+        try {
+            String query = "UPDATE users SET password = ?, fullName = ?, address = ?, gender = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setString(1, password);
+            prs.setString(2, fullName);
+            prs.setString(3, address);
+            prs.setString(4, gender);
+            //prs.setString(5, birthDay);
+            prs.setString(5, email);
+            prs.setString(6, phoneNumber);
+            prs.setString(7, maritalStatus);
+            prs.setInt(8, height);
+            prs.setInt(9, countryID);
+            prs.setInt(10, cityID);
+            prs.setString(11, languages);
+            prs.setString(12, caste);
+            prs.setString(13, familyDetails);
+            prs.setString(14, qualification);
+            prs.setString(15, workingAt);
+            prs.setString(16, hobbies);
+            prs.setString(17, favoriteMusic);
+            prs.setString(18, movies);
+            prs.setString(19, cuisine);
+            prs.setString(20, books);
+            prs.setInt(21, userID);
+            prs.executeUpdate();
+            prs.close();
+            conn.closeConnect();
+            flag = true;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            flag = false;
+        } 
+        return flag;
     }
     
     public int getCityID(String cityName) {
@@ -156,7 +194,7 @@ public class UserManager {
         return cityName;
     }
     
-    public ArrayList getCityList() {
+    public void fillCityList() {
         conn = new ConnectDB();
         try {
             String query = "SELECT cityName FROM city";
@@ -171,7 +209,6 @@ public class UserManager {
         } catch(Exception ex) {
             ex.printStackTrace();
         } 
-        return this.cityList;
     }
     
     public int getCountryID(String countryName) {
@@ -214,7 +251,7 @@ public class UserManager {
         return countryName;
     }
     
-    public ArrayList getCountryList() {
+    public void fillCountryList() {
         conn = new ConnectDB();
         try {
             String query = "SELECT countryName FROM country";
@@ -229,7 +266,6 @@ public class UserManager {
         } catch(Exception ex) {
             ex.printStackTrace();
         } 
-        return this.countryList;
     }
     
     public boolean checkUserName(String userName) {
@@ -255,5 +291,12 @@ public class UserManager {
         return userList;
     }
     
+    public ArrayList getCityList() {
+        return this.cityList;
+    }
+    
+    public ArrayList getCountryList() {
+        return this.countryList;
+    }
 
 }
