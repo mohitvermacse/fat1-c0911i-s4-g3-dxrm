@@ -48,7 +48,7 @@
                         Male <html:radio property="gender" value="Male"/>
                         Female <html:radio property="gender" value="Female"/>
                     </td>
-                    <td></td>
+                    <td><html:errors property="genderError" /></td>
                 </tr>
                 <tr>
                     <td>BirthDay: </td>
