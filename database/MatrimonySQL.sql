@@ -47,7 +47,7 @@ CREATE TABLE users(
 	cuisine NTEXT,
 	books NTEXT,
 	registerDate DATETIME DEFAULT GETDATE(),
-	expireDate DATETIME DEFAULT GETDATE(),
+	expireDate DATETIME,
 	status NVARCHAR(10)
 )
 GO
