@@ -123,3 +123,34 @@ SELECT count(*) FROM users WHERE status='true'
 SELECT top(3) * FROM users order by userID asc
 /* All user have friend */
 SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Accept'
+
+
+
+CREATE PROC GetCustomPayment 
+	@date1 nvarchar(50),
+	@date2 nvarchar(50)
+AS
+SELECT SUM(p.amount) AS TotalMoney, Convert(varchar, t.dates, 101) AS  date  FROM transactions as t inner join premium as p
+on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2 GROUP BY Convert(varchar, t.dates, 101)
+GO
+CREATE PROC GetSum 
+	@date1 nvarchar(50),
+	@date2 nvarchar(50)
+	AS
+	SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
+	on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2/*'08/17/2012 0:00:00' AND '08/17/2012 23:59:59'*/
+
+GO
+CREATE PROC GetSumMonth
+	@month int
+AS
+SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
+	on t.premiumID=p.premiumID WHERE MONTH(t.dates) = @month
+
+GO
+
+CREATE PROC InsertImage
+	@id int,
+	@image nvarchar(100)
+AS
+INSERT INTO images(userID,images) VALUES (@id,@image)
