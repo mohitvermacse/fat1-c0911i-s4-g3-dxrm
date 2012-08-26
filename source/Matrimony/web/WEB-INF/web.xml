@@ -21,6 +21,10 @@
         <servlet-name>TransferRequest</servlet-name>
         <servlet-class>controller.TransferRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadImage</servlet-name>
+        <servlet-class>controller.UploadImage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.page</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>TransferRequest</servlet-name>
         <url-pattern>/TransferRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadImage</servlet-name>
+        <url-pattern>/upload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
