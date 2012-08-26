@@ -30,6 +30,7 @@ CREATE TABLE users(
 	fullName NVARCHAR(50),
 	address NVARCHAR(100),
 	gender NVARCHAR(10),
+	birthDay DATETIME,
 	email NVARCHAR(50),
 	phoneNumber NVARCHAR(20),
 	maritalStatus NVARCHAR(50),
