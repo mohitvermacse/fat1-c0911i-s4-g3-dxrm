@@ -4,7 +4,6 @@
  */
 package bean;
 
-import entity.Users;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -48,7 +47,7 @@ public class ConnectDB {
             BigInteger dis = new BigInteger(1, md5.digest());
             result = dis.toString(16);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
