@@ -92,7 +92,7 @@ public class UserAccess {
             con = db.getConnect();
             ps = con.prepareCall("{call GetAllReceveRequestByStatus(?,?)}");
             ps.setInt(1, _receiveId);
-            ps.setString(2, "Transfer");
+            ps.setString(2, "Approve");
             rs = ps.executeQuery();
             while (rs.next()) {
                 ReceiveRequest rr = new ReceiveRequest();
@@ -108,8 +108,9 @@ public class UserAccess {
                 ps.setInt(1, rr.getSendUserId());
                 rs1 = ps.executeQuery();
                 while (rs1.next()) {
-                    rr.setFullName(rs1.getString(2));
-                    rr.setImages(rs1.getString(3));
+                    rr.setImages(rs1.getString(2));
+                    rr.setFullName(rs1.getString(3));
+
                     array.add(rr);
                 }
 
@@ -120,6 +121,7 @@ public class UserAccess {
         return array;
     }
 // Select all request transferring
+
     public Collection getAllReceveRequestTransfer() {
         ArrayList array = new ArrayList();
 
@@ -129,7 +131,7 @@ public class UserAccess {
             ps.setString(1, "Pending");
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users();
+                User u = new User();
                 ps = con.prepareCall("{call GetInforUserById(?)}");
 
                 u.setReceiverId(rs.getInt(1));
@@ -164,22 +166,22 @@ public class UserAccess {
                     ps.setInt(1, u.getUserId());
                     rs2 = ps.executeQuery();
                     while (rs2.next()) {
-                        u.setImages(rs2.getString(2));
-                        u.setFullName(rs2.getString(3));
-                        u.setGender(rs2.getString(5));
-                        u.setCityName(rs2.getString(8));
-                        u.setCountryName(rs2.getString(9));
-                        u.setMaritalStatus(rs2.getString(10));
-                        u.setHeight(rs2.getInt(11));
-                        u.setLanguages(rs2.getString(12));
-                        u.setFamilyDetail(rs2.getString(13));
-                        u.setQualification(rs2.getString(14));
-                        u.setWorkingAt(rs2.getString(15));
-                        u.setHobbies(rs2.getString(16));
-                        u.setFavorite(rs2.getString(17));
-                        u.setMovies(rs2.getString(18));
-                        u.setCuisine(rs2.getString(19));
-                        u.setBook(rs2.getString(20));
+                        u.setsImages(rs2.getString(2));
+                        u.setsFullName(rs2.getString(3));
+                        u.setsGender(rs2.getString(5));
+                        u.setsCityName(rs2.getString(8));
+                        u.setsCountryName(rs2.getString(9));
+                        u.setsMaritalStatus(rs2.getString(10));
+                        u.setsHeight(rs2.getInt(11));
+                        u.setsLanguages(rs2.getString(12));
+                        u.setsFamilyDetails(rs2.getString(13));
+                        u.setsQualification(rs2.getString(14));
+                        u.setsWorkingAt(rs2.getString(15));
+                        u.setsHobbies(rs2.getString(16));
+                        u.setsFavorite(rs2.getString(17));
+                        u.setsMovies(rs2.getString(18));
+                        u.setsCuisine(rs2.getString(19));
+                        u.setsBook(rs2.getString(20));
                         array.add(u);
                     }
                 }
@@ -246,11 +248,11 @@ public class UserAccess {
             // String str = "SELECT u.fullName,i.images FROM users AS u inner join images AS i ON u.userID=i.userID WHERE u.userID=?";
             ps = con.prepareCall("{call GetAllReceveRequestByStatus(?,?)}");
             ps.setInt(1, _userId);
-            ps.setString(2, "Accept");
+            ps.setString(2, "Approved");
             rs = ps.executeQuery();
             while (rs.next()) {
                 ReceiveRequest rr = new ReceiveRequest();
-                ps = con.prepareCall("{call GetInforRequestBySendUserID(?)}");
+                ps = con.prepareCall("{call GetInforUserSendByUserID(?)}");
                 rr.setReceiverId(rs.getInt(1));
                 rr.setUserId(rs.getInt(2));
                 rr.setSendUserId(rs.getInt(3));
@@ -301,7 +303,7 @@ public class UserAccess {
             ps.setInt(1, _userId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users();
+                User u = new User();
                 u.setUserId(rs.getInt(1));
                 u.setImages(rs.getString(2));
                 u.setFullName(rs.getString(3));
@@ -438,7 +440,7 @@ public class UserAccess {
     }
 //        Insert new user
 
-    public boolean insertUser(Users u) {
+    public boolean insertUser(User u) {
         try {
             if (checkUserName(u.getUserName())) {
                 if (checkEmail(u.getEmail())) {
