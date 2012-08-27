@@ -5,6 +5,7 @@
 package controller;
 
 import bean.UserManager;
+import entity.Premium;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author SENJURO
  */
-public class TempAction extends org.apache.struts.action.Action {
+public class PremiumAction extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -37,14 +38,13 @@ public class TempAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
+        PremiumForm premiumForm = (PremiumForm) form;
         UserManager userManager = new UserManager();
-        userManager.fillCityList();
-        userManager.fillCountryList();
-        userManager.fillUserProfile(1);
-        userManager.fillPremiumPlan();
-        session.setAttribute("userManager", userManager);
-        return mapping.findForward("register");
+        Premium premium = userManager.getPremiumDetails(Integer.parseInt(premiumForm.getPremiumSelecter()));
+        session.setAttribute("premiumID", premiumForm.getPremiumSelecter());
+        session.setAttribute("amount", premium.getAmount());
+        session.setAttribute("premiumType", premium.getPreType());
+        return mapping.findForward("payment");
     }
 }
