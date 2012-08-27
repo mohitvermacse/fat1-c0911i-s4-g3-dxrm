@@ -4,10 +4,8 @@
  */
 package controller;
 
-import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -16,7 +14,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author SENJURO
  */
-public class TempAction extends org.apache.struts.action.Action {
+public class PaymentAction extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -38,13 +36,6 @@ public class TempAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        HttpSession session = request.getSession(true);
-        UserManager userManager = new UserManager();
-        userManager.fillCityList();
-        userManager.fillCountryList();
-        userManager.fillUserProfile(1);
-        userManager.fillPremiumPlan();
-        session.setAttribute("userManager", userManager);
-        return mapping.findForward("register");
+        return mapping.findForward("success");
     }
 }

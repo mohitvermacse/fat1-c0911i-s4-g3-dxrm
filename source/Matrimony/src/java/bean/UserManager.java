@@ -4,6 +4,7 @@
  */
 package bean;
 
+import entity.Premium;
 import entity.Users;
 import java.sql.*;
 import java.text.*;
@@ -19,6 +20,7 @@ public class UserManager {
     private ArrayList userList = new ArrayList();
     ArrayList cityList = new ArrayList();
     ArrayList countryList = new ArrayList();
+    ArrayList premiumPlans = new ArrayList();
     
     public boolean addNewUser(String userName, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
         boolean flag = false;
@@ -211,6 +213,27 @@ public class UserManager {
         } 
     }
     
+    public void fillPremiumPlan() {
+        conn = new ConnectDB();
+        try {
+            String query = "SELECT * FROM premium";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            ResultSet rs = prs.executeQuery();
+            while(rs.next()) {
+                Premium premium = new Premium();
+                premium.setPreId(rs.getInt(1));
+                premium.setPreType(rs.getString(2));
+                premium.setAmount(rs.getInt(3));
+                premiumPlans.add(premium);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     public int getCountryID(String countryName) {
         conn = new ConnectDB();
         int countryID = 0;
@@ -287,6 +310,28 @@ public class UserManager {
         return true;
     }
     
+    public Premium getPremiumDetails(int premiumID) {
+        conn = new ConnectDB();
+        Premium premium = new Premium();
+        try {
+            String query = "SELECT * FROM premium WHERE premiumID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, premiumID);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                premium.setPreId(rs.getInt(1));
+                premium.setPreType(rs.getString(2));
+                premium.setAmount(rs.getInt(3));
+            }
+            prs.close();
+            conn.closeConnect();
+            
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return premium;
+    }
+    
     public ArrayList getUserList() {
         return userList;
     }
@@ -295,8 +340,11 @@ public class UserManager {
         return this.cityList;
     }
     
+    public ArrayList getPremiumPlans() {
+        return this.premiumPlans;
+    }
+    
     public ArrayList getCountryList() {
         return this.countryList;
     }
-
 }

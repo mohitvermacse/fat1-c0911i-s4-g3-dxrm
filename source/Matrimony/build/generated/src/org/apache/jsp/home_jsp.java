@@ -74,6 +74,11 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_meth_html_link_1(_jspx_page_context))
         return;
       out.write("\n");
+      out.write("        <br>\n");
+      out.write("        ");
+      if (_jspx_meth_html_link_2(_jspx_page_context))
+        return;
+      out.write("\n");
       out.write("    </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
@@ -152,6 +157,39 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_html_link_page.reuse(_jspx_th_html_link_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_link_2(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:link
+    org.apache.struts.taglib.html.LinkTag _jspx_th_html_link_2 = (org.apache.struts.taglib.html.LinkTag) _jspx_tagPool_html_link_page.get(org.apache.struts.taglib.html.LinkTag.class);
+    _jspx_th_html_link_2.setPageContext(_jspx_page_context);
+    _jspx_th_html_link_2.setParent(null);
+    _jspx_th_html_link_2.setPage("/premium.jsp");
+    int _jspx_eval_html_link_2 = _jspx_th_html_link_2.doStartTag();
+    if (_jspx_eval_html_link_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      if (_jspx_eval_html_link_2 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
+        out = _jspx_page_context.pushBody();
+        _jspx_th_html_link_2.setBodyContent((javax.servlet.jsp.tagext.BodyContent) out);
+        _jspx_th_html_link_2.doInitBody();
+      }
+      do {
+        out.write("Premium");
+        int evalDoAfterBody = _jspx_th_html_link_2.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+      if (_jspx_eval_html_link_2 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE)
+        out = _jspx_page_context.popBody();
+    }
+    if (_jspx_th_html_link_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_link_page.reuse(_jspx_th_html_link_2);
+      return true;
+    }
+    _jspx_tagPool_html_link_page.reuse(_jspx_th_html_link_2);
     return false;
   }
 }
