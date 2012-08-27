@@ -4,8 +4,8 @@
  */
 package bean;
 
-import entity.Premium;
-import entity.Users;
+
+import entity.*;
 import java.sql.*;
 import java.text.*;
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class UserManager {
             prs.setInt(1, userID);
             ResultSet rs = prs.executeQuery();
             if(rs.next()) {
-                Users user = new Users();
+                User user = new User();
                 user.setUserId(rs.getInt(1));
                 user.setUserName(rs.getString(2));
                 user.setPassword(rs.getString(3));
