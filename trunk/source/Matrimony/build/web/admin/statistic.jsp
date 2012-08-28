@@ -1,18 +1,19 @@
 <%-- 
-    Document   : paymentstats
-    Created on : Aug 17, 2012, 2:34:40 PM
-    Author     : UTAN
+    Document   : statistic
+    Created on : Aug 28, 2012, 11:57:55 PM
+    Author     : nvc
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Payment Stats</title>
+        <title>Statistic</title>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
         <style type="text/css">@import "jquery.datepick.package-4.0.6/jquery.datepick.css";</style> 
         <style type="text/css">
@@ -34,7 +35,8 @@
             }
             $(function() {                
                 $('#startPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
-                $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});                
+                $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'}); 
+                $('#aDayPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'})
                 $('#validateForm').validate({ 
                     errorPlacement: $.datepick.errorPlacement, 
                     rules: { 
@@ -60,28 +62,53 @@
         <div style="display: none;">
             <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
         </div>
+        <c:set var="listNewUser" value="${requestScope.listNewUser}"/>
         <jsp:useBean id="statBean" scope="session" class="bean.StatBean"/>
-        <h1>Stats Today</h1> ${statBean.todaySum}
-        <h1>Stats This Month</h1> ${statBean.monthSum}
-        <h1>Stats Custom Date</h1>        
-
-        <html:form action="StatsAction" method="post" styleId="validateForm">
-            <html:text property="startDate" styleId="startPicker" size="12" styleClass="dpDate"/> to <html:text property="endDate" styleId="endPicker" size="12" styleClass="dpDate"/>  ---  <html:submit value="Filter"/>
+        <h3>Total money of today: ${statBean.todaySum}</h3>
+        <h3>Total money of this Month: ${statBean.monthSum}</h3> 
+        <h3>Total money of Custom Date:</br></h3> 
+            <html:form action="StatsAction" method="post" styleId="validateForm">
+                <html:text property="startDate" styleId="startPicker" size="12" styleClass="dpDate"/> to
+            <html:text property="endDate" styleId="endPicker" size="12" styleClass="dpDate"/>
+            ---  <html:submit value="Filter"/>
+            <h3>Choose a date you want statistic user has been generate: </h3>
+            <html:text property="aDay" styleId="aDayPicker" size="12" styleClass="dpDate"/>
+            ---  <html:submit value="A Day"/>
         </html:form>
         <table>
             <tr>
-                <th>Date</th>
-                <th>Amount</th>
+                <td>
+                    <table>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <c:forEach var="item" items="${statBean.arrS}">
+                            <tr>
+                                <td align="center">${item.date}</td>
+                                <td align="center">${item.sum}</td>
+                            </tr>
+                        </c:forEach>  
+                    </table>
+                </td>
             </tr>
-            <c:forEach var="item" items="${statBean.arrS}">
-                <tr>
-                    <td>${item.date}</td>
-                    <td>${item.sum}</td>
-                </tr>
-            </c:forEach>  
-        </table>    
+            <tr>
+                <td>
+                    <table>
+                        <div style="color: green">${requestScope.listADay}</div>
+                        <c:forEach var="u" items="${listNewUser}">
+                            <tr>
 
-
+                                <td>
+                                    <a href="StatsAction.page?id=${u.userId}" style="font: underLine:false"> ${u.images} ${u.fullName}</a>
+                                </td>
+                                <td>${u.email}
+                                    <html:hidden property="email" value="${u.email}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
+        </table>
 
     </body>
 </html>
