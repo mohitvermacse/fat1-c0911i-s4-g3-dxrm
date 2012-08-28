@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="StatistForm" type="controller.StatistForm"/>
         <form-bean name="PhotoForm" type="controller.PhotoForm"/>
         
         <form-bean name="RegisterForm" type="controller.RegisterForm"/>
@@ -41,9 +42,7 @@
         <action input="/changePassword.jsp" name="ChangePasswordForm" path="/ChangePasswordAction" scope="session" type="controller.ChangePasswordAction">
             <forward name="login" path="/login.jsp"/>
         </action>
-        <action input="/paymentStats.jsp" name="StatsForm"  path="/StatsAction" scope="session" type="controller.StatsAction">
-            <forward name="success" path="/paymentstats.jsp"/>
-        </action>
+       
         <action input="/index.jsp" name="MatrimonyForm" path="/MatrimonyAction" scope="session" type="controller.MatrimonyAction">
             <forward name="success" path="/success.jsp"/>
             <forward name="fail" path="/error.jsp"/>
@@ -62,6 +61,7 @@
         <action path="/ManagePhoto" type="controller.ManagePhoto">
             <forward name="success" path="/managepic.jsp"/>
         </action>
+        <action input="/admin/statistic.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction"/>
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
