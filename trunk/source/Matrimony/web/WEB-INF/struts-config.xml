@@ -7,6 +7,8 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="PhotoForm" type="controller.PhotoForm"/>
+        
         <form-bean name="RegisterForm" type="controller.RegisterForm"/>
         <form-bean name="ChangePasswordForm" type="controller.ChangePasswordForm"/>
         <form-bean name="StatisticForm" type="controller.StatisticForm"/>
@@ -53,6 +55,12 @@
         </action>
         <action path="/ViewAlbum" type="controller.ViewAlbum">
             <forward name="success" path="/album.jsp"/>
+        </action>
+        <action input="/managepic.jsp" name="PhotoForm" path="/PhotoAction" scope="session" type="controller.PhotoAction">
+            <forward name="success" path="/managepic.jsp"/>
+        </action>
+        <action path="/ManagePhoto" type="controller.ManagePhoto">
+            <forward name="success" path="/managepic.jsp"/>
         </action>
     </action-mappings>
     

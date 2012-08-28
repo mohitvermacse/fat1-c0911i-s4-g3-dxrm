@@ -145,12 +145,6 @@ insert into receiveRequest(userID,sendID,actions,status) VALUES(1,8,'Pending','U
 insert into receiveRequest(userID,sendID,actions,status) VALUES(1,9,'Pending','Unread')
 insert into receiveRequest(userID,sendID,actions,status) VALUES(1,10,'Pending','Unread')
 
-INSERT INTO images(userID,images) VALUES(1,'1.jpg')
-INSERT INTO images(userID,images) VALUES(2,'2.jpg')
-INSERT INTO images(userID,images) VALUES(3,'3.jpg')
-INSERT INTO images(userID,images) VALUES(4,'4.jpg')
-INSERT INTO images(userID,images) VALUES(5,'5.jpg')
-INSERT INTO images(userID,images) VALUES(1,'6.jpg')
 Go
 DELETE users
 DELETE city

@@ -43,11 +43,37 @@ public class ImageBus {
             while (rs.next()){
                 ar.add(new Image(rs.getInt(1), rs.getString(2)));
             }
+            rs.close();
             ps.close();
             da.closeConnect();
         } catch (SQLException ex) {
             Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ar;
+    }
+    public void deleteImage (int id){
+        ConnectDB da = new ConnectDB();
+        try {
+            ps = da.getConnect().prepareCall("{call DeleteImage(?)}");        
+            ps.setInt(1, id);            
+            ps.executeUpdate();
+            ps.close();
+            da.closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void changeAvatar (int id, int userId){
+        ConnectDB da = new ConnectDB();
+        try {
+            ps = da.getConnect().prepareCall("{call MakeProfileImage(?,?)}");        
+            ps.setInt(1, id);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+            ps.close();
+            da.closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
