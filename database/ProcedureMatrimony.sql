@@ -194,7 +194,7 @@ CREATE PROCEDURE InsertUser
 				@caste,@familyDetails,@qualification,@workingAt,@hobbies,@favoriteMusic,@movies,@cuisine,@books,@status
 				)
 GO
-/*        Check UerName Of User        */
+/*        Check UserName Of User        */
 CREATE PROCEDURE CheckUserName
 	@userName NVARCHAR(50)
 	AS
@@ -264,6 +264,19 @@ CREATE PROC DisplayImage
 	@id int	
 	AS
 	SELECT imageID, images FROM images WHERE userID = @id
+GO
+/*        Delete image        */
+CREATE PROC DeleteImage
+	@id int
+AS
+DELETE FROM images WHERE imageID = @id
+GO
+/*        Make Profile image        */
+CREATE PROC MakeProfileImage
+	@id int,
+	@userId int
+AS
+UPDATE users SET avatar = @id WHERE userID = @userId
 GO
 /*        Get all user expire        */
 CREATE PROCEDURE GetAllUserExpired
