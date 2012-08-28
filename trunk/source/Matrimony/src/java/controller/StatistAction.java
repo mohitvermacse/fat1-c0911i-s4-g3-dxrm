@@ -4,20 +4,22 @@
  */
 package controller;
 
+import bean.StatBean;
+import bean.StatBus;
+import bean.UserAccess;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import bean.*;
-import java.util.ArrayList;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author UTAN
+ * @author nvc
  */
-public class StatsAction extends org.apache.struts.action.Action {
+public class StatistAction extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -38,7 +40,7 @@ public class StatsAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        try {
+         try {
             HttpSession session = request.getSession(false);
             UserAccess ua = new UserAccess();
             StatBean stBe = new StatBean();
@@ -46,7 +48,7 @@ public class StatsAction extends org.apache.struts.action.Action {
             stBe.setTodaySum(stBu.getTodayTotal());
             stBe.setMonthSum(stBu.getMonthTotal());
             if (form != null) {
-                StatsForm statsForm = (StatsForm) form;
+                StatistForm statsForm = (StatistForm) form;
                 stBe.setArrS(stBu.getCustomStats(statsForm.getStartDate(), statsForm.getEndDate()));
                 
                 String aDay ="Total new user of a day "+ statsForm.getaDay() +" : "+ ua.getTotalNewUserToday(statsForm.getaDay());                
