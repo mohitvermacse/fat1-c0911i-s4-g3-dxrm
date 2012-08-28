@@ -105,8 +105,6 @@ insert into city values(2,'Manchester')
 insert into premium values('month',50)
 insert into premium values('year',500)
 
-select * from users
-
 insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
  values('chiennv','e10adc3949ba59abbe56e057f20f883e','Nguyen Van Chien','Bac Ninh','Male','10/20/1984','chiennv_a04470@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
 insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
@@ -147,6 +145,12 @@ insert into receiveRequest(userID,sendID,actions,status) VALUES(1,8,'Pending','U
 insert into receiveRequest(userID,sendID,actions,status) VALUES(1,9,'Pending','Unread')
 insert into receiveRequest(userID,sendID,actions,status) VALUES(1,10,'Pending','Unread')
 
+INSERT INTO images(userID,images) VALUES(1,'1.jpg')
+INSERT INTO images(userID,images) VALUES(2,'2.jpg')
+INSERT INTO images(userID,images) VALUES(3,'3.jpg')
+INSERT INTO images(userID,images) VALUES(4,'4.jpg')
+INSERT INTO images(userID,images) VALUES(5,'5.jpg')
+INSERT INTO images(userID,images) VALUES(1,'6.jpg')
 Go
 DELETE users
 DELETE city

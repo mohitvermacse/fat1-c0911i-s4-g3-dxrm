@@ -268,16 +268,21 @@ GO
 /*        Get all user expire        */
 CREATE PROCEDURE GetAllUserExpired
 	AS
-	Select userID,fullName from users where expireDate between (getDate()-5) And expireDate
+	Select u.userID,i.images, u.fullName,u.email from users AS u INNER JOIN images AS i ON u.userID = i.userID where i.imageID=avatar AND expireDate between (getDate()-5) And expireDate
 GO
 /*        Check user expired        */
 
-CREATE PROCEDURE CheckUserExpired
+CREATE PROCEDURE CheckUserExpired/*'chiennv'*/
 	@userName NVARCHAR(50)
 	AS
-	Select userID,fullName from users where userName=@userName AND expireDate between (getDate()-5) And expireDate
+	Select * from users where userName=@userName AND expireDate between (getDate()-5) And expireDate
 Go
 /*
+drop procedure CheckUserExpired
+	Select * from users where userName='chiennv' AND expireDate between (getDate()-5) And expireDate
+
+Select u.userID,i.images, u.fullName,u.email from users AS u INNER JOIN images AS i ON u.userID = i.userID where i.imageID=avatar AND expireDate between (getDate()-5) And expireDate
+
 Select userID,fullName from users where userName='tungpt' AND registerDate between (getDate()-5) And registerDate
 select registerDate from users
 select CURDATE()
