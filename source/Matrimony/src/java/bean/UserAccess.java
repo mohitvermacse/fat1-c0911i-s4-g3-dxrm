@@ -60,7 +60,7 @@ public class UserAccess {
         return false;
     }
     /*
-     * Select send request by user id
+     * Select all city
      */
 
     public Collection getAllCity() {
@@ -68,6 +68,28 @@ public class UserAccess {
         try {
             con = db.getConnect();
             ps = con.prepareCall("{call GetAllCity}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                City c = new City();
+                c.setCityId(rs.getInt(1));
+                c.setCountryId(rs.getInt(2));
+                c.setCityName(rs.getString(3));
+                array.add(c);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Not found request!");
+        }
+        return array;
+    }
+    /*
+     * Select all contry
+     */
+
+    public Collection getAllCountry() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call GetAllContry}");
             rs = ps.executeQuery();
             while (rs.next()) {
                 City c = new City();

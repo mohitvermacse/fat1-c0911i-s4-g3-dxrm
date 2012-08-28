@@ -9,14 +9,15 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html:html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Matrimony</title>
     </head>
     <body>
-        <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
+        <c:set var="city" value="${requestScope.listCity}" />
         <html:form action="RegisterAction" >
             <table>
                 <tr>
@@ -85,9 +86,9 @@
                     <td>City: </td>
                     <td>
                         <html:select property="cityName">
-                            <logic:iterate id="city" collection="${userManager.cityList}">
-                                <html:option value="${city}"/>
-                            </logic:iterate>
+                            <c:forEach var="c" items="${city}">
+                                <html:option value="${c.cityId}">${c.cityName}</html:option>
+                            </c:forEach>
                         </html:select>
                     </td>
                     <td></td>
@@ -155,4 +156,4 @@
             </table>
         </html:form>
     </body>
-</html>
+</html:html>
