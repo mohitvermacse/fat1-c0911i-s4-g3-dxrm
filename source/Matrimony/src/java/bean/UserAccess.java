@@ -89,13 +89,12 @@ public class UserAccess {
         ArrayList array = new ArrayList();
         try {
             con = db.getConnect();
-            ps = con.prepareCall("{call GetAllContry}");
+            ps = con.prepareCall("{call GetAllCountry}");
             rs = ps.executeQuery();
             while (rs.next()) {
-                City c = new City();
-                c.setCityId(rs.getInt(1));
-                c.setCountryId(rs.getInt(2));
-                c.setCityName(rs.getString(3));
+                Country c = new Country();
+                c.setCountryId(rs.getInt(1));
+                c.setCountryName(rs.getString(2));
                 array.add(c);
             }
         } catch (SQLException ex) {
