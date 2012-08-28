@@ -7,6 +7,8 @@ package bean;
 import java.sql.*;
 import java.util.*;
 import entity.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -595,6 +597,67 @@ public class UserAccess {
 
 
         } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Count all new user of a day
+     */
+
+    public String getTotalNewUserToday(String _date) {
+        String total =null;
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        System.out.print("date 1: " + _date);
+        String strDate = dateFormat.format(java.util.Date.parse(_date));
+        System.out.print("date 2: " + strDate);
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call TotalNewUserToday(?,?)}");
+            ps.setString(1, strDate + " 0:00:00");
+            ps.setString(2, strDate + " 23:59:59");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getString(1);
+            }
+            rs.close();
+            ps.close();
+            db.closeConnect();
+        } catch (SQLException ex) {
+            System.out.println("System have not users of in a day.");
+        }
+        return total;
+    }
+    /*
+     * Get infor new users of today
+     *
+     */
+
+    public Collection getInforNewUserToday(String _date) {
+        ArrayList array = new ArrayList();
+
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String strDate = dateFormat.format(java.util.Date.parse(_date));
+
+            con = db.getConnect();
+            ps = con.prepareCall("{call InforNewUserToday(?,?)}");
+            ps.setString(1, strDate + " 0:00:00");
+            ps.setString(2, strDate + " 23:59:59");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                User u = new User();
+                u.setUserId(rs.getInt(1));
+                u.setImages(rs.getString(2));
+                u.setFullName(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                array.add(u);
+            }
+            rs.close();
+            ps.close();
+            db.closeConnect();
+        } catch (SQLException ex) {
+            System.out.println("System have not users of in a day.");
         }
         return array;
     }
