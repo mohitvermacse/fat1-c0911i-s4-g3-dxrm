@@ -18,6 +18,7 @@
     </head>
     <body>
         <c:set var="city" value="${requestScope.listCity}" />
+        <c:set var="country" value="${requestScope.listCountry}"/>
         <html:form action="RegisterAction" >
             <table>
                 <tr>
@@ -75,9 +76,9 @@
                     <td>Country: </td>
                     <td>
                         <html:select property="countryName">
-                            <logic:iterate id="country" collection="${userManager.countryList}">
-                                <html:option value="${country}"/>
-                            </logic:iterate>
+                            <c:forEach var="c" items="${country}">
+                                <html:option value="${c.countryId}">${c.countryName}</html:option>
+                            </c:forEach>
                         </html:select>
                     </td>
                     <td></td>
