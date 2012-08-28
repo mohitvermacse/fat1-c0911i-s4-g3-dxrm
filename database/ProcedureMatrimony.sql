@@ -1,7 +1,7 @@
 USE Matrimony
 GO
 /*        user login        */
-CREATE PROCEDURE LoginUser'tungpt','e10adc3949ba59abbe56e057f20f883e'*/
+CREATE PROCEDURE LoginUser/*'tungpt','e10adc3949ba59abbe56e057f20f883e'*/
 	@userName nvarchar(50),
 	@password nvarchar(50)
 	AS
@@ -72,14 +72,41 @@ CREATE PROCEDURE GetAdminIdByUserName
 	AS
 	SELECT adminID FROM admin WHERE userName=@userName
 GO
-/*        select all request unread        */
-CREATE PROCEDURE GetAllReceveRequestByStatus'2','Unread' */
+/*        select all users want is friends of user   drop procedure GetInforRequestBySendUserID      */
+CREATE PROCEDURE GetAllReceveRequestByStatus/*'2','Transfer'*/
 	@userId int,
-	@status NVARCHAR(50)
+	@actions NVARCHAR(50)
 	AS
-	SELECT rr.receiveID,rr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
-	ON rr.sendID=sr.sendID WHERE rr.status=@status AND rr.userID=@userId
+	SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID WHERE rr.actions=@actions AND rr.userID=@userId
+	
+GO
+/*        select all users want is friends of user to transition management        */
+CREATE PROCEDURE GetAllReceveRequestTransfer/*'Pending'*/	
+	@actions NVARCHAR(50)
+	AS
+	SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID WHERE rr.actions=@actions
+	
+GO
+/*        Select information fo a user send request        */
+CREATE PROCEDURE GetInforUserSendByUserID
+	@sendUserID int
+	AS
+	SELECT u.fullName,u.gender,u.birthDay,u.email,u.languages,u.qualification,u.familyDetails,u.favoriteMusic,u.hobbies,u.workingAt,u.books,i.images
+	FROM users AS u inner join images AS i ON u.userID=i.userID
+	WHERE u.userID=@sendUserID
 Go
+/*        Select information of a user        */
+CREATE PROCEDURE GetInforUserById /*'1'*/
+	@userId int 
+	AS
+	SELECT u.userID,i.images,u.fullName,u.address,u.gender,u.email,u.phoneNumber,c.cityName,ct.countryName,u.maritalStatus,u.height,u.languages
+		  ,u.caste,u.familyDetails,u.qualification,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books
+	FROM images AS i INNER JOIN users AS u  ON u.userID=i.userId INNER JOIN city AS c ON u.cityID=c.cityID INNER JOIN country
+	AS ct ON c.countryID=ct.countryID
+	WHERE u.userId=@userId
+GO
 /*        Update receive reuqest of user by Id        */
 CREATE PROCEDURE UpdateReceiveRequestById/*'1','Accept','Read'*/
 	@id int,
@@ -101,39 +128,116 @@ CREATE PROCEDURE UpdateSendRequestById/*'1','8/13/2012','Accept'*/
 	WHERE sendID=@id
 GO
 /*        Select all riend of user        */
-CREATE PROCEDURE GetAllFriend'2','Accept'/*'2','Accept'*/
+CREATE PROCEDURE GetAllFriend/*'2','Accept'*/
 	@userId int,
 	@action NVARCHAR(20)
 	AS
-	SELECT rr.receiveID,rr.userID,rr.actions,sr.sendID FROM receiveRequest AS rr inner join sendRequest AS sr 
-	ON rr.sendID=sr.sendID WHERE rr.userId=@userId AND rr.actions=@action
-
-
-DROP procedure GetAllReceveRequestByStatus
-Go
-SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
-	on p.premiumID=t.premiumID inner join users as u on t.userID = u.userID
-	WHERE p.premiumID=1 and 
+	SELECT u.fullName,i.images,u.userID,sr.userID FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID INNER JOIN images AS i ON u.userID=i.userID
+	WHERE rr.userId=2 AND rr.actions=@action
 GO
-SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
-on p.premiumID=t.premiumID WHERE p.premiumID=2
+/*        All user have friend        */
+CREATE PROCEDURE TotalUserHaveFriend
+	AS
+	SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Accept'
+GO/*        Total user of system        */
+CREATE PROCEDURE TotalUser
+	AS
+	SELECT Count(*)FROM users WHERE status !='Expired'
 GO
-SELECT count(*) FROM users WHERE status='false'
-SELECT count(*) FROM users WHERE status='true'
-SELECT top(3) * FROM users order by userID asc
-/* All user have friend */
-SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Accept'
+/*        Total new user by today        */
+CREATE PROCEDURE TotalNewUserToday/*'7/13/2012 0:00:00','7/13/2012 23:59:59'*/
+	@date NVARCHAR(50),
+	@date1 NVARCHAR(50)	
+	AS
+	select COUNT(*) FROM users WHERE status!='Expired'AND registerDate BETWEEN @date AND @date1
+GO
+/*        Total new user by month        */
+CREATE PROCEDURE TotalNewUserMonth/*'8','2012'*/
+	@month NVARCHAR(50),
+	@year NVARCHAR(50)
+	AS
+	select COUNT(*) FROM users WHERE registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+'' AND status!='Expired'
 
+GO
 
+/*        Insert user        */
+CREATE PROCEDURE InsertUser
+	@userName NVARCHAR(50),
+	@password NVARCHAR(50),
+	@fullName NVARCHAR(50),
+	@address NVARCHAR(100),
+	@gender NVARCHAR(10),
+	@birthDay NVARCHAR(50),
+	@email NVARCHAR(50),
+	@phoneNumber NVARCHAR(20),
+	@maritalStatus NVARCHAR(50),
+	@height INT,
+	@cityID INT,
+	@languages NVARCHAR(100),
+	@caste NVARCHAR(10),
+	@familyDetails NTEXT,
+	@qualification NTEXT,
+	@workingAt NTEXT,
+	@hobbies NTEXT,
+	@favoriteMusic NTEXT,
+	@movies NTEXT,
+	@cuisine NTEXT,
+	@books NTEXT,
+	@status NVARCHAR(10)
+	AS
+	INSERT INTO users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,maritalStatus,height,cityID,languages,
+				  caste,familyDetails,qualification,workingAt,hobbies,favoriteMusic,movies,cuisine,books,status
+					)
+	VALUES(@userName,@password,@fullName,@address,@gender,@birthDay,@email,@phoneNumber,@maritalStatus,@height,@cityID,@languages,
+				@caste,@familyDetails,@qualification,@workingAt,@hobbies,@favoriteMusic,@movies,@cuisine,@books,@status
+				)
+GO
+/*        Check UerName Of User        */
+CREATE PROCEDURE CheckUserName
+	@userName NVARCHAR(50)
+	AS
+	SELECT * FROM uses WHERE userName=@userName
+GO
+/*        Check Email Of User        */
+CREATE PROCEDURE CheckEmail
+@email NVARCHAR(50)
+AS
+SELECT * FROM users WHERE email=@email
+GO
+/*        Insert admin        */
+CREATE PROCEDURE InsertAmin
+	@userName NVARCHAR(50),
+	@password NVARCHAR(50)
+	AS
+	INSERT INTO admin(userName,password) VALUES(@userName,@password)
+GO
+/*        Change password        */
+CREATE PROCEDURE ChangePassword
+	@userName NVARCHAR(50),
+	@password NVARCHAR(50)
+	AS UPDATE users SET password=@password WHERE userName=@userName
+GO
+/*        Valid Password        */
+CREATE PROCEDURE CheckOldPassword
+	@userName NVARCHAR(50),
+	@password NVARCHAR(50)
+	AS
+	SELECT * FROM users WHERE userName=@userName AND password=@password
+GO
+/*        Update Profile Of User        */
+CREATE PROCEDURE UpdateProfileOfUser
 
-CREATE PROC GetCustomPayment 
+/*        */
+GO
+CREATE PROC GetCustomPayment/* '08/16/2012 0:00:00','08/17/2012 23:59:59'*/
 	@date1 nvarchar(50),
 	@date2 nvarchar(50)
 AS
 SELECT SUM(p.amount) AS TotalMoney, Convert(varchar, t.dates, 101) AS  date  FROM transactions as t inner join premium as p
 on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2 GROUP BY Convert(varchar, t.dates, 101)
 GO
-CREATE PROC GetSum 
+CREATE PROC GetSum /*'08/17/2012 0:00:00','08/17/2012 23:59:59'*/
 	@date1 nvarchar(50),
 	@date2 nvarchar(50)
 	AS
