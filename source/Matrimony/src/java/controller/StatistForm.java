@@ -12,11 +12,11 @@ import org.apache.struts.action.ActionMessage;
 
 /**
  *
- * @author UTAN
+ * @author nvc
  */
-public class StatsForm extends org.apache.struts.action.ActionForm {
-
-    private String startDate;
+public class StatistForm extends org.apache.struts.action.ActionForm {
+    
+     private String startDate;
     private String endDate;
     private String aDay;
     private int userId;
@@ -25,7 +25,7 @@ public class StatsForm extends org.apache.struts.action.ActionForm {
     /**
      *
      */
-    public StatsForm() {
+    public StatistForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,12 +39,7 @@ public class StatsForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-//        if (getStartDate() == null || getStartDate().length() < 1) {
-//            errors.add("startDate", new ActionMessage("error.date.required"));            
-//        }
-//        if (getEndDate() == null || getEndDate().length() < 1) {
-//            errors.add("endDate", new ActionMessage("error.date.required"));            
-//        }
+        
         return errors;
     }
 
@@ -117,5 +112,4 @@ public class StatsForm extends org.apache.struts.action.ActionForm {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }
