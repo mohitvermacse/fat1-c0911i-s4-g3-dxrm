@@ -140,7 +140,8 @@ GO
 CREATE PROCEDURE TotalUserHaveFriend
 	AS
 	SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Accept'
-GO/*        Total user of system        */
+GO
+/*        Total user of system        */
 CREATE PROCEDURE TotalUser
 	AS
 	SELECT Count(*)FROM users WHERE status !='Expired'
@@ -225,18 +226,16 @@ CREATE PROCEDURE CheckOldPassword
 	AS
 	SELECT * FROM users WHERE userName=@userName AND password=@password
 GO
-/*        Update Profile Of User        */
-CREATE PROCEDURE UpdateProfileOfUser
 
-/*        */
-GO
+/*        Get total money of system        */
 CREATE PROC GetCustomPayment/* '08/16/2012 0:00:00','08/17/2012 23:59:59'*/
 	@date1 nvarchar(50),
 	@date2 nvarchar(50)
-AS
-SELECT SUM(p.amount) AS TotalMoney, Convert(varchar, t.dates, 101) AS  date  FROM transactions as t inner join premium as p
-on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2 GROUP BY Convert(varchar, t.dates, 101)
+	AS
+	SELECT SUM(p.amount) AS TotalMoney, Convert(varchar, t.dates, 101) AS  date  FROM transactions as t inner join premium as p
+	on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2 GROUP BY Convert(varchar, t.dates, 101)
 GO
+/*        Get total money of a day        */
 CREATE PROC GetSum /*'08/17/2012 0:00:00','08/17/2012 23:59:59'*/
 	@date1 nvarchar(50),
 	@date2 nvarchar(50)
@@ -245,21 +244,41 @@ CREATE PROC GetSum /*'08/17/2012 0:00:00','08/17/2012 23:59:59'*/
 	on t.premiumID=p.premiumID WHERE t.dates BETWEEN @date1 AND @date2/*'08/17/2012 0:00:00' AND '08/17/2012 23:59:59'*/
 
 GO
+/*        Get total money of a month        */
 CREATE PROC GetSumMonth
 	@month int
-AS
-SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
+	AS
+	SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t 
 	on t.premiumID=p.premiumID WHERE MONTH(t.dates) = @month
 
 GO
-
+/*        insert new image        */
 CREATE PROC InsertImage
 	@id int,
 	@image nvarchar(100)
-AS
-INSERT INTO images(userID,images) VALUES (@id,@image)
+	AS
+	INSERT INTO images(userID,images) VALUES (@id,@image)
 GO
+/*        Display image        */
 CREATE PROC DisplayImage
 	@id int	
-AS
-SELECT imageID, images FROM images WHERE userID = @id
+	AS
+	SELECT imageID, images FROM images WHERE userID = @id
+GO
+/*        Get all user expire        */
+CREATE PROCEDURE GetAllUserExpired
+	AS
+	Select userID,fullName from users where expireDate between (getDate()-5) And expireDate
+GO
+/*        Check user expired        */
+
+CREATE PROCEDURE CheckUserExpired
+	@userName NVARCHAR(50)
+	AS
+	Select userID,fullName from users where userName=@userName AND expireDate between (getDate()-5) And expireDate
+Go
+/*
+Select userID,fullName from users where userName='tungpt' AND registerDate between (getDate()-5) And registerDate
+select registerDate from users
+select CURDATE()
+*/
