@@ -50,8 +50,9 @@ public class LoginAction extends org.apache.struts.action.Action {
             request.setAttribute("listReceive", arrayReceive);
         } else {
             ArrayList arrayCity = (ArrayList) ua.getAllCity();
-            ArrayList arrayContry = (ArrayList) ua.getAllCity();
+            ArrayList arrayCountry = (ArrayList) ua.getAllCountry();
             request.setAttribute("listCity", arrayCity);
+            request.setAttribute("listCountry", arrayCountry);
             action = "register";
         }
         return mapping.findForward(action);
