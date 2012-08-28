@@ -15,9 +15,12 @@ import org.apache.struts.action.ActionMessage;
  * @author UTAN
  */
 public class StatsForm extends org.apache.struts.action.ActionForm {
-    
+
     private String startDate;
     private String endDate;
+    private String aDay;
+    private int userId;
+    private String email;
 
     /**
      *
@@ -72,4 +75,47 @@ public class StatsForm extends org.apache.struts.action.ActionForm {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
+
+    /**
+     * @return the aDay
+     */
+    public String getaDay() {
+        return aDay;
+    }
+
+    /**
+     * @param aDay the aDay to set
+     */
+    public void setaDay(String aDay) {
+        this.aDay = aDay;
+    }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
