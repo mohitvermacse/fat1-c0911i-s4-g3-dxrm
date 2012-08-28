@@ -31,7 +31,7 @@
         </action>
         <action input="/myUser.jsp" name="MyUserForm" path="/MyUserAction" scope="session" type="controller.MyUserAction">
             <forward name="user" path="/myUser.jsp"/>
-            <forward name="infor" path="/profile.jsp"/>           
+            <forward name="infor" path="/infor.jsp"/>           
         </action>
         <action input="/statistic.jsp" name="StatisticForm" path="/StatisticAction" scope="session" type="controller.StatisticAction">
             <forward name="sta" path="/statistic.jsp"/>

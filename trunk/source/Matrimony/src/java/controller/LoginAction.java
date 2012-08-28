@@ -50,6 +50,7 @@ public class LoginAction extends org.apache.struts.action.Action {
             request.setAttribute("listReceive", arrayReceive);
         } else {
             ArrayList arrayCity = (ArrayList) ua.getAllCity();
+            ArrayList arrayContry = (ArrayList) ua.getAllCity();
             request.setAttribute("listCity", arrayCity);
             action = "register";
         }
