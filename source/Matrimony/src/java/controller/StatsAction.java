@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import bean.*;
+import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -37,16 +38,30 @@ public class StatsAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        HttpSession session = request.getSession(false);
-        StatBean stBe = new StatBean();
-        StatBus stBu = new StatBus();
-        stBe.setTodaySum(stBu.getTodayTotal());
-        stBe.setMonthSum(stBu.getMonthTotal());
-        if (form != null) {
-            StatsForm statsForm = (StatsForm) form;
-            stBe.setArrS(stBu.getCustomStats(statsForm.getStartDate(), statsForm.getEndDate()));
+        try {
+            HttpSession session = request.getSession(false);
+            UserAccess ua = new UserAccess();
+            StatBean stBe = new StatBean();
+            StatBus stBu = new StatBus();
+            stBe.setTodaySum(stBu.getTodayTotal());
+            stBe.setMonthSum(stBu.getMonthTotal());
+            if (form != null) {
+                StatsForm statsForm = (StatsForm) form;
+                stBe.setArrS(stBu.getCustomStats(statsForm.getStartDate(), statsForm.getEndDate()));
+                
+                String aDay ="Total new user of a day "+ statsForm.getaDay() +" : "+ ua.getTotalNewUserToday(statsForm.getaDay());                
+                ArrayList arrayNewUser = (ArrayList) ua.getInforNewUserToday(statsForm.getaDay());
+                
+                request.setAttribute("listNewUser", arrayNewUser);
+                request.setAttribute("listADay", aDay);
+                
+                System.out.println("A Day: " + statsForm.getaDay());
+            }
+            session.setAttribute("statBean", stBe);
+        } catch (Exception e) {
+            System.out.println(""+e.getMessage());
         }
-        session.setAttribute("statBean", stBe);
+
         return mapping.findForward(SUCCESS);
     }
 }
