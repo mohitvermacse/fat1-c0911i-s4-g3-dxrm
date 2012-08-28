@@ -1,0 +1,70 @@
+/**************************************************************
+
+	SlideShow
+
+**************************************************************/
+#example{
+	padding-left:10px;
+	width:345px;
+	float:left;
+}
+.slideshowContainer {
+	border: 20px solid #1c0b24;
+	width: 300px;
+	height: 300px;
+	overflow:hidden;
+	margin-bottom: 15px;
+}
+.slideshowContainer img{
+}
+
+.loading {
+	background: url(../images/loading.gif) center no-repeat;
+}
+
+.slideshowThumbnail {
+	float:left;
+	padding-left:5px;
+	padding-bottom:4px;
+	outline: none;
+}
+
+.slideshowThumbnail img {
+	border: 1px solid white;
+	margin:1px 0px 0px 0px;
+	width:105px;
+	float:left;
+	height:105px;
+}
+
+a:hover.slideshowThumbnail img {
+	border: 1px solid #ccc;
+}
+
+.current img {
+	border: 1px solid red;
+	padding: 5px;
+}
+
+.outline {
+	border: 2px solid orange;
+	overflow:hidden;
+	z-index: 0;
+	position: absolute;
+	padding:1px 2px 1px 0px;
+	padding:0px 0px 0px 0px;
+}
+
+#thumbnails{
+	margin:0 auto;
+}
+#thumbnails p{
+	clear:left;
+}
+#thumbnails {
+	/*width: 130px;
+	float: left;*/
+}
+
+/*************************************************************/
+
