@@ -27,6 +27,7 @@ CREATE TABLE users(
 	userID INT PRIMARY KEY IDENTITY(1, 1),
 	userName NVARCHAR(50) not null,
 	password NVARCHAR(50)not null,
+	avatar int,
 	fullName NVARCHAR(50),
 	address NVARCHAR(100),
 	gender NVARCHAR(10),
@@ -80,6 +81,7 @@ CREATE TABLE premium(
 	premiumType NTEXT,
 	amount INT
 )
+GO
 CREATE TABLE transactions(
 	transactionID INT PRIMARY KEY IDENTITY(1, 1),
 	userID INT FOREIGN KEY REFERENCES users(userID)not null,
@@ -103,20 +105,19 @@ insert into city values(2,'Manchester')
 insert into premium values('month',50)
 insert into premium values('year',500)
 
-insert into users(userName,password,fullName,cityID,status)
- values('chiennv','e10adc3949ba59abbe56e057f20f883e','Nguyen Van Chien',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('tungpt','e10adc3949ba59abbe56e057f20f883e','Pham Thannh Tung',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('longnh','e10adc3949ba59abbe56e057f20f883e','Nguyen Hoang Long',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('tienvv','e10adc3949ba59abbe56e057f20f883e','Vu Van Tien',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('hunglv','e10adc3949ba59abbe56e057f20f883e','Le Viet Hung',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('nampt','e10adc3949ba59abbe56e057f20f883e','Pham Trung Nam',2,'true')
-insert into users(userName,password,fullName,cityID,status)
- values('hunglk','e10adc3949ba59abbe56e057f20f883e','Le Khac Hung',2,'true')
+select * from users
+
+insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
+ values('chiennv','e10adc3949ba59abbe56e057f20f883e','Nguyen Van Chien','Bac Ninh','Male','10/20/1984','chiennv_a04470@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
+insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
+ values('tungpt','e10adc3949ba59abbe56e057f20f883e','Pham Thanh Tung','Ha Noi','Male','10/20/1984','tungpt_a04471@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
+insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
+ values('longnh','e10adc3949ba59abbe56e057f20f883e','Nguyen Hoang Long','Ha Noi','Male','10/20/1984','longnh_a04472@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
+insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
+ values('tienvv','e10adc3949ba59abbe56e057f20f883e','Vu Van Tien','Ha Noi','Male','10/20/1984','tienvv_a04473@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
+insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
+ values('hunglv','e10adc3949ba59abbe56e057f20f883e','Le Viet Hung','Ha Noi','Male','10/20/1984','hunglv_a04474@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
+
 
 insert into transactions(userID,premiumID)values(1,1)
 insert into transactions(userID,premiumID)values(2,1)
@@ -129,13 +130,16 @@ insert into transactions(userID,premiumID)values(7,2)
 insert into sendRequest(userID,contents) VALUES(1,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
 insert into sendRequest(userID,contents) VALUES(2,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
 insert into sendRequest(userID,contents) VALUES(3,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
+insert into sendRequest(userID,contents) VALUES(4,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
+insert into sendRequest(userID,contents) VALUES(5,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
+insert into sendRequest(userID,contents) VALUES(6,'Chao Ban! Chung ta co the lam quen voi nhau duoc khong?')
 
 insert into receiveRequest(userID,sendID,actions,status) VALUES(2,1,'Pending','Unread')
 insert into receiveRequest(userID,sendID,actions,status) VALUES(2,3,'Pending','Unread')
 insert into receiveRequest(userID,sendID,actions,status) VALUES(2,4,'Pending','Unread')
 insert into receiveRequest(userID,sendID,actions,status) VALUES(2,5,'Pending','Unread')
-insert into receiveRequest(userID,sendID,actions,status) VALUES(2,6,'Pending','Unread')
-insert into receiveRequest(userID,sendID,actions,status) VALUES(2,7,'Pending','Unread')
+insert into receiveRequest(userID,sendID,actions,status) VALUES(1,6,'Pending','Unread')
+insert into receiveRequest(userID,sendID,actions,status) VALUES(3,6,'Pending','Unread')
 
 Go
 DELETE users
