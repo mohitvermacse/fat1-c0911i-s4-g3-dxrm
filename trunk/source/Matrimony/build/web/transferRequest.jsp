@@ -18,25 +18,29 @@
 
     </head>
     <body style="background-color: white">
-
         <c:set var="tranfer" value="${requestScope.listTransfer}"/>
-        <table>
-            <th>Full Name</th>
-            <th>ID</th>
-            <th>Full Name</th>
-            <th>ID</th>
+        <table border="1">
+            <th>STT</th>
+            <th>Full Name user send</th>
+            <th>ID user send</th>
+            <th>Full Name user receive</th>
+            <th>ID user receive</th>
             <th>Content</th>
+            <th></th>
             <c:forEach var="t" items="${tranfer}">
-                <tr>
-                    <td>${t.fullName}</td>
-                    <td>${t.userId}</td>
-                    <td>${t.fullName}</td>
-                    <td>${t.sendUserId}</td>
-                    <td>${t.content}</td>
-                </tr>
+                <form action="TransferRequest" method="POST">
+                    <tr>
+                        <td>${t.receiverId}</td>
+                        <td>${t.sImages}${t.sFullName}</td>
+                        <td>${t.sendUserId}</td>
+                        <td>${t.images}${t.fullName}<input type="hidden" name="receiveID" value="${t.receiverId}"/></td>
+                        <td>${t.userId}</td>                            
+                        <td>${t.content}</td>
+                        <td><input type="submit" name="action" value="Transfer"/></td>
+                    </tr>
+                </form>
             </c:forEach>
         </table>
-
     </body>
 </html:html>
 
