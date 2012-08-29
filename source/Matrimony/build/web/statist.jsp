@@ -36,7 +36,8 @@
             $(function() {                
                 $('#startPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
                 $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'}); 
-                $('#aDayPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'})
+                $('#aDayPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#aMonthPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
                 $('#validateForm').validate({ 
                     errorPlacement: $.datepick.errorPlacement, 
                     rules: { 
@@ -62,19 +63,27 @@
         <div style="display: none;">
             <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
         </div>
-        <c:set var="listNewUser" value="${requestScope.listNewUser}"/>
+        <c:set var="listNewUserADay" value="${requestScope.listNewUser}"/>
+        <c:set var="listUserAmonth" value="${requestScope.listNewUserAmonth}"/>
         <jsp:useBean id="statBean" scope="session" class="bean.StatBean"/>
+        <h3>Total User Of system: ${requestScope.total}</h3>
+        <h3>Total User have Friend: ${requestScope.friend}</h3>
         <h3>Total money of today: ${statBean.todaySum}</h3>
-        <h3>Total money of this Month: ${statBean.monthSum}</h3> 
-        <h3>Total money of Custom Date:</br></h3> 
-            <html:form action="StatsAction" method="post" styleId="validateForm">
+        <h3>Total money of this Month: ${statBean.monthSum}</h3>
+
+        <html:form action="StatistAction" method="post" styleId="validateForm">
+            <h3>Total money of Custom Date:
                 <html:text property="startDate" styleId="startPicker" size="12" styleClass="dpDate"/> to
-            <html:text property="endDate" styleId="endPicker" size="12" styleClass="dpDate"/>
-            ---  <html:submit value="Filter"/>
-            <h3>Choose a date you want statistic user has been generate: </h3>
-            <html:text property="aDay" styleId="aDayPicker" size="12" styleClass="dpDate"/>
-            ---  <html:submit value="A Day"/>
-        </html:form>
+                <html:text property="endDate" styleId="endPicker" size="12" styleClass="dpDate"/>
+                ---  <html:submit value="Filter"/></h3>
+            <h3>Choose a date you want statistic user has been generate:
+                <html:text property="aDay" styleId="aDayPicker" size="12" styleClass="dpDate"/>
+                ---  <html:submit value="Total User Of A Day"/></h3>
+            <h3>Choose a month you want statistic user has been generate:
+                <html:text property="aMonth" styleId="aMonthPicker" size="12" styleClass="dpDate"/>
+                --- <html:submit value="Total New User Of A Month"/></h3>
+            </html:form>
+
         <table>
             <tr>
                 <td>
@@ -93,10 +102,26 @@
             <tr>
                 <td>
                     <table>
-                        <div style="color: green">${requestScope.listADay}</div>
-                        <c:forEach var="u" items="${listNewUser}">
+                        <div style="color: green">${requestScope.totalUser}</div>
+                        <c:forEach var="u" items="${listNewUserADay}">
                             <tr>
-
+                                <td>
+                                    <a href="StatsAction.page?id=${u.userId}" style="font: underLine:false"> ${u.images} ${u.fullName}</a>
+                                </td>
+                                <td>${u.email}
+                                    <html:hidden property="email" value="${u.email}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <div style="color: green">${requestScope.totalUserAMonth}</div>
+                        <c:forEach var="u" items="${listUserAmonth}">
+                            <tr>
                                 <td>
                                     <a href="StatsAction.page?id=${u.userId}" style="font: underLine:false"> ${u.images} ${u.fullName}</a>
                                 </td>
