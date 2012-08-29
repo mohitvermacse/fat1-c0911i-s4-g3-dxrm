@@ -39,10 +39,27 @@ public class TransferRequest extends HttpServlet {
              * TODO output your page here. You may use following sample code.
              */
             UserAccess ua = new UserAccess();
-            ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
-            request.setAttribute("listTransfer", arrayTransfer);
-            RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
-            di.forward(request, response);
+            String action;
+            action = request.getParameter("action");
+            if (action != null) {
+                if (action.equalsIgnoreCase("Transfer")) {
+                    int receiveId = Integer.parseInt(request.getParameter("receiveID"));
+                    if (ua.updateReceiveRequestById(receiveId, "Transfer", "Unread")) {
+                        ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
+
+                        request.setAttribute("listTransfer", arrayTransfer);
+                        RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                        di.forward(request, response);
+                    }
+                }
+            } else {
+                ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
+
+                request.setAttribute("listTransfer", arrayTransfer);
+                RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                di.forward(request, response);
+                System.out.println("Update............!");
+            }
 
         } finally {
             out.close();
