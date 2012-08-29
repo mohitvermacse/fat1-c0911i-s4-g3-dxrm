@@ -42,53 +42,51 @@ public class MyUserAction extends org.apache.struts.action.Action {
             throws Exception {
         MyUserForm uform = (MyUserForm) form;
         UserAccess ua = new UserAccess();
-        String action = uform.getAction();
-        int receiveID = uform.getReceiveId();
-        int sendID = uform.getSendId();
+        try {
+            int receiveID = uform.getReceiveId();
+            int sendID = uform.getSendId();
 
-        String btn = uform.getBtn();
-        Date dateTemp = new Date();
-        DateFormat fr = new SimpleDateFormat("MM/dd/yyy hh:mm:ss");
+            String btn = uform.getBtn();
+            String btn2 = uform.getBtn2();
+            Date dateTemp = new Date();
+            DateFormat fr = new SimpleDateFormat("MM/dd/yyy hh:mm:ss");
+            String date = (fr.format(dateTemp));
+            String friendId = request.getParameter("friendId");
 
-        String date = (fr.format(dateTemp));
-        String friendId = request.getParameter("friendId");
-        System.out.println("FriendID: " + friendId);
-        System.out.println("Button Value: : " + btn);
-        if (btn == null) {
-            System.out.println("Button Value: OK");
-            action = "infor";
-            System.out.println("Button Value: OK 1");
-            ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
-            request.setAttribute("information", arrayInfor);
-            System.out.println("Button Value: OK 2: " + action);
-        } else if (btn.equalsIgnoreCase("Accept")) {
-            System.out.println("Button Value: OK 3");
-            if (ua.updateReceiveRequestById(receiveID, "Accept", "Read")) {
-                if (ua.updateSendRequestById(sendID, date, "Accept")) {
-                    action = "user";
-                    ArrayList arrayRequest = (ArrayList) ua.getReceiveRequestByStatus(2);
-                    ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
-                    request.setAttribute("listFriend", arrayFriend);
-                    request.setAttribute("listReceive", arrayRequest);
+            if (friendId != null) {
+
+                ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
+                request.setAttribute("information", arrayInfor);
+                return mapping.findForward("infor");
+            }
+            if (btn.equalsIgnoreCase("Accept")) {
+
+                if (ua.updateReceiveRequestById(receiveID, "Approved", "Read")) {
+                    if (ua.updateSendRequestById(sendID, date, "Approved")) {
+
+                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
+                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                        request.setAttribute("listFriend", arrayFriend);
+                        request.setAttribute("listReceive", arrayRequest);
+                        return mapping.findForward("user");
+                    }
+                }
+            } else if (btn.equalsIgnoreCase("Deny")) {
+                if (ua.updateReceiveRequestById(receiveID, "Deny", "Read")) {
+                    if (ua.updateSendRequestById(sendID, date, "Deny")) {
+
+                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
+                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                        request.setAttribute("listFriend", arrayFriend);
+                        request.setAttribute("listReceive", arrayRequest);
+                        return mapping.findForward("user");
+                    }
                 }
             }
-        } else if (btn.equalsIgnoreCase("Deny")) {
-            if (ua.updateReceiveRequestById(receiveID, "Deny", "Read")) {
-                if (ua.updateSendRequestById(sendID, date, "Deny")) {
-                    action = "user";
-                    ArrayList arrayRequest = (ArrayList) ua.getReceiveRequestByStatus(2);
-                    ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
-                    request.setAttribute("listFriend", arrayFriend);
-                    request.setAttribute("listReceive", arrayRequest);
-                }
-            }
-        } else {
-            action = "infor";
-            System.out.println("Button Value: OK 1");
-            ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
-            request.setAttribute("information", arrayInfor);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
         }
-        System.out.println("Button Value: OK 4: " + action);
-        return mapping.findForward(action);
+        return mapping.findForward("error");
     }
 }

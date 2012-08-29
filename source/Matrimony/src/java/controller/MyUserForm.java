@@ -19,7 +19,7 @@ public class MyUserForm extends org.apache.struts.action.ActionForm {
     private int receiveId;
     private int sendId;
     private String btn;
-    private String action;
+    private String btn2;
     private int friendId;
 
     /**
@@ -89,20 +89,6 @@ public class MyUserForm extends org.apache.struts.action.ActionForm {
     }
 
     /**
-     * @return the action
-     */
-    public String getAction() {
-        return action;
-    }
-
-    /**
-     * @param action the action to set
-     */
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    /**
      * @return the friendId
      */
     public int getFriendId() {
@@ -114,6 +100,20 @@ public class MyUserForm extends org.apache.struts.action.ActionForm {
      */
     public void setFriendId(int friendId) {
         this.friendId = friendId;
+    }
+
+    /**
+     * @return the btn2
+     */
+    public String getBtn2() {
+        return btn2;
+    }
+
+    /**
+     * @param btn2 the btn2 to set
+     */
+    public void setBtn2(String btn2) {
+        this.btn2 = btn2;
     }
 
 }
