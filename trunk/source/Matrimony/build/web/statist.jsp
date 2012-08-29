@@ -36,8 +36,8 @@
             $(function() {                
                 $('#startPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
                 $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'}); 
-                $('#aDayPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
-                $('#aMonthPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#aDayPicker').datepick({showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#aMonthPicker').datepick({showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
                 $('#validateForm').validate({ 
                     errorPlacement: $.datepick.errorPlacement, 
                     rules: { 

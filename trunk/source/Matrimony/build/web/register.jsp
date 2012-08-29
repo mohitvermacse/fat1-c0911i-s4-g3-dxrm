@@ -15,11 +15,59 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Matrimony</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <style type="text/css">@import "jquery.datepick.package-4.0.6/jquery.datepick.css";</style> 
+        <style type="text/css">
+            label { width: 10em; float: left; }
+            label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+        </style>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.validate.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.validation.js"></script>
+        <script type="text/javascript">            
+            function customRange(dates) { 
+                if (this.id == 'startPicker') { 
+                    $('#endPicker').datepick('option', 'minDate', dates[0] || null); 
+                } 
+                else { 
+                    $('#startPicker').datepick('option', 'maxDate', dates[0] || null); 
+                } 
+            }
+            $(function() {                
+                $('#startPicker').datepick({onSelect:customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'}); 
+                $('#aDayPicker').datepick({showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#aMonthPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#validateForm').validate({ 
+                    errorPlacement: $.datepick.errorPlacement, 
+                    rules: { 
+                        startPicker: { 
+                            required: true, 
+                            dpDate: true 
+                        },
+                        endPicker: { 
+                            required: true, 
+                            dpDate: true 
+                        }
+       
+                    }, 
+                    messages: {                         
+                        startPicker: 'Please enter a valid date',
+                        endPicker: 'Please enter a valid date'
+                    }});
+                
+            });
+        </script>
     </head>
     <body>
-        <c:set var="city" value="${requestScope.listCity}" />
-        <c:set var="country" value="${requestScope.listCountry}"/>
-        <html:form action="RegisterAction" >
+        <div style="display: none;">
+            <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
+        </div>
+        <%--<c:set var="city" value="${requestScope.listCity}" />
+        <c:set var="country" value="${requestScope.listCountry}"/>--%>
+        <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
+        <html:form action="RegisterAction" styleId="validateForm" >
             <table>
                 <tr>
                     <td>UserName: </td>
@@ -31,7 +79,7 @@
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><html:text property="password"/></td>
+                    <td><html:password property="password"/></td>
                     <td><html:errors property="passwordError" /></td>
                 </tr>
                 <tr>
@@ -54,7 +102,7 @@
                 </tr>
                 <tr>
                     <td>BirthDay: </td>
-                    <td><html:text property="birthDay"/></td>
+                    <td><html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -76,9 +124,9 @@
                     <td>Country: </td>
                     <td>
                         <html:select property="countryName">
-                            <c:forEach var="c" items="${country}">
-                                <html:option value="${c.countryId}">${c.countryName}</html:option>
-                            </c:forEach>
+                            <logic:iterate id="country" collection="${userManager.countryList}">
+                                <html:option value="${country}"/>
+                            </logic:iterate>
                         </html:select>
                     </td>
                     <td></td>
@@ -87,9 +135,9 @@
                     <td>City: </td>
                     <td>
                         <html:select property="cityName">
-                            <c:forEach var="c" items="${city}">
-                                <html:option value="${c.cityId}">${c.cityName}</html:option>
-                            </c:forEach>
+                            <logic:iterate id="city" collection="${userManager.cityList}">
+                                <html:option value="${city}"/>
+                            </logic:iterate>
                         </html:select>
                     </td>
                     <td></td>
