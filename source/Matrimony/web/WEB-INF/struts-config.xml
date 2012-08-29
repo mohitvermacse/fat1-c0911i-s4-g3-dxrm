@@ -7,6 +7,9 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="ExpireForm" type="controllerAdmin.ExpireForm"/>
+        <form-bean name="ControllerAdminForm" type="controllerAdmin.ControllerAdminForm"/>
+        <form-bean name="logAdminForm" type="controllerAdmin.logAdminForm"/>
         <form-bean name="StatistForm" type="controller.StatistForm"/>
         <form-bean name="PhotoForm" type="controller.PhotoForm"/>
         
@@ -16,7 +19,7 @@
         <form-bean name="MyUserForm" type="controller.MyUserForm"/>
         <form-bean name="LoginForm" type="controller.LoginForm"/>
         <form-bean name="StatsForm" type="controller.StatsForm"/>
-         <form-bean name="MatrimonyForm" type="controller.MatrimonyForm"/>
+        <form-bean name="MatrimonyForm" type="controller.MatrimonyForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -31,6 +34,7 @@
         <action input="/login.jsp" name="LoginForm" path="/LoginAction" scope="session" type="controller.LoginAction">
             <forward name="user" path="/myUser.jsp"/>
             <forward name="register" path="/register.jsp"/>
+            <forward name="error" path="/login.jsp"/>
         </action>
         <action input="/myUser.jsp" name="MyUserForm" path="/MyUserAction" scope="session" type="controller.MyUserAction">
             <forward name="user" path="/myUser.jsp"/>
@@ -58,10 +62,25 @@
         <action input="/managepic.jsp" name="PhotoForm" path="/PhotoAction" scope="session" type="controller.PhotoAction">
             <forward name="success" path="/managepic.jsp"/>
         </action>
-        <action path="/ManagePhoto" type="controller.ManagePhoto">
+        <action path="/admin/ManagePhoto" type="controller.ManagePhoto">
             <forward name="success" path="/managepic.jsp"/>
         </action>
-        <action input="/admin/statistic.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction"/>
+        <action input="/statist.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction">
+            <forward name="sta" path="/statist.jsp"/>
+        </action>
+        <action input="/admin/loginAdmin.jsp" name="logAdminForm" path="/LogAdminAction" scope="session" type="controllerAdmin.LogAdminAction">
+           
+            <forward name="homeAdmin" path="/admin/controller.jsp"/>
+            <forward name="error" path="/admin/loginAdmin.jsp"/>
+            
+        </action>
+        <action input="/admin/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
+            <forward name="expired" path="/admin/expired.jsp"/>
+            <forward name="transfer" path="/transferRequest.jsp"/>
+            <forward name="statistic" path="/statist.jsp"/>           
+            
+        </action>
+        <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction"/>
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

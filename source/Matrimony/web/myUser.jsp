@@ -11,14 +11,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<html:html lang="true">
+<!DOCTYPE html>
+<html>
     <head>      
         <title>Matrimony.com</title>      
     </head>
     <body style="background-color: white">
-        <c:set var="listReceive" value="${requestScope.listReceive}"/>
-        <c:set var="listFriend" value="${requestScope.listFriend}"/>
+        <c:set var="receive" value="${requestScope.listReceive}"/>
+        <c:set var="friend" value="${requestScope.listFriend}"/>
     <center>
         <table width="100%">
             <tr>
@@ -38,17 +38,17 @@
                 </td>
                 <td width="50%">
                     <table width="100%">
-                        <c:forEach var="receive" items="${listReceive}">
-                            <html:form action="MyUserAction" method="POST">
+                        <c:forEach var="r" items="${receive}">
+                            <html:form  action="MyUserAction" method="POST">
                                 <tr>
                                     <td align="center">
-                                        ${receive.content}
-                                        <html:hidden property="receiveId" value="${receive.receiverId}"/>
-                                        <html:hidden property="sendId" value="${receive.sendId}"/>
+                                        ${r.content}
+                                        <html:hidden property="receiveId" value="${r.receiverId}"/>
+                                        <html:hidden property="sendId" value="${r.sendId}"/>
                                     </td>
                                     <td align="center">
-                                        ${receive.fullName}
-                                        ${receive.images}
+                                        ${r.fullName}
+                                        ${r.images}
                                     </td>
                                     <td align="center">                         
                                         <html:submit property="btn" value="Accept"/>
@@ -63,4 +63,4 @@
         </table>
     </center>
 </body>
-</html:html>
+</html>
