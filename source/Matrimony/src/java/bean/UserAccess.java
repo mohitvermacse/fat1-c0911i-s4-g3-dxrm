@@ -108,42 +108,58 @@ public class UserAccess {
      * Select receive request by status
      */
 
-    public Collection getReceiveRequestByStatus(int _receiveId) {
+    public Collection getAllReceiveRequestByStatus(int _receiveId) {
         ArrayList array = new ArrayList();
 
         try {
             con = db.getConnect();
             ps = con.prepareCall("{call GetAllReceveRequestByStatus(?,?)}");
             ps.setInt(1, _receiveId);
-            ps.setString(2, "Approve");
+            ps.setString(2, "Transfer");
             rs = ps.executeQuery();
             while (rs.next()) {
-                ReceiveRequest rr = new ReceiveRequest();
+                User u = new User();
                 ps = con.prepareCall("{call GetInforUserById(?)}");
 
-                rr.setReceiverId(rs.getInt(1));
-                rr.setUserId(rs.getInt(2));
-                rr.setSendUserId(rs.getInt(3));
-                rr.setAction(rs.getString(4));
-                rr.setSendId(rs.getInt(5));
-                rr.setContent(rs.getString(6));
-                rr.setStatus(rs.getString(7));
-                ps.setInt(1, rr.getSendUserId());
+                u.setReceiverId(rs.getInt(1));
+                u.setUserId(rs.getInt(2));
+                u.setSendUserId(rs.getInt(3));
+                u.setAction(rs.getString(4));
+                u.setSendId(rs.getInt(5));
+                u.setContent(rs.getString(6));
+                u.setStatus(rs.getString(7));
+
+                ps.setInt(1, u.getSendUserId());
                 rs1 = ps.executeQuery();
                 while (rs1.next()) {
-                    rr.setImages(rs1.getString(2));
-                    rr.setFullName(rs1.getString(3));
+                    u.setImages(rs1.getString(2));
+                    u.setFullName(rs1.getString(3));
+                    u.setGender(rs1.getString(5));
+                    u.setCityName(rs1.getString(8));
+                    u.setCountryName(rs1.getString(9));
+                    u.setMaritalStatus(rs1.getString(10));
+                    u.setHeight(rs1.getInt(11));
+                    u.setLanguages(rs1.getString(12));
+                    u.setFamilyDetail(rs1.getString(13));
+                    u.setQualification(rs1.getString(14));
+                    u.setWorkingAt(rs1.getString(15));
+                    u.setHobbies(rs1.getString(16));
+                    u.setFavorite(rs1.getString(17));
+                    u.setMovies(rs1.getString(18));
+                    u.setCuisine(rs1.getString(19));
+                    u.setBook(rs1.getString(20));
 
-                    array.add(rr);
+                    array.add(u);
                 }
-
             }
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
         return array;
     }
-// Select all request transferring
+    /*
+     * Select all request transferring
+     */
 
     public Collection getAllReceveRequestTransfer() {
         ArrayList array = new ArrayList();
@@ -268,27 +284,40 @@ public class UserAccess {
         ArrayList array = new ArrayList();
         try {
             con = db.getConnect();
-            // String str = "SELECT u.fullName,i.images FROM users AS u inner join images AS i ON u.userID=i.userID WHERE u.userID=?";
             ps = con.prepareCall("{call GetAllReceveRequestByStatus(?,?)}");
             ps.setInt(1, _userId);
             ps.setString(2, "Approved");
             rs = ps.executeQuery();
             while (rs.next()) {
-                ReceiveRequest rr = new ReceiveRequest();
-                ps = con.prepareCall("{call GetInforUserSendByUserID(?)}");
-                rr.setReceiverId(rs.getInt(1));
-                rr.setUserId(rs.getInt(2));
-                rr.setSendUserId(rs.getInt(3));
-                rr.setAction(rs.getString(4));
-                rr.setSendId(rs.getInt(5));
-                rr.setContent(rs.getString(6));
-                rr.setStatus(rs.getString(7));
-                ps.setInt(1, rr.getSendUserId());
+                User u = new User();
+                ps = con.prepareCall("{call GetInforUserById(?)}");
+
+                u.setReceiverId(rs.getInt(1));
+                u.setSendUserId(rs.getInt(3));
+                u.setUserId(rs.getInt(2));
+                u.setSendId(rs.getInt(5));
+                u.setContent(rs.getString(6));
+
+                ps.setInt(1, u.getSendUserId());
                 rs1 = ps.executeQuery();
                 while (rs1.next()) {
-                    rr.setFullName(rs1.getString(1));
-                    rr.setImages(rs1.getString(2));
-                    array.add(rr);
+                    u.setImages(rs1.getString(2));
+                    u.setFullName(rs1.getString(3));
+                    u.setGender(rs1.getString(5));
+                    u.setCityName(rs1.getString(8));
+                    u.setCountryName(rs1.getString(9));
+                    u.setMaritalStatus(rs1.getString(10));
+                    u.setHeight(rs1.getInt(11));
+                    u.setLanguages(rs1.getString(12));
+                    u.setFamilyDetail(rs1.getString(13));
+                    u.setQualification(rs1.getString(14));
+                    u.setWorkingAt(rs1.getString(15));
+                    u.setHobbies(rs1.getString(16));
+                    u.setFavorite(rs1.getString(17));
+                    u.setMovies(rs1.getString(18));
+                    u.setCuisine(rs1.getString(19));
+                    u.setBook(rs1.getString(20));
+                    array.add(u);
                 }
             }
         } catch (SQLException e) {
@@ -296,7 +325,9 @@ public class UserAccess {
         }
         return array;
     }
-//        Slect All premium
+    /*
+     * Slect All premium
+     */
 
     public Collection getAllPremium() {
         ArrayList array = new ArrayList();
@@ -316,7 +347,9 @@ public class UserAccess {
         }
         return array;
     }
-//        Select information of a user by user id
+    /*
+     * Select information of a user by user id
+     */
 
     public Collection getInforUserByID(int _userId) {
         ArrayList array = new ArrayList();
@@ -355,7 +388,9 @@ public class UserAccess {
         }
         return array;
     }
-//        Count all user have friend
+    /*
+     * Count all user have friend
+     */
 
     public String getAllUserHaveFriend() {
         String total = null;
@@ -371,7 +406,9 @@ public class UserAccess {
         }
         return total;
     }
-//        Count all user of system
+    /*
+     * Count all user of system
+     */
 
     public String getTotalUser() {
         String total = null;
@@ -387,44 +424,10 @@ public class UserAccess {
         }
         return total;
     }
-//        Count all new user of a day
 
-    public String getTotalNewUserToday(String _date, String _date1) {
-        String total = null;
-        try {
-            con = db.getConnect();
-            ps = con.prepareCall("{call TotalNewUserToday(?,?)}");
-            ps.setString(1, _date);
-            ps.setString(2, _date1);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                total = rs.getString(1);
-            }
-        } catch (SQLException e) {
-            System.out.println("System have not users of in a day.");
-        }
-        return total;
-    }
-//        Count all new user of a month
-
-    public String getTotalNewUserMonth(int _month, int _year) {
-        String total = null;
-        try {
-            con = db.getConnect();
-            ps = con.prepareCall("{call TotalNewUserMonth(?,?)}");
-            ps.setInt(1, _month);
-            ps.setInt(2, _year);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                total = rs.getString(1);
-            }
-        } catch (SQLException e) {
-            System.out.println("System have not users of in a month.");
-        }
-        return total;
-    }
-//        Check UserName and email of a user
-
+    /*
+     * Check UserName and email of a user
+     */
     public boolean checkUserName(String _userName) {
 
         try {
@@ -442,6 +445,10 @@ public class UserAccess {
         }
         return true;
     }
+    /*
+     * check email
+     *
+     */
 
     public boolean checkEmail(String _email) {
 
@@ -461,7 +468,9 @@ public class UserAccess {
         }
         return true;
     }
-//        Insert new user
+    /*
+     * Insert new user
+     */
 
     public boolean insertUser(User u) {
         try {
@@ -503,7 +512,9 @@ public class UserAccess {
         }
         return false;
     }
-//        Insert new admin
+    /*
+     * Insert new admin
+     */
 
     public boolean insertAdmin(String _userName, String _password) {
         try {
@@ -521,7 +532,9 @@ public class UserAccess {
         }
         return false;
     }
-//        Check old password
+    /*
+     * Check old password
+     */
 
     public boolean checkOldPassword(String _userName, String _oldPassword) {
         try {
@@ -540,7 +553,9 @@ public class UserAccess {
         }
         return false;
     }
-//        Changer password of user
+    /*
+     * Changer password of user
+     */
 
     public boolean changePassword(String _userName, String _oldPassword, String _newPassword) {
         try {
@@ -563,7 +578,9 @@ public class UserAccess {
         }
         return false;
     }
-//        Update information of user
+    /*
+     * Update information of user
+     */
 
     public boolean updateProfile() {
         try {
@@ -589,23 +606,11 @@ public class UserAccess {
         return currentYear - birthYear;
     }
 
-    public Collection getAllUserExpired() {
-        ArrayList array = new ArrayList();
-        try {
-            con = db.getConnect();
-            ps = con.prepareCall("{}");
-
-
-        } catch (SQLException e) {
-        }
-        return array;
-    }
     /*
      * Count all new user of a day
      */
-
     public String getTotalNewUserToday(String _date) {
-        String total =null;
+        String total = null;
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.print("date 1: " + _date);
@@ -617,7 +622,7 @@ public class UserAccess {
             ps.setString(1, strDate + " 0:00:00");
             ps.setString(2, strDate + " 23:59:59");
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 total = rs.getString(1);
             }
             rs.close();
@@ -645,7 +650,7 @@ public class UserAccess {
             ps.setString(1, strDate + " 0:00:00");
             ps.setString(2, strDate + " 23:59:59");
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 User u = new User();
                 u.setUserId(rs.getInt(1));
                 u.setImages(rs.getString(2));
@@ -660,5 +665,121 @@ public class UserAccess {
             System.out.println("System have not users of in a day.");
         }
         return array;
+    }
+
+    /*
+     * Count all new user of a month
+     */
+    public String getTotalNewUserAMonth(String _date) {
+        String total = null;
+
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        DateFormat yearformat = new SimpleDateFormat("yyyy");
+
+        String strMonth = dateFormat.format(java.util.Date.parse(_date));
+        String strYear = yearformat.format(java.util.Date.parse(_date));
+        int month = Integer.parseInt(strMonth);
+        int year = Integer.parseInt(strYear);
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call TotalNewUserMonth(?,?)}");
+            ps.setInt(1, month);
+            ps.setInt(2, year);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getString(1);
+            }
+            rs.close();
+            ps.close();
+            db.closeConnect();
+        } catch (SQLException ex) {
+            System.out.println("System have not users of in a day.");
+        }
+        return total;
+    }
+    /*
+     * Get information of new user in a month
+     *
+     */
+
+    public Collection getInforNewUserAMonth(String _date) {
+        ArrayList array = new ArrayList();
+        DateFormat dateFormat = new SimpleDateFormat("MM");
+        DateFormat yearformat = new SimpleDateFormat("yyyy");
+
+        String strMonth = dateFormat.format(java.util.Date.parse(_date));
+        String strYear = yearformat.format(java.util.Date.parse(_date));
+        int month = Integer.parseInt(strMonth);
+        int year = Integer.parseInt(strYear);
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call InforNewUserAMonth(?,?)}");
+            ps.setInt(1, month);
+            ps.setInt(2, year);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                u.setUserId(rs.getInt(1));
+                u.setImages(rs.getString(2));
+                u.setFullName(rs.getString(3));
+                u.setEmail(rs.getString(4));
+                array.add(u);
+            }
+            rs.close();
+            ps.close();
+            db.closeConnect();
+        } catch (SQLException ex) {
+            System.out.println("System have not users of in a day.");
+        }
+        return array;
+    }
+    /*
+     * Get all user expired
+     *
+     */
+
+    public Collection getAllUserExpired() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call GetAllUserExpired}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                
+                u.setUserId(rs.getInt(1));
+                u.setImages(rs.getString(2));
+                u.setFullName(rs.getString(3));
+                u.setAddress(rs.getString(4));
+                u.setEmail(rs.getString(5));
+                u.setPhoneNumber(rs.getString(6));
+                u.setRegisterDate(rs.getDate(7));
+                u.setExpireDate(rs.getDate(8));
+                
+                array.add(u);
+            }
+        } catch (SQLException e) {
+            System.out.println("System have not users expired.");
+        }
+        return array;
+    }
+    /*
+     * Check user expired
+     *
+     */
+
+    public boolean checkUserExpired(String _userName) {
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call CheckUserExpired(?) }");
+            ps.setString(1, _userName);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("This user is expired.");
+        }
+        return false;
     }
 }
