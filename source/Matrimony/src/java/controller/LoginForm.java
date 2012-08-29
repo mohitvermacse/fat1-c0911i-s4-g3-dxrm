@@ -19,6 +19,7 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
 
     private String userName;
     private String password;
+    
 
     /**
      *
@@ -41,17 +42,17 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
         UserAccess ua = new UserAccess();
         
         if (getUserName() == null || getUserName().length() < 1) {
-            errors.add("userName", new ActionMessage("error.userName.required"));
+            errors.add("use", new ActionMessage("error.userName.requireds"));
             // TODO: add 'error.name.required' key to your resources
         }
         if (getPassword() == null || getPassword().length() < 1) {
-            errors.add("password", new ActionMessage("error.password.required"));
+            errors.add("pas", new ActionMessage("error.password.requireds"));
             // TODO: add 'error.name.required' key to your resources
         }
-//        if (!ua.loginUser(userName, password)) {
-//            errors.add("loginUser", new ActionMessage("error.loginUser.required"));
-//            // TODO: add 'error.name.required' key to your resources
-//        }
+        if (!ua.loginUser(userName, password)) {
+            errors.add("logUser", new ActionMessage("error.loginUser.requireds"));
+            // TODO: add 'error.name.required' key to your resources
+        }
 
         return errors;
     }
@@ -83,4 +84,5 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
