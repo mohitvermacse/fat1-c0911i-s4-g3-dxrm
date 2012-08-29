@@ -27,7 +27,7 @@ CREATE TABLE users(
 	userID INT PRIMARY KEY IDENTITY(1, 1),
 	userName NVARCHAR(50) not null,
 	password NVARCHAR(50)not null,
-	avatar int,
+	avatar INT,
 	fullName NVARCHAR(50),
 	address NVARCHAR(100),
 	gender NVARCHAR(10),
