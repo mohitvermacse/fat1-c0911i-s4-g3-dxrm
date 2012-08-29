@@ -10,6 +10,8 @@ import java.sql.*;
 import java.text.*;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -121,30 +123,30 @@ public class UserManager {
         int cityID = getCityID(cityName);
         int countryID = getCountryID(countryName);
         try {
-            String query = "UPDATE users SET password = ?, fullName = ?, address = ?, gender = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
+            String query = "UPDATE users SET password = ?, fullName = ?, address = ?, gender = ?, birthDay = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, password);
             prs.setString(2, fullName);
             prs.setString(3, address);
             prs.setString(4, gender);
-            //prs.setString(5, birthDay);
-            prs.setString(5, email);
-            prs.setString(6, phoneNumber);
-            prs.setString(7, maritalStatus);
-            prs.setInt(8, height);
-            prs.setInt(9, countryID);
-            prs.setInt(10, cityID);
-            prs.setString(11, languages);
-            prs.setString(12, caste);
-            prs.setString(13, familyDetails);
-            prs.setString(14, qualification);
-            prs.setString(15, workingAt);
-            prs.setString(16, hobbies);
-            prs.setString(17, favoriteMusic);
-            prs.setString(18, movies);
-            prs.setString(19, cuisine);
-            prs.setString(20, books);
-            prs.setInt(21, userID);
+            prs.setString(5, birthDay);
+            prs.setString(6, email);
+            prs.setString(7, phoneNumber);
+            prs.setString(8, maritalStatus);
+            prs.setInt(9, height);
+            prs.setInt(10, countryID);
+            prs.setInt(11, cityID);
+            prs.setString(12, languages);
+            prs.setString(13, caste);
+            prs.setString(14, familyDetails);
+            prs.setString(15, qualification);
+            prs.setString(16, workingAt);
+            prs.setString(17, hobbies);
+            prs.setString(18, favoriteMusic);
+            prs.setString(19, movies);
+            prs.setString(20, cuisine);
+            prs.setString(21, books);
+            prs.setInt(22, userID);
             prs.executeUpdate();
             prs.close();
             conn.closeConnect();
@@ -154,6 +156,144 @@ public class UserManager {
             flag = false;
         } 
         return flag;
+    }
+    
+    public boolean upgradeAccount(int userID, int premiumID) {
+        boolean flag = false;
+        conn = new ConnectDB();
+        String premiumType = getPremiumType(premiumID);
+        
+        if(checkUserStatus(userID)) {
+            String d = getUserExpireDate(userID);
+            int month = Integer.parseInt(d.substring(0, 2));
+            int day = Integer.parseInt(d.substring(3, 5));
+            int year = Integer.parseInt(d.substring(6, 10));
+            if(premiumType.equalsIgnoreCase("One Month")) {
+                if(month == 12) {
+                    month = 1;
+                    year = year + 1;
+                } else {
+                    month = month + 1;
+                }
+            }
+            if(premiumType.equalsIgnoreCase("One Year")) {
+                year = year + 1;
+            }
+            String expireDate = month + "/" + day + "/" + year;
+            try {
+                String query = "UPDATE users SET expireDate = ?, WHERE userID = ?";
+                PreparedStatement prs = conn.getConnect().prepareStatement(query);
+                prs.setString(1, expireDate);   
+                prs.setInt(2, userID);
+                prs.executeUpdate();
+                prs.close();
+                conn.closeConnect();
+                flag = true;
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                flag = false;
+            } 
+        } else {
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            java.util.Date now = new java.util.Date();
+            String d = dateFormat.format(now).toString();
+            int value = 1;
+            int month = Integer.parseInt(d.substring(0, 2));
+            int day = Integer.parseInt(d.substring(3, 5));
+            int year = Integer.parseInt(d.substring(6, 10));
+            if(premiumType.equalsIgnoreCase("One Month")) {
+                if(month == 12) {
+                    month = 1;
+                    year = year + 1;
+                } else {
+                    month = month + 1;
+                }
+            }
+            if(premiumType.equalsIgnoreCase("One Year")) {
+                year = year + 1;
+            }
+            String expireDate = month + "/" + day + "/" + year;
+            try {
+                String query = "UPDATE users SET expireDate = ?, status = ? WHERE userID = ?";
+                PreparedStatement prs = conn.getConnect().prepareStatement(query);
+                prs.setString(1, expireDate);   
+                prs.setString(2, "Paid");
+                prs.setInt(3, userID);
+                prs.executeUpdate();
+                prs.close();
+                conn.closeConnect();
+                flag = true;
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                flag = false;
+            } 
+        }
+        
+        return flag;
+    }
+    
+    public boolean checkUserStatus(int userID) {
+        boolean flag = false;
+        conn = new ConnectDB();
+        try {
+            String query = "SELECT status FROM users WHERE userID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, userID);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                if(rs.getString(1).equalsIgnoreCase("Paid")) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return flag;
+    }
+    
+    public String getPremiumType(int premiumID) {
+        conn = new ConnectDB();
+        String premiumType = "";
+        try {
+            String query = "SELECT premiumType FROM premium WHERE premiumID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, premiumID);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                premiumType = rs.getString(1);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return premiumType;
+    }
+    
+    public String getUserExpireDate(int userID) {
+        conn = new ConnectDB();
+        String expireDate = "";
+        try {
+            String query = "SELECT expireDate FROM users WHERE userID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, userID);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()) {
+                expireDate = rs.getDate(1).toString();
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+        return expireDate;
     }
     
     public int getCityID(String cityName) {

@@ -7,6 +7,7 @@ package controller;
 import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sound.midi.SysexMessage;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -39,19 +40,25 @@ public class PaymentAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        PaymentForm pf = (PaymentForm) form;
-        UserManager u = new UserManager();
-
+        HttpSession session = request.getSession(false);
+        PaymentForm paymentForm = (PaymentForm) form;
+        String adminBankAccount = "08282012001";
+        float amount = Float.parseFloat(paymentForm.getMoney());
         MatrimonyBankService_Service service = new MatrimonyBankService_Service();
-        MatrimonyBankService pb = service.getMatrimonyBankServicePort();
-
-        System.out.print("bacsadsa"+ pf.getMoney() +pf.getIdentityNumber() + pf.getPassword());
-//        if (pb.checkIdentityNumber(pf.getIdentityNumber(), pf.getPassword())) {
-//            System.out.println("Identity card valid!");
-//        }
-//        if (pb.checkBalance(pf.getIdentityNumber(), Float.parseFloat(pf.getAmount()))){
-//            System.out.println("money valid!");
-//        }
-        return mapping.findForward("success");
+        MatrimonyBankService matrimonyBankService = service.getMatrimonyBankServicePort();
+        boolean flag = matrimonyBankService.makeTransaction(paymentForm.getIdentityNumber(), adminBankAccount, amount);
+        if(flag) {
+            int premiumID = Integer.parseInt(session.getAttribute("premiumID").toString());
+            UserManager userManager = new UserManager();
+            flag = userManager.upgradeAccount(1, premiumID);
+            if(flag) {
+                return mapping.findForward("success");
+            } else {
+                return mapping.findForward("error");
+            }
+        } else {
+            return mapping.findForward("error");
+        }
+        
     }
 }
