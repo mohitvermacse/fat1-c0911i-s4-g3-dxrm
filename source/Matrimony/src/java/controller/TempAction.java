@@ -38,7 +38,7 @@ public class TempAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
         UserManager userManager = new UserManager();
         userManager.fillCityList();
         userManager.fillCountryList();
