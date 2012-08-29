@@ -18,23 +18,39 @@
     <body>
         <h1>Payment Gateway</h1>
         <html:form action="PaymentAction">
+            <html:errors property="balanceError" />
+            <html:errors property="cardNumberError" />
+            
             <table>
                 <tr>
                     <td>Your card account: </td>
                     <td>
                         <html:text property="identityNumber" />
                     </td>
+                    <td>
+                        <html:errors property="identityNumberError" />
+                    </td>                    
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td>
+                        <html:text property="password" />
+                    </td>
+                    <td>
+                        <html:errors property="passwordError" />
+                    </td>
+                    
                 </tr>
                 <tr>
                     <td>Premium plan: </td>
-                    <td><html:text property="" disabled="true" value="${premiumType}"/></td>
+                    <td><input type="text" value="${premiumType}"/></td>
                 </tr>
                 <tr>
                     <td>Amount: </td>
-                    <td><html:text property="amount" disabled="true" value="${amount}"/> $</td>
+                    <td><html:text property="money" value="${amount}"/> $</td>
                 </tr>
                 <tr>
-                    <td><html:submit property="submit" value="Accept"/></td>
+                    <td><html:submit value="Accept"/></td>
                     <td></td>
                 </tr>
             </table>
