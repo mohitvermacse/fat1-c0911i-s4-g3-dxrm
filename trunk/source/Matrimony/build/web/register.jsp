@@ -64,14 +64,13 @@
         <div style="display: none;">
             <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
         </div>
-        <%--<c:set var="city" value="${requestScope.listCity}" />
-        <c:set var="country" value="${requestScope.listCountry}"/>--%>
+
         <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
         <html:form action="RegisterAction" styleId="validateForm" >
             <table>
                 <tr>
                     <td>UserName: </td>
-                    <td><html:text property="userName"/></td>
+                    <td><html:text property="userName"/><div style="color: red">*</div></td>
                     <td>
                         <html:errors property="userNameError" />
                         <html:errors property="existed" />
@@ -79,40 +78,40 @@
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><html:password property="password"/></td>
+                    <td><html:password property="password"/><div style="color: red">*</div></td>
                     <td><html:errors property="passwordError" /></td>
                 </tr>
                 <tr>
                     <td>Full Name: </td>
-                    <td><html:text property="fullName"/></td>
+                    <td><html:text property="fullName"/><div style="color: red">*</div></td>
                     <td><html:errors property="fullNameError" /></td>
                 </tr>
                 <tr>
                     <td>Address: </td>
-                    <td><html:text property="address"/></td>
+                    <td><html:text property="address"/><div style="color: red">*</div></td>
                     <td><html:errors property="addressError" /></td>
                 </tr>
                 <tr>
                     <td>Gender: </td>
                     <td>
                         Male <html:radio property="gender" value="Male"/>
-                        Female <html:radio property="gender" value="Female"/>
+                        Female <html:radio property="gender" value="Female"/><div style="color: red">*</div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>BirthDay: </td>
-                    <td><html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/></td>
+                    <td>BirthDay:(mm/dd/yyyy) </td>
+                    <td><html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/><div style="color: red">*</div></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Email: </td>
-                    <td><html:text property="email"/></td>
+                    <td>Email:(luka@org.com.vn) </td>
+                    <td><html:text property="email"/><div style="color: red">*</div></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Phone Number: </td>
-                    <td><html:text property="phoneNumber"/></td>
+                    <td><html:text property="phoneNumber"/><div style="color: red">*</div></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -127,7 +126,7 @@
                             <logic:iterate id="country" collection="${userManager.countryList}">
                                 <html:option value="${country}"/>
                             </logic:iterate>
-                        </html:select>
+                        </html:select><div style="color: red">*</div>
                     </td>
                     <td></td>
                 </tr>
@@ -138,13 +137,13 @@
                             <logic:iterate id="city" collection="${userManager.cityList}">
                                 <html:option value="${city}"/>
                             </logic:iterate>
-                        </html:select>
+                        </html:select><div style="color: red">*</div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Height: </td>
-                    <td><html:text property="height"/></td>
+                    <td><html:text property="height"/><div style="color: red">*</div></td>
                     <td></td>
                 </tr>
                 <tr>
