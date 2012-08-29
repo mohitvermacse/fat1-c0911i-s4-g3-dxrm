@@ -15,10 +15,10 @@ import org.apache.struts.action.ActionMessage;
  * @author nvc
  */
 public class StatistForm extends org.apache.struts.action.ActionForm {
-    
-     private String startDate;
+
+    private String startDate;
     private String endDate;
-    private String aDay;
+    private String aDay, aMonth;
     private int userId;
     private String email;
 
@@ -39,7 +39,7 @@ public class StatistForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        
+
         return errors;
     }
 
@@ -111,5 +111,19 @@ public class StatistForm extends org.apache.struts.action.ActionForm {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the aMonth
+     */
+    public String getaMonth() {
+        return aMonth;
+    }
+
+    /**
+     * @param aMonth the aMonth to set
+     */
+    public void setaMonth(String aMonth) {
+        this.aMonth = aMonth;
     }
 }
