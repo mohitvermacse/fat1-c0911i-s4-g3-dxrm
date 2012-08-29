@@ -62,7 +62,7 @@
         <action input="/managepic.jsp" name="PhotoForm" path="/PhotoAction" scope="session" type="controller.PhotoAction">
             <forward name="success" path="/managepic.jsp"/>
         </action>
-        <action path="/admin/ManagePhoto" type="controller.ManagePhoto">
+        <action path="/ManagePhoto" type="controller.ManagePhoto">
             <forward name="success" path="/managepic.jsp"/>
         </action>
         <action input="/statist.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction">
