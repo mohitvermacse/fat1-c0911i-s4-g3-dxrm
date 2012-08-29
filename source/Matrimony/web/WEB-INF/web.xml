@@ -25,6 +25,10 @@
         <servlet-name>UploadImage</servlet-name>
         <servlet-class>controller.UploadImage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendmailServlet</servlet-name>
+        <servlet-class>controllerAdmin.SendmailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.page</url-pattern>
@@ -37,13 +41,17 @@
         <servlet-name>UploadImage</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendmailServlet</servlet-name>
+        <url-pattern>/SendmailServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>home.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <taglib>
