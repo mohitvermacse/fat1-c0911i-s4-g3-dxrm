@@ -64,54 +64,82 @@
         <div style="display: none;">
             <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
         </div>
-
+        <h1>Register</h1>
         <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
         <html:form action="RegisterAction" styleId="validateForm" >
             <table>
                 <tr>
                     <td>UserName: </td>
-                    <td><html:text property="userName"/><div style="color: red">*</div></td>
                     <td>
-                        <html:errors property="userNameError" />
-                        <html:errors property="existed" />
+                        <html:text property="userName"/>
+                        <font style="color: red">*</font>
+                    </td>
+                    <td>
+                        <font style="color: red"><html:errors property="userNameError" /></font>
+                        <font style="color: red"><html:errors property="existed" /></font>
                     </td>
                 </tr>
                 <tr>
                     <td>Password: </td>
-                    <td><html:password property="password"/><div style="color: red">*</div></td>
-                    <td><html:errors property="passwordError" /></td>
+                    <td>
+                        <html:password property="password"/>
+                        <font style="color: red">*</font>
+                    </td>
+                    <td>
+                        <font style="color: red"><html:errors property="passwordError" /></font>
+                    </td>
                 </tr>
                 <tr>
                     <td>Full Name: </td>
-                    <td><html:text property="fullName"/><div style="color: red">*</div></td>
-                    <td><html:errors property="fullNameError" /></td>
+                    <td>
+                        <html:text property="fullName"/>
+                        <font style="color: red">*</font>
+                    </td>
+                    <td>
+                        <font style="color: red"><html:errors property="fullNameError" /></font>
+                    </td>
                 </tr>
                 <tr>
                     <td>Address: </td>
-                    <td><html:text property="address"/><div style="color: red">*</div></td>
-                    <td><html:errors property="addressError" /></td>
+                    <td>
+                        <html:text property="address"/>
+                        <font style="color: red">*</font>
+                    </td>
+                    <td>
+                        <font style="color: red"><html:errors property="addressError" /></font>
+                    </td>
                 </tr>
                 <tr>
                     <td>Gender: </td>
                     <td>
                         Male <html:radio property="gender" value="Male"/>
-                        Female <html:radio property="gender" value="Female"/><div style="color: red">*</div>
+                        Female <html:radio property="gender" value="Female"/>
+                        <font style="color: red">*</font>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>BirthDay:(mm/dd/yyyy) </td>
-                    <td><html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/><div style="color: red">*</div></td>
+                    <td>BirthDay: </td>
+                    <td>
+                        <html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/> 
+                        <font style="color: red">*</font> Format: mm/dd/yyyy
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Email:(luka@org.com.vn) </td>
-                    <td><html:text property="email"/><div style="color: red">*</div></td>
+                    <td>Email: </td>
+                    <td>
+                        <html:text property="email"/> 
+                        <font style="color: red">*</font> Exam: luka@org.com.vn
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Phone Number: </td>
-                    <td><html:text property="phoneNumber"/><div style="color: red">*</div></td>
+                    <td>
+                        <html:text property="phoneNumber"/>
+                        <font style="color: red">*</font>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -126,7 +154,8 @@
                             <logic:iterate id="country" collection="${userManager.countryList}">
                                 <html:option value="${country}"/>
                             </logic:iterate>
-                        </html:select><div style="color: red">*</div>
+                        </html:select>
+                        <font style="color: red">*</font>
                     </td>
                     <td></td>
                 </tr>
@@ -137,13 +166,17 @@
                             <logic:iterate id="city" collection="${userManager.cityList}">
                                 <html:option value="${city}"/>
                             </logic:iterate>
-                        </html:select><div style="color: red">*</div>
+                        </html:select>
+                        <font style="color: red">*</font>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Height: </td>
-                    <td><html:text property="height"/><div style="color: red">*</div></td>
+                    <td>
+                        <html:text property="height"/> Cm 
+                        <font style="color: red">*</font>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>

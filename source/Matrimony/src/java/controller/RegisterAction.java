@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+
 /**
  *
  * @author SENJURO
@@ -64,9 +65,9 @@ public class RegisterAction extends org.apache.struts.action.Action {
         String movies = registerForm.getMovies();
         String cuisine = registerForm.getCuisine();
         String books = registerForm.getBooks();
+        String expireDate = "08/10/2012";
         
-        boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, "01/01/2013", "Paid User");
-        System.out.println("CDCM: " + flag);
+        boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, "Free");
         if(flag) {
             return mapping.findForward("success");
         } else {
