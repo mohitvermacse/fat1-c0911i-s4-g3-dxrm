@@ -39,22 +39,28 @@ public class LoginAction extends org.apache.struts.action.Action {
             throws Exception {
         LoginForm from = (LoginForm) form;
         UserAccess ua = new UserAccess();
-        String action = null;
+
         String user = from.getUserName();
         String pas = from.getPassword();
-        if (ua.loginUser(user, pas)) {
-            action = "user";
-            ArrayList arrayReceive = (ArrayList) ua.getReceiveRequestByStatus(2);
-            ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
-            request.setAttribute("listFriend", arrayFriend);
-            request.setAttribute("listReceive", arrayReceive);
-        } else {
-            ArrayList arrayCity = (ArrayList) ua.getAllCity();
-            ArrayList arrayCountry = (ArrayList) ua.getAllCountry();
-            request.setAttribute("listCity", arrayCity);
-            request.setAttribute("listCountry", arrayCountry);
-            action = "register";
+        try {
+            if (ua.loginUser(user, pas)) {
+                ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(1);
+                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(1);
+                request.setAttribute("listFriend", arrayFriend);
+                request.setAttribute("listReceive", arrayReceive);
+                return mapping.findForward("user");
+            } else {
+                ArrayList arrayCity = (ArrayList) ua.getAllCity();
+                ArrayList arrayCountry = (ArrayList) ua.getAllCountry();
+                request.setAttribute("listCity", arrayCity);
+                request.setAttribute("listCountry", arrayCountry);
+
+                return mapping.findForward("register");
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return mapping.findForward("error");
         }
-        return mapping.findForward(action);
+
     }
 }
