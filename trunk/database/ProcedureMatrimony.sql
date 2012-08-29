@@ -73,7 +73,7 @@ CREATE PROCEDURE GetAdminIdByUserName
 	SELECT adminID FROM admin WHERE userName=@userName
 GO
 /*        select all users want is friends of user   drop procedure GetInforRequestBySendUserID      */
-CREATE PROCEDURE GetAllReceveRequestByStatus'2','Transfer'*/
+CREATE PROCEDURE GetAllReceveRequestByStatus/*'2','Transfer'*/
 	@userId int,
 	@actions NVARCHAR(50)
 	AS
