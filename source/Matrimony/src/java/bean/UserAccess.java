@@ -8,7 +8,9 @@ import java.sql.*;
 import java.util.*;
 import entity.*;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.text.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 /**
  *
@@ -746,7 +748,7 @@ public class UserAccess {
             rs = ps.executeQuery();
             while (rs.next()) {
                 User u = new User();
-                
+
                 u.setUserId(rs.getInt(1));
                 u.setImages(rs.getString(2));
                 u.setFullName(rs.getString(3));
@@ -755,7 +757,7 @@ public class UserAccess {
                 u.setPhoneNumber(rs.getString(6));
                 u.setRegisterDate(rs.getDate(7));
                 u.setExpireDate(rs.getDate(8));
-                
+
                 array.add(u);
             }
         } catch (SQLException e) {
@@ -779,6 +781,44 @@ public class UserAccess {
             }
         } catch (SQLException e) {
             System.out.println("This user is expired.");
+        }
+        return false;
+    }
+    /*
+     * Send messages fo user infor expired
+     *
+     */
+
+    public boolean send(String mailTo, String subject, String messageText) {
+        try {
+            final String username = "vchienbn@gmail.com";
+            final String password = "chienhoa2010";
+
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("vchienbn@gmail.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(mailTo));
+            message.setSubject(subject);
+            message.setText(messageText);
+
+            Transport.send(message);
+            System.out.println("Done");
+            return true;
+        } catch (MessagingException e) {
+            System.out.println(e.getMessage());
         }
         return false;
     }
