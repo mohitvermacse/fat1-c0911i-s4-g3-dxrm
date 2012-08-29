@@ -6,6 +6,7 @@ package controller;
 
 import bean.ImageBean;
 import bean.ImageBus;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,11 +43,14 @@ public class PhotoAction extends org.apache.struts.action.Action {
         PhotoForm photoForm = (PhotoForm) form;
         int id = photoForm.getPhotoId();
         String action = photoForm.getBtn();
-        System.out.print(id + action);
+        String imgPath= photoForm.getPhotoPath();
+        imgPath = imgPath.replace("/", "\\");        
+        ServletContext sc = request.getServletContext();        
         ImageBus iBus = new ImageBus();
         ImageBean iBean = new ImageBean();
         if (action.equalsIgnoreCase("Delete")){
             iBus.deleteImage(id);
+            iBus.delImg(sc.getRealPath("") + imgPath);
         } else if (action.equalsIgnoreCase("Make Profile Picture")){
             iBus.changeAvatar(id, 1);
             request.setAttribute("message", "Changed Avatar to Image ID " + id);

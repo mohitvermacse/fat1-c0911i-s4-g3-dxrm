@@ -19,10 +19,15 @@
             <c:forEach var="item" items="${iBean.arImg}">
                 <html:form action="PhotoAction" method="POST">
                     <tr>
-                        <td><img src=".${item.imagePath}" style="max-width: 200px; max-height: 200px"/>
-                        <html:hidden property="photoId" value="${item.imageId}"/></td>
-                        <td><html:submit property="btn" value="Make Profile Picture"/><br/>
-                            <html:submit property="btn" value="Delete"/></td>
+                        <td>
+                            <img src=".${item.imagePath}" style="max-width: 200px; max-height: 200px"/>
+                            <html:hidden property="photoId" value="${item.imageId}"/>
+                            <html:hidden property="photoPath" value="${item.imagePath}"/>
+                        </td>
+                        <td>
+                            <html:submit property="btn" value="Make Profile Picture"/><br/>
+                            <html:submit property="btn" value="Delete"/>
+                        </td>
                     </tr>
                 </html:form>
             </c:forEach>

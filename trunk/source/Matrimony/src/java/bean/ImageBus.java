@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
 import entity.Image;
+import java.io.File;
 /**
  *
  * @author UTAN
@@ -61,6 +62,12 @@ public class ImageBus {
             da.closeConnect();
         } catch (SQLException ex) {
             Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void delImg(String path){
+        File f = new File(path);
+        if (f.exists()){
+            f.delete();
         }
     }
     public void changeAvatar (int id, int userId){

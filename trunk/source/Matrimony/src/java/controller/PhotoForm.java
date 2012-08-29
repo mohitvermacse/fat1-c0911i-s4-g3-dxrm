@@ -18,7 +18,7 @@ public class PhotoForm extends org.apache.struts.action.ActionForm {
     
     private String btn;
     private int photoId;
-
+    private String photoPath;
     
 
     /**
@@ -68,6 +68,20 @@ public class PhotoForm extends org.apache.struts.action.ActionForm {
      */
     public void setPhotoId(int photoId) {
         this.photoId = photoId;
+    }
+
+    /**
+     * @return the photoPath
+     */
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    /**
+     * @param photoPath the photoPath to set
+     */
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
     }
 
 }
