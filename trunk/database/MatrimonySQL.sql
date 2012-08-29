@@ -92,18 +92,18 @@ GO
 insert into admin values('admin1','e10adc3949ba59abbe56e057f20f883e')
 insert into admin values('admin2','e10adc3949ba59abbe56e057f20f883e')
 
-insert into country values('Viet Nam')
+insert into country values('Vietnam')
 insert into country values('England')
 
-insert into city values(1,'TP HCM')
+insert into city values(1,'HCM City')
 insert into city values(1,'Ha Noi')
 insert into city values(1,'Hue')
 insert into city values(2,'Lodon')
 insert into city values(2,'Birmingham')
 insert into city values(2,'Manchester')
 
-insert into premium values('month',50)
-insert into premium values('year',500)
+insert into premium values('One Month', 25)
+insert into premium values('One Year', 275)
 
 insert into users(userName,password,fullName,address,gender,birthDay,email,phoneNumber,height,countryID,cityID,expireDate,status)
  values('chiennv','e10adc3949ba59abbe56e057f20f883e','Nguyen Van Chien','Bac Ninh','Male','10/20/1984','chiennv_a04470@fpt.aptech.ac.vn','0984632414','166',1,2,getDate(),'Expired')
