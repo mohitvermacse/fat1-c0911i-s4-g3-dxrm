@@ -9,47 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+import service.MatrimonyBankService;
+import service.MatrimonyBankService_Service;
 
 /**
  *
  * @author SENJURO
  */
 public class PaymentForm extends org.apache.struts.action.ActionForm {
+
     
-    private String name;
-    private int number;
-    private String submit;
-    private String amount;
+    private String money;
     private String identityNumber;
+    private String password;
 
     /**
      * @return
      */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param string
-     */
-    public void setName(String string) {
-        name = string;
-    }
-
-    /**
-     * @return
-     */
-    public int getNumber() {
-        return number;
-    }
-
-    /**
-     * @param i
-     */
-    public void setNumber(int i) {
-        number = i;
-    }
-
+    
     /**
      *
      */
@@ -67,40 +44,30 @@ public class PaymentForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        /*if (getName() == null || getName().length() < 1) {
-            errors.add("name", new ActionMessage("error.name.required"));
+
+        MatrimonyBankService_Service service = new MatrimonyBankService_Service();
+        MatrimonyBankService p = service.getMatrimonyBankServicePort();
+        
+        if (getIdentityNumber() == null || getIdentityNumber().length() < 1) {
+            errors.add("identityNumberError", new ActionMessage("error.identityNumber.required"));
+        }
+        if (getPassword() == null || getPassword().length() < 1) {
+            errors.add("passwordError", new ActionMessage("error.password.required"));
+        }
+
+        if (!p.checkIdentityNumber(identityNumber, password)) {
+            errors.add("cardNumberError", new ActionMessage("error.cardNumber.invalid"));
             // TODO: add 'error.name.required' key to your resources
-        }*/
+        }
+        if (!p.checkBalance(identityNumber, Float.parseFloat(money))) {
+            errors.add("balanceError", new ActionMessage("error.balance"));
+        }
         return errors;
     }
 
-    /**
-     * @return the submit
-     */
-    public String getSubmit() {
-        return submit;
-    }
+    
 
-    /**
-     * @param submit the submit to set
-     */
-    public void setSubmit(String submit) {
-        this.submit = submit;
-    }
-
-    /**
-     * @return the amount
-     */
-    public String getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+   
 
     /**
      * @return the identityNumber
@@ -114,5 +81,33 @@ public class PaymentForm extends org.apache.struts.action.ActionForm {
      */
     public void setIdentityNumber(String identityNumber) {
         this.identityNumber = identityNumber;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the money
+     */
+    public String getMoney() {
+        return money;
+    }
+
+    /**
+     * @param money the money to set
+     */
+    public void setMoney(String money) {
+        this.money = money;
     }
 }

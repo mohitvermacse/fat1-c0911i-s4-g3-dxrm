@@ -43,7 +43,7 @@ public class PremiumAction extends org.apache.struts.action.Action {
         UserManager userManager = new UserManager();
         Premium premium = userManager.getPremiumDetails(Integer.parseInt(premiumForm.getPremiumSelecter()));
         session.setAttribute("premiumID", premiumForm.getPremiumSelecter());
-        session.setAttribute("amount", premium.getAmount());
+        session.setAttribute("amount", String.valueOf(premium.getAmount()));
         session.setAttribute("premiumType", premium.getPreType());
         return mapping.findForward("payment");
     }
