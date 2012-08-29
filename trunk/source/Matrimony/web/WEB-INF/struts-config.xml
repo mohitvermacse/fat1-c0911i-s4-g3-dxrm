@@ -7,19 +7,26 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="PaymentForm" type="controller.PaymentForm"/>
+        <form-bean name="PremiumForm" type="controller.PremiumForm"/>
+        <form-bean name="ProfileForm" type="controller.ProfileForm"/>
+        <form-bean name="RegisterForm" type="controller.RegisterForm"/>
+        
+        <form-bean name="ChangePasswordForm" type="controller.ChangePasswordForm"/>
+        <form-bean name="StatisticForm" type="controller.StatisticForm"/>
+        <form-bean name="MyUserForm" type="controller.MyUserForm"/>
+        
+        <form-bean name="LoginForm" type="controller.LoginForm"/>
+        <form-bean name="StatsForm" type="controller.StatsForm"/>
+        <form-bean name="MatrimonyForm" type="controller.MatrimonyForm"/>
+        
         <form-bean name="ExpireForm" type="controllerAdmin.ExpireForm"/>
         <form-bean name="ControllerAdminForm" type="controllerAdmin.ControllerAdminForm"/>
         <form-bean name="logAdminForm" type="controllerAdmin.logAdminForm"/>
         <form-bean name="StatistForm" type="controller.StatistForm"/>
         <form-bean name="PhotoForm" type="controller.PhotoForm"/>
         
-        <form-bean name="RegisterForm" type="controller.RegisterForm"/>
-        <form-bean name="ChangePasswordForm" type="controller.ChangePasswordForm"/>
-        <form-bean name="StatisticForm" type="controller.StatisticForm"/>
-        <form-bean name="MyUserForm" type="controller.MyUserForm"/>
-        <form-bean name="LoginForm" type="controller.LoginForm"/>
-        <form-bean name="StatsForm" type="controller.StatsForm"/>
-        <form-bean name="MatrimonyForm" type="controller.MatrimonyForm"/>
+       
     </form-beans>
     
     <global-exceptions>
@@ -46,18 +53,34 @@
         <action input="/changePassword.jsp" name="ChangePasswordForm" path="/ChangePasswordAction" scope="session" type="controller.ChangePasswordAction">
             <forward name="login" path="/login.jsp"/>
         </action>
-       
+        <action input="/paymentStats.jsp" name="StatsForm"  path="/StatsAction" scope="session" type="controller.StatsAction">
+            <forward name="success" path="/paymentstats.jsp"/>
+        </action>
         <action input="/index.jsp" name="MatrimonyForm" path="/MatrimonyAction" scope="session" type="controller.MatrimonyAction">
             <forward name="success" path="/success.jsp"/>
             <forward name="fail" path="/error.jsp"/>
         </action>
         <action input="/register.jsp" name="RegisterForm" path="/RegisterAction" scope="session" type="controller.RegisterAction">
             <forward name="success" path="/success.jsp"/>
-            <forward name="fail" path="/error.jsp"/>
+            <forward name="error" path="/error.jsp"/>
+            <forward name="register" path="/register.jsp"/>
+        </action>
+        <action path="/TempAction" type="controller.TempAction">
             <forward name="register" path="/register.jsp"/>
         </action>
         <action path="/ViewAlbum" type="controller.ViewAlbum">
             <forward name="success" path="/album.jsp"/>
+        </action>
+        <action input="/profile.jsp" name="ProfileForm" path="/ProfileAction" scope="session" type="controller.ProfileAction">
+            <forward name="success" path="/success.jsp"/>
+            <forward name="error" path="/error.jsp"/>
+        </action>
+        <action input="/premium.jsp" name="PremiumForm" path="/PremiumAction" scope="session" type="controller.PremiumAction">
+            <forward name="payment" path="/payment.jsp"/>
+        </action>
+        <action input="/payment.jsp" name="PaymentForm" path="/PaymentAction" scope="session" type="controller.PaymentAction">
+            <forward name="success" path="/success.jsp"/>
+            <forward name="error" path="/error.jsp"/>
         </action>
         <action input="/managepic.jsp" name="PhotoForm" path="/PhotoAction" scope="session" type="controller.PhotoAction">
             <forward name="success" path="/managepic.jsp"/>
@@ -69,16 +92,14 @@
             <forward name="sta" path="/statist.jsp"/>
         </action>
         <action input="/admin/loginAdmin.jsp" name="logAdminForm" path="/LogAdminAction" scope="session" type="controllerAdmin.LogAdminAction">
-           
             <forward name="homeAdmin" path="/admin/controller.jsp"/>
-            <forward name="error" path="/admin/loginAdmin.jsp"/>
-            
+            <forward name="error" path="/admin/loginAdmin.jsp"/>            
         </action>
+      
         <action input="/admin/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
             <forward name="expired" path="/admin/expired.jsp"/>
             <forward name="transfer" path="/transferRequest.jsp"/>
-            <forward name="statistic" path="/statist.jsp"/>           
-            
+            <forward name="statistic" path="/statist.jsp"/>               
         </action>
         <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction"/>
     </action-mappings>
