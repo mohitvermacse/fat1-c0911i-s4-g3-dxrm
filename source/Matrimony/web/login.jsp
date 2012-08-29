@@ -38,11 +38,9 @@
                 </tr>
             </table> 
             <div style="color: red"> 
-
                 <html:errors property="logUser"/>
             </div>     
         </html:form>
-
     </body>
 </html:html>
 
