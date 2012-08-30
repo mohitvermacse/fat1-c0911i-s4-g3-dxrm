@@ -44,8 +44,8 @@ public class LoginAction extends org.apache.struts.action.Action {
         String pas = from.getPassword();
         try {
             if (ua.loginUser(user, pas)) {
-                ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(1);
-                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(1);
+                ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(2);
+                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
                 request.setAttribute("listFriend", arrayFriend);
                 request.setAttribute("listReceive", arrayReceive);
                 return mapping.findForward("user");
