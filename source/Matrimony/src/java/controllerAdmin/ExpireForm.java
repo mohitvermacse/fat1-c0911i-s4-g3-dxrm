@@ -15,37 +15,11 @@ import org.apache.struts.action.ActionMessage;
  * @author nvc
  */
 public class ExpireForm extends org.apache.struts.action.ActionForm {
-    
-    private String name;
-    private int number;
 
-    /**
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param string
-     */
-    public void setName(String string) {
-        name = string;
-    }
-
-    /**
-     * @return
-     */
-    public int getNumber() {
-        return number;
-    }
-
-    /**
-     * @param i
-     */
-    public void setNumber(int i) {
-        number = i;
-    }
+    private String fullName,userName;
+    private String email;
+    private java.sql.Date expireDa;
+    private String userId;
 
     /**
      *
@@ -64,10 +38,80 @@ public class ExpireForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        if (getName() == null || getName().length() < 1) {
-            errors.add("name", new ActionMessage("error.name.required"));
-            // TODO: add 'error.name.required' key to your resources
-        }
+//        if (getName() == null || getName().length() < 1) {
+//            errors.add("name", new ActionMessage("error.name.required"));
+//            // TODO: add 'error.name.required' key to your resources
+//        }
         return errors;
+    }
+
+    /**
+     * @return the fullName
+     */
+    public String getFullName() {
+        return fullName;
+    }
+
+    /**
+     * @param fullName the fullName to set
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the expireDa
+     */
+    public java.sql.Date getExpireDa() {
+        return expireDa;
+    }
+
+    /**
+     * @param expireDa the expireDa to set
+     */
+    public void setExpireDa(java.sql.Date expireDa) {
+        this.expireDa = expireDa;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

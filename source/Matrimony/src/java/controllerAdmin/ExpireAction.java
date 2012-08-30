@@ -4,6 +4,9 @@
  */
 package controllerAdmin;
 
+import bean.UserAccess;
+import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
@@ -35,7 +38,26 @@ public class ExpireAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-        return mapping.findForward(SUCCESS);
+        ExpireForm ef = (ExpireForm) form;
+        UserAccess ua = new UserAccess();
+
+        String d = request.getParameter("dates");
+        String fullName = ef.getFullName();
+        java.util.Date date = ef.getExpireDa();
+        String userName = ef.getUserName();
+
+        String to = "kukaravn@gmail.com";// ef.getEmail();
+        String subject = "Expire date account";
+        String content = "Your account <h3 style='font-style: italic; font: bold'> " + userName + "</h3> on matrimony.com expired to the day " + date;
+
+        System.out.println("\nEmail: " + to + "\nFull Name: " + fullName + "\nExpire Date: " + date);
+
+       
+        if (ua.send(to, subject, content)) {
+            ArrayList arrayUserExpired = (ArrayList) ua.getAllUserExpired();
+            request.setAttribute("listUserExpired", arrayUserExpired);
+            return mapping.findForward("success");
+        }
+        return mapping.findForward("error");
     }
 }
