@@ -757,6 +757,7 @@ public class UserAccess {
                 u.setPhoneNumber(rs.getString(6));
                 u.setRegisterDate(rs.getDate(7));
                 u.setExpireDate(rs.getDate(8));
+                u.setUserName(rs.getString(9));
 
                 array.add(u);
             }
@@ -802,13 +803,12 @@ public class UserAccess {
 
             Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
-
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(username, password);
                         }
                     });
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("vchienbn@gmail.com"));
+            message.setFrom(new InternetAddress("phuongchienl@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(mailTo));
             message.setSubject(subject);
@@ -818,7 +818,28 @@ public class UserAccess {
             System.out.println("Done");
             return true;
         } catch (MessagingException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean sendMailFogetPassword(String to, String subject, String conten) {
+        try {
+            String hot = "192.168.10.205";
+            String from = "vchienbn@gmail.com";
+            Properties pro = System.getProperties();
+            pro.setProperty("mail.smtp.host", hot);
+            Session session = Session.getDefaultInstance(pro);
+            MimeMessage msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(from));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            msg.setSubject(subject);
+
+            msg.setText(conten);
+            Transport.send(msg);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
