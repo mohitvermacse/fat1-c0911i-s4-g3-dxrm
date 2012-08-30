@@ -37,7 +37,7 @@ public class MatrimonyAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         MatrimonyManager matrimonyManager = new MatrimonyManager();
-        boolean flag = matrimonyManager.sendRequest(2, 3);
+        boolean flag = matrimonyManager.sendRequest(1, 3);
         if (flag) {
             return mapping.findForward("success");
         } else {
