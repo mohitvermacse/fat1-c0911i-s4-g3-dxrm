@@ -138,45 +138,45 @@ CREATE PROCEDURE GetAllFriend/*'2','Accept'*/
 	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID INNER JOIN images AS i ON u.userID=i.userID
 	WHERE rr.userId=2 AND rr.actions=@action
 GO
-/*        All user have friend        */
+/*        All user have friend drop procedure TotalUserHaveFriend      */
 CREATE PROCEDURE TotalUserHaveFriend
 	AS
-	SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Accept'
+	SELECT count(distinct(userID)) AS Allfriend FROM receiveRequest WHERE actions='Approved'
 GO
-/*        Total user of system        */
+/*        Total user of system drop procedure  TotalUser       */
 CREATE PROCEDURE TotalUser
 	AS
-	SELECT Count(*)FROM users WHERE status !='Expired'
+	SELECT Count(*)FROM users WHERE status !='Free'
 GO
-/*        Total new user by today        */
+/*        Total new user by today drop procedure  TotalNewUserToday        */
 CREATE PROCEDURE TotalNewUserToday/*'7/13/2012 0:00:00','7/13/2012 23:59:59'*/
 	@date NVARCHAR(50),
 	@date1 NVARCHAR(50)	
 	AS
-	select COUNT(*) FROM users WHERE status!='Expired'AND registerDate BETWEEN @date AND @date1
+	select COUNT(*) FROM users WHERE status!='Free'AND registerDate BETWEEN @date AND @date1
 GO
-/*        Select Infor of new users a today        */
+/*        Select Infor of new users a today  drop procedure  InforNewUserToday       */
 CREATE PROCEDURE InforNewUserToday/*'08/28/2012 0:00:00','08/28/2012 23:59:59'*/
 	@date NVARCHAR(50),
 	@date1 NVARCHAR(50)	
 	AS
 	SELECT u.userID,i.images, u.fullName,u.email FROM users AS u INNER JOIN images AS i	ON u.userID = i.userID 
-	where u.status!='Expired' AND i.imageID=avatar AND u.registerDate BETWEEN @date AND @date1
+	where u.status!='Free' AND i.imageID=avatar AND u.registerDate BETWEEN @date AND @date1
 GO
-/*        Total new user by month        */
+/*        Total new user by month drop procedure TotalNewUserMonth       */
 CREATE PROCEDURE TotalNewUserMonth/*'8','2012'*/
 	@month NVARCHAR(50),
 	@year NVARCHAR(50)
 	AS
-	select COUNT(*) FROM users WHERE registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+'' AND status!='Expired'
+	select COUNT(*) FROM users WHERE registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+'' AND status!='Free'
 GO
-/*        Select infor of new user a month        */
+/*        Select infor of new user a month   drop procedure InforNewUserAMonth      */
 CREATE PROCEDURE InforNewUserAMonth/*'8','2012'*/
 	@month NVARCHAR(50),
 	@year NVARCHAR(50)
 	AS
 	select u.userID,i.images, u.fullName,u.email  FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
-	WHERE u.status!='Expired' AND i.imageID=avatar AND registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+''
+	WHERE u.status!='Free' AND i.imageID=avatar AND registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+''
 GO
 /*        Insert user        */
 CREATE PROCEDURE InsertUser
@@ -296,7 +296,7 @@ GO
 /*        Get all user expire drop procedure GetAllUserExpired       */
 CREATE PROCEDURE GetAllUserExpired
 	AS
-	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate,u.userName FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
 	WHERE i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
 
 GO
