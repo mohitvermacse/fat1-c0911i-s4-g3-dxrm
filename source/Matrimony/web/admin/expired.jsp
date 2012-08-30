@@ -18,18 +18,32 @@
         <title>Matrimony</title>
     </head>
     <body>
+        
         <c:set var="listUser" value="${requestScope.listUserExpired}"/>
         <table border="1">
             <c:forEach var="u" items="${listUser}">
                 <html:form action="ExpireAction" method="POST">
-                    <tr>
-                        <td>${u.userId}</td>
-                        <td>${u.images}${u.fullName}</td>
+                    <tr>                        
+                        <td>
+                            ${u.images}${u.fullName}
+                            <html:hidden property="fullName" value="${u.fullName}"/>
+                            <html:hidden property="userId" value="${u.userId}"/>
+                            <html:hidden property="userName" value="${u.userName}"/>
+                        </td>
                         <td>${u.address}</td>
-                        <td>${u.email}</td>
+                        <td>
+                            ${u.email}
+                            <html:hidden property="email" value="${u.email}"/>
+                        </td>
                         <td>${u.phoneNumber}</td>
-                        <td>${u.registerDate}</td>
-                        <td>${u.expireDate}</td>
+                        <td>
+                            ${u.registerDate}
+                        </td>
+                        <td>
+                            ${u.expireDate}
+                            <input type="hidden" name="dates" value="${u.expireDate}"/>
+                            <html:hidden property="expireDa" value="${u.expireDate}"/>
+                        </td>
                         <td><html:submit property="action" value="Expired"/></td>
                     </tr>
                 </html:form>
