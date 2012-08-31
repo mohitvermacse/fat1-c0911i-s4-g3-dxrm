@@ -83,7 +83,7 @@ public class TransferRequest extends HttpServlet {
 
                     RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                     di.forward(request, response);
-                    System.out.println("5: " + action);
+                    System.out.println("5: " + action +"\nPending Count: "+ listRequestPending.size() +"\nTransfer Count: "+ listRequestTransfer.size());
                 } else if (action.equalsIgnoreCase("Request Approved")) {
 
                     ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
