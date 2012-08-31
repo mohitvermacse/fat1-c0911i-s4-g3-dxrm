@@ -37,6 +37,9 @@ public class UserAccess {
             if (rs.next()) {
                 return true;
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Login fail! Please try again." + ex.getMessage());
             return false;
@@ -58,6 +61,9 @@ public class UserAccess {
             if (rs.next()) {
                 return true;
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Login fail! Please try again." + e.getMessage());
         }
@@ -80,6 +86,9 @@ public class UserAccess {
                 c.setCityName(rs.getString(3));
                 array.add(c);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Not found request!");
         }
@@ -101,6 +110,9 @@ public class UserAccess {
                 c.setCountryName(rs.getString(2));
                 array.add(c);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Not found request!");
         }
@@ -154,6 +166,11 @@ public class UserAccess {
                     array.add(u);
                 }
             }
+            db.closeConnect();
+            rs.close();
+            rs1.close();
+            rs2.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
@@ -228,6 +245,11 @@ public class UserAccess {
                 }
 
             }
+            db.closeConnect();
+            rs.close();
+            rs1.close();
+            rs2.close();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
@@ -248,6 +270,8 @@ public class UserAccess {
             if (check > 0) {
                 return true;
             }
+            db.closeConnect();
+            ps.close();
         } catch (SQLException ex) {
             System.out.println("Please try again!");
             return false;
@@ -322,6 +346,11 @@ public class UserAccess {
                     array.add(u);
                 }
             }
+            db.closeConnect();
+            rs.close();
+            rs1.close();
+            rs2.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Please try again!");
         }
@@ -344,6 +373,9 @@ public class UserAccess {
                 pr.setAmount(rs.getInt(3));
                 array.add(pr);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Please try again!");
         }
@@ -385,6 +417,9 @@ public class UserAccess {
                 u.setBook(rs.getString(10));
                 array.add(u);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Not found infomation of user. Please try again." + e.getMessage());
         }
@@ -403,6 +438,9 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getString(1);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Not user have friend.");
         }
@@ -421,6 +459,9 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getString(1);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("System have not user.");
         }
@@ -442,6 +483,7 @@ public class UserAccess {
             } else {
                 return true;
             }
+
         } catch (SQLException ex) {
             System.out.println("UserName wrong.");
         }
@@ -463,8 +505,8 @@ public class UserAccess {
                 return false;
             } else {
                 return true;
-
             }
+
         } catch (SQLException ex) {
             System.out.println("Email wrong.");
         }
@@ -508,6 +550,8 @@ public class UserAccess {
                     }
                 }
             }
+            db.closeConnect();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Please try again." + e.getMessage());
             return false;
@@ -528,6 +572,8 @@ public class UserAccess {
             if (check > 0) {
                 return true;
             }
+            ps.close();
+            db.closeConnect();
         } catch (SQLException e) {
             System.out.println("Please try again." + e.getMessage());
             return false;
@@ -549,6 +595,9 @@ public class UserAccess {
             while (rs.next()) {
                 return true;
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Please try again." + e.getMessage());
             return false;
@@ -571,6 +620,9 @@ public class UserAccess {
                 if (check > 0) {
                     return true;
                 }
+                db.closeConnect();
+                rs.close();
+                ps.close();
             } else {
                 System.out.println("Password old  wrong.");
             }
@@ -580,23 +632,8 @@ public class UserAccess {
         }
         return false;
     }
-    /*
-     * Update information of user
-     */
 
-    public boolean updateProfile() {
-        try {
-            con = db.getConnect();
-            ps = con.prepareCall("{call UpdateProfileOfUser()}");
-
-        } catch (SQLException ex) {
-            System.out.println("update profile of user fail.");
-        }
-        return false;
-
-    }
     // Calculation age of user
-
     public int getAge(java.util.Date birthdate) {
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(new java.util.Date());
@@ -761,6 +798,9 @@ public class UserAccess {
 
                 array.add(u);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("System have not users expired.");
         }
@@ -780,6 +820,9 @@ public class UserAccess {
             while (rs.next()) {
                 return true;
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("This user is expired.");
         }
@@ -793,7 +836,7 @@ public class UserAccess {
     public boolean send(String mailTo, String subject, String messageText) {
         try {
             final String username = "vchienbn@gmail.com";
-            final String password = "chienhoa2010";
+            final String password = "chienhoa20101984";
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
@@ -809,7 +852,7 @@ public class UserAccess {
                         }
                     });
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("phuongchienl@gmail.com"));
+            message.setFrom(new InternetAddress("vchienbn@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(mailTo));
             message.setSubject(subject);
@@ -824,30 +867,10 @@ public class UserAccess {
         return false;
     }
 
-    public boolean sendMailFogetPassword(String to, String subject, String conten) {
-        try {
-            String hot = "192.168.10.205";
-            String from = "vchienbn@gmail.com";
-            Properties pro = System.getProperties();
-            pro.setProperty("mail.smtp.host", hot);
-            Session session = Session.getDefaultInstance(pro);
-            MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(from));
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            msg.setSubject(subject);
-
-            msg.setText(conten);
-            Transport.send(msg);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    /* Get Id of user 
+    /* 
+     * Get Id of user 
      * 
      */
-
     public int getIdUserByUserName(String _userName) {
         int id = 0;
         try {
@@ -858,6 +881,9 @@ public class UserAccess {
             while (rs.next()) {
                 id = rs.getInt(1);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Not found user");
         }
@@ -877,6 +903,9 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getInt(1);
             }
+            db.closeConnect();
+            rs.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Not request receive.");
         }
