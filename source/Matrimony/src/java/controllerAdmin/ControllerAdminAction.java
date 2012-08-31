@@ -42,13 +42,19 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
 
             ControllerAdminForm ad = (ControllerAdminForm) form;
             String action = ad.getAction();
-
+            System.out.println("ACtion: " + action);
             if (action.equalsIgnoreCase("Manager user Expired")) {
-
+                System.out.println("ACtion: " + action);
                 ArrayList arrayUserExpired = (ArrayList) ua.getAllUserExpired();
-                request.setAttribute("listUserExpired", arrayUserExpired);
+                String status = "Not user expired";
+                if (arrayUserExpired.isEmpty()) {
+                    request.setAttribute("status", status);
+                    return mapping.findForward("expired");
+                } else {
+                    request.setAttribute("listUserExpired", arrayUserExpired);
 
-                return mapping.findForward("expired");
+                    return mapping.findForward("expired");
+                }
 
             } else if (action.equalsIgnoreCase("Manager Statistic")) {
 
@@ -63,15 +69,15 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
                 int totalPending = ua.sumRequestReceive("Pending");
                 int totalTransfer = ua.sumRequestReceive("Transfer");
                 int totalApproved = ua.sumRequestReceive("Approved");
-                
+
                 request.setAttribute("listTransfer", listRequestPending);
 //                request.setAttribute("listRequestTransfer", listRequestTransfer);
 //                request.setAttribute("listRequestApproved", listRequestApproved);                
-               
+
                 request.setAttribute("totalApproved", totalPending);
                 request.setAttribute("totalApproved", totalTransfer);
                 request.setAttribute("totalApproved", totalApproved);
-                
+
                 return mapping.findForward("transfer");
             }
 
