@@ -60,7 +60,7 @@ CREATE PROCEDURE CreateReceiveRequest
 				@status
 				)
 GO
-/*        Select Id of user by userName        */
+/*        Select Id of user by userName, drop procedure GetUserIdByUserName'chiennv'     */
 CREATE PROCEDURE GetUserIdByUserName
 	@userName nvarchar(50)
 	AS
@@ -73,7 +73,7 @@ CREATE PROCEDURE GetAdminIdByUserName
 	SELECT adminID FROM admin WHERE userName=@userName
 GO
 /*        select all users want is friends of user   drop procedure GetInforRequestBySendUserID      */
-CREATE PROCEDURE GetAllReceveRequestByStatus/*'2','Transfer'*/
+CREATE PROCEDURE GetAllReceveRequestByStatus/*GetAllReceveRequestByStatus'1','Transfer' select *from receiveRequest*/
 	@userId int,
 	@actions NVARCHAR(50)
 	AS
@@ -81,13 +81,28 @@ CREATE PROCEDURE GetAllReceveRequestByStatus/*'2','Transfer'*/
 	ON rr.sendID=sr.sendID WHERE rr.actions=@actions AND rr.userID=@userId
 	
 GO
-/*        select all users want is friends of user to transition management        */
+/*        select all users want is friends of user to transition management  GetAllReceveRequestTransfer'Transfer'       */
 CREATE PROCEDURE GetAllReceveRequestTransfer/*'Pending'*/	
 	@actions NVARCHAR(50)
 	AS
 	SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
 	ON rr.sendID=sr.sendID WHERE rr.actions=@actions
-	
+GO
+/*        Count all request of user receive        */
+CREATE PROCEDURE SumRequestReceive
+	@actions NVARCHAR(50)
+	AS
+	SELECT Count(*) FROM receiveRequest WHERE actions=@actions
+/*
+SELECT  rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID  WHERE rr.actions='Approved'
+SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID WHERE rr.actions='Transfer'
+SELECT Count(*) FROM receiveRequest WHERE actions='Transfer'
+SELECT  Count(*) FROM receiveRequest WHERE actions='Approved'
+select * from receiveRequest
+
+*/	
 GO
 /*        Select information fo a user send request        */
 CREATE PROCEDURE GetInforUserSendByUserID
@@ -128,15 +143,15 @@ CREATE PROCEDURE UpdateSendRequestById/*'1','8/13/2012','Accept'*/
 	UPDATE sendRequest SET dates=@date, status=@status
 	FROM sendRequest
 	WHERE sendID=@id
-GO
-/*        Select all riend of user        */
-CREATE PROCEDURE GetAllFriend/*'2','Accept'*/
+GO select * from receiveRequest select * from sendRequest
+/*        Select all riend of user drop procedure   GetAllFriend'2','Approved'     */
+CREATE PROCEDURE GetAllFriend
 	@userId int,
 	@action NVARCHAR(20)
 	AS
 	SELECT u.fullName,i.images,u.userID,sr.userID FROM receiveRequest AS rr inner join sendRequest AS sr 
 	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID INNER JOIN images AS i ON u.userID=i.userID
-	WHERE rr.userId=2 AND rr.actions=@action
+	WHERE rr.userId=@userId AND rr.actions=@action
 GO
 /*        All user have friend drop procedure TotalUserHaveFriend      */
 CREATE PROCEDURE TotalUserHaveFriend
@@ -280,7 +295,7 @@ CREATE PROC DisplayImage
 	AS
 	SELECT imageID, images FROM images WHERE userID = @id
 GO
-/*        Delete image        */
+/*        Delete image, drop procedure DeleteImage       */
 CREATE PROC DeleteImage
 	@id int
 AS
@@ -300,9 +315,9 @@ CREATE PROCEDURE GetAllUserExpired
 	WHERE i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
 
 GO
-/*        Check user expired        */
+/*        Check user expired  drop procedure CheckUserExpired'chiennv'    */
 
-CREATE PROCEDURE CheckUserExpired/*'chiennv'*/
+CREATE PROCEDURE CheckUserExpired
 	@userName NVARCHAR(50)
 	AS
 	SELECT * FROM users
