@@ -82,7 +82,7 @@ CREATE PROCEDURE GetAllReceveRequestByStatus/*GetAllReceveRequestByStatus'1','Tr
 	
 GO
 /*        select all users want is friends of user to transition management  GetAllReceveRequestTransfer'Transfer'       */
-CREATE PROCEDURE GetAllReceveRequestTransfer/*'Pending'*/	
+CREATE PROCEDURE GetAllReceveRequestTransfer/*'Pending' GetInforUserById'2'*/	
 	@actions NVARCHAR(50)
 	AS
 	SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
@@ -312,7 +312,7 @@ GO
 CREATE PROCEDURE GetAllUserExpired
 	AS
 	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate,u.userName FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
-	WHERE i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
+	WHERE  i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
 
 GO
 /*        Check user expired  drop procedure CheckUserExpired'chiennv'    */
