@@ -18,14 +18,16 @@
         <title>Matrimony</title>
     </head>
     <body>
-        
+
         <c:set var="listUser" value="${requestScope.listUserExpired}"/>
+        <h3> ${requestScope.status}</h3>
         <table border="1">
-            <c:forEach var="u" items="${listUser}">
+            <c:forEach var="u" items="${listUser}">               
                 <html:form action="ExpireAction" method="POST">
                     <tr>                        
                         <td>
-                            ${u.images}${u.fullName}
+                            <img src=".${u.images}" height="40px" width="35px"/>
+                            ${u.fullName}
                             <html:hidden property="fullName" value="${u.fullName}"/>
                             <html:hidden property="userId" value="${u.userId}"/>
                             <html:hidden property="userName" value="${u.userName}"/>
