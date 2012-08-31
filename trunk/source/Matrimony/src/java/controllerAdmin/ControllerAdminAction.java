@@ -49,16 +49,29 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
                 request.setAttribute("listUserExpired", arrayUserExpired);
 
                 return mapping.findForward("expired");
-                
+
             } else if (action.equalsIgnoreCase("Manager Statistic")) {
-                
+
                 return mapping.findForward("statistic");
-                
+
             } else if (action.equalsIgnoreCase("Manager Request")) {
 
-                ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
-                request.setAttribute("listTransfer", arrayTransfer);
+                ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+//                ArrayList listRequestTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Transfer");
+//                ArrayList listRequestApproved = (ArrayList) ua.getAllReceveRequestTransfer("Approved");
 
+                int totalPending = ua.sumRequestReceive("Pending");
+                int totalTransfer = ua.sumRequestReceive("Transfer");
+                int totalApproved = ua.sumRequestReceive("Approved");
+                
+                request.setAttribute("listTransfer", listRequestPending);
+//                request.setAttribute("listRequestTransfer", listRequestTransfer);
+//                request.setAttribute("listRequestApproved", listRequestApproved);                
+               
+                request.setAttribute("totalApproved", totalPending);
+                request.setAttribute("totalApproved", totalTransfer);
+                request.setAttribute("totalApproved", totalApproved);
+                
                 return mapping.findForward("transfer");
             }
 
