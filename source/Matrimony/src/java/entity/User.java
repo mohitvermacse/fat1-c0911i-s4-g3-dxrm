@@ -13,6 +13,7 @@ import java.sql.Date;
 public class User {
 
     private int userId;
+    private int receiveUserId;
     private String userName;
     private String password;
     private String fullName;
@@ -748,5 +749,19 @@ public class User {
      */
     public void setsImages(String sImages) {
         this.sImages = sImages;
+    }
+
+    /**
+     * @return the receiveUserId
+     */
+    public int getReceiveUserId() {
+        return receiveUserId;
+    }
+
+    /**
+     * @param receiveUserId the receiveUserId to set
+     */
+    public void setReceiveUserId(int receiveUserId) {
+        this.receiveUserId = receiveUserId;
     }
 }
