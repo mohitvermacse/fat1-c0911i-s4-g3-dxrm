@@ -8,6 +8,7 @@ import bean.UserAccess;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -37,30 +38,28 @@ public class LoginAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        //HttpSession session = request.getSession(false);
         LoginForm from = (LoginForm) form;
         UserAccess ua = new UserAccess();
 
         String user = from.getUserName();
         String pas = from.getPassword();
+        System.out.println(user +"\n"+ pas);
         try {
             if (ua.loginUser(user, pas)) {
-                ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(2);
-                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                int id = ua.getIdUserByUserName(user);
+                ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(id);
+                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(id);
                 request.setAttribute("listFriend", arrayFriend);
                 request.setAttribute("listReceive", arrayReceive);
+                
+                //session.setAttribute("idUser", id);
                 return mapping.findForward("user");
-            } else {
-                ArrayList arrayCity = (ArrayList) ua.getAllCity();
-                ArrayList arrayCountry = (ArrayList) ua.getAllCountry();
-                request.setAttribute("listCity", arrayCity);
-                request.setAttribute("listCountry", arrayCountry);
-
-                return mapping.findForward("register");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return mapping.findForward("error");
         }
-
+        return mapping.findForward("error");
     }
 }

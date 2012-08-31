@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,33 +35,77 @@ public class TransferRequest extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        /*
+         * TODO output your page here. You may use following sample code.
+         */
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
             UserAccess ua = new UserAccess();
             String action;
             action = request.getParameter("action");
+//            String id = request.getParameter("id");
+            System.out.println("1");
+//            if (id != null) {
+//                System.out.println("2");
+//                ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(id));
+//                request.setAttribute("information", arrayInfor);
+//
+//                RequestDispatcher di = request.getRequestDispatcher("infor.jsp");
+//                di.forward(request, response);
+//            } else {
             if (action != null) {
+                System.out.println("3: " + action);
                 if (action.equalsIgnoreCase("Transfer")) {
+
                     int receiveId = Integer.parseInt(request.getParameter("receiveID"));
                     if (ua.updateReceiveRequestById(receiveId, "Transfer", "Unread")) {
-                        ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
 
-                        request.setAttribute("listTransfer", arrayTransfer);
+                        ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+
+                        int totalPending = ua.sumRequestReceive("Pending");
+                        int totalTransfer = ua.sumRequestReceive("Transfer");
+                        int totalApproved = ua.sumRequestReceive("Approved");
+
+                        request.setAttribute("listTransfer", listRequestPending);
+                        request.setAttribute("totalApproved", totalPending);
+                        request.setAttribute("totalApproved", totalTransfer);
+                        request.setAttribute("totalApproved", totalApproved);
+
                         RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                         di.forward(request, response);
+                        System.out.println("4: " + action);
                     }
+                } else if (action.equalsIgnoreCase("Request Transfer")) {
+
+                    ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+                    ArrayList listRequestTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Transfer");
+                    request.setAttribute("listTransfer", listRequestPending);
+                    request.setAttribute("listRequestTransfer", listRequestTransfer);
+
+                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    di.forward(request, response);
+                    System.out.println("5: " + action);
+                } else if (action.equalsIgnoreCase("Request Approved")) {
+
+                    ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+                    ArrayList listRequestApproved = (ArrayList) ua.getAllReceveRequestTransfer("Approved");
+                    request.setAttribute("listTransfer", listRequestPending);
+                    request.setAttribute("listRequestApproved", listRequestApproved);
+
+                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    di.forward(request, response);
+                    System.out.println("6: " + action);
                 }
             } else {
-                ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer();
+                ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
 
                 request.setAttribute("listTransfer", arrayTransfer);
                 RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                 di.forward(request, response);
                 System.out.println("Update............!");
             }
-
+//            }
+        } catch (Exception e) {
+            out.println(e.getMessage());
         } finally {
             out.close();
         }
