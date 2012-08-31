@@ -101,7 +101,10 @@
             <forward name="transfer" path="/transferRequest.jsp"/>
             <forward name="statistic" path="/statist.jsp"/>               
         </action>
-        <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction"/>
+        <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction">
+            <forward name="success" path="/admin/expired.jsp"/>
+              
+        </action>
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
