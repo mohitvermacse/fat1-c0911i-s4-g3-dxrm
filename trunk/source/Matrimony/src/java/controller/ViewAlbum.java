@@ -41,6 +41,7 @@ public class ViewAlbum extends org.apache.struts.action.Action {
         HttpSession session = request.getSession(false);
         ImageBus iBus = new ImageBus();
         ImageBean iBean = new ImageBean();
+        
         iBean.setArImg(iBus.getImage(1));
         session.setAttribute("iBean", iBean);
         return mapping.findForward(SUCCESS);

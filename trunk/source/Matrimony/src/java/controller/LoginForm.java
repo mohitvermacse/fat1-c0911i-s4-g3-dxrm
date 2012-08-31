@@ -49,10 +49,10 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
             errors.add("pas", new ActionMessage("error.password.requireds"));
             // TODO: add 'error.name.required' key to your resources
         }
-        if (!ua.loginUser(userName, password)) {
-            errors.add("logUser", new ActionMessage("error.loginUser.requireds"));
-            // TODO: add 'error.name.required' key to your resources
-        }
+            if (!ua.loginUser(userName, password)) {
+                errors.add("logUser", new ActionMessage("error.loginUser.requireds"));
+                // TODO: add 'error.name.required' key to your resources
+            }
 
         return errors;
     }

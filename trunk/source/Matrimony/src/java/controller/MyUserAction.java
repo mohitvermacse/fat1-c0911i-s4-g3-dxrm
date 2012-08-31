@@ -40,14 +40,14 @@ public class MyUserAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        MyUserForm uform = (MyUserForm) form;
-        UserAccess ua = new UserAccess();
         try {
+            UserAccess ua = new UserAccess();
+            MyUserForm uform = (MyUserForm) form;
+
             int receiveID = uform.getReceiveId();
             int sendID = uform.getSendId();
 
             String btn = uform.getBtn();
-            String btn2 = uform.getBtn2();
             Date dateTemp = new Date();
             DateFormat fr = new SimpleDateFormat("MM/dd/yyy hh:mm:ss");
             String date = (fr.format(dateTemp));
@@ -83,6 +83,7 @@ public class MyUserAction extends org.apache.struts.action.Action {
                     }
                 }
             }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
