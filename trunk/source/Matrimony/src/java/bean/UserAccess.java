@@ -160,16 +160,16 @@ public class UserAccess {
         return array;
     }
     /*
-     * Select all request transferring
+     * Get all request pending
      */
 
-    public Collection getAllReceveRequestTransfer() {
+    public Collection getAllReceveRequestTransfer(String _action) {
         ArrayList array = new ArrayList();
 
         try {
             con = db.getConnect();
             ps = con.prepareCall("{call GetAllReceveRequestTransfer(?)}");
-            ps.setString(1, "Pending");
+            ps.setString(1, _action);
             rs = ps.executeQuery();
             while (rs.next()) {
                 User u = new User();
@@ -803,6 +803,7 @@ public class UserAccess {
 
             Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
+
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(username, password);
                         }
@@ -842,5 +843,43 @@ public class UserAccess {
             e.printStackTrace();
         }
         return false;
+    }
+    /* Get Id of user 
+     * 
+     */
+
+    public int getIdUserByUserName(String _userName) {
+        int id = 0;
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call GetUserIdByUserName(?)}");
+            ps.setString(1, _userName);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Not found user");
+        }
+        return id;
+    }
+    /*
+     * Sum all request receive
+     */
+
+    public int sumRequestReceive(String _action) {
+        int total = 0;
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SumRequestReceive(?)}");
+            ps.setString(1, _action);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Not request receive.");
+        }
+        return total;
     }
 }
