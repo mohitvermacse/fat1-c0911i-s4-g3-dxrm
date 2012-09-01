@@ -7,6 +7,7 @@
 
 <struts-config>
     <form-beans>
+        <form-bean name="ForgotPasswordForm" type="controller.ForgotPasswordForm"/>
         <form-bean name="PaymentForm" type="controller.PaymentForm"/>
         <form-bean name="PremiumForm" type="controller.PremiumForm"/>
         <form-bean name="ProfileForm" type="controller.ProfileForm"/>
@@ -108,7 +109,12 @@
         </action>
         <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction">
             <forward name="success" path="/admin/expired.jsp"/>              
-        </action>      
+        </action>
+        <action input="/forgotPassword.jsp" name="ForgotPasswordForm" path="/ForgotPasswordAction" scope="session" type="controller.ForgotPasswordAction">
+            <forward name="success" path="/login.jsp"/>
+            <forward name="error" path="/forgotPassword.jsp"/>
+            
+        </action>
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
