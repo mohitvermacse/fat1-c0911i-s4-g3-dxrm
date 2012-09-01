@@ -61,6 +61,7 @@
                 </td>
             </tr>
         </table>
+        <div style="color: red">${requestScope.status}</div>
     </center>
 </body>
 </html>
