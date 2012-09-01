@@ -42,38 +42,62 @@ public class TransferRequest extends HttpServlet {
             UserAccess ua = new UserAccess();
             String action;
             action = request.getParameter("action");
-//            String id = request.getParameter("id");
-            System.out.println("1");
-//            if (id != null) {
-//                System.out.println("2");
-//                ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(id));
-//                request.setAttribute("information", arrayInfor);
-//
-//                RequestDispatcher di = request.getRequestDispatcher("infor.jsp");
-//                di.forward(request, response);
-//            } else {
+////         
             if (action != null) {
-                System.out.println("3: " + action);
+
                 if (action.equalsIgnoreCase("Transfer")) {
+                    String[] arrayId = request.getParameterValues("list");
+                    String statust = "Not request pending";
 
-                    int receiveId = Integer.parseInt(request.getParameter("receiveID"));
-                    if (ua.updateReceiveRequestById(receiveId, "Transfer", "Unread")) {
-
-                        ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
-
-                        int totalPending = ua.sumRequestReceive("Pending");
-                        int totalTransfer = ua.sumRequestReceive("Transfer");
-                        int totalApproved = ua.sumRequestReceive("Approved");
-
+                    ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+                    if (listRequestPending.size() <= 0) {
                         request.setAttribute("listTransfer", listRequestPending);
-                        request.setAttribute("totalApproved", totalPending);
-                        request.setAttribute("totalApproved", totalTransfer);
-                        request.setAttribute("totalApproved", totalApproved);
+//                            request.setAttribute("totalApproved", totalPending);
+//                            request.setAttribute("totalApproved", totalTransfer);
+//                            request.setAttribute("totalApproved", totalApproved);
+                        System.out.println("Not request pending 12 ");
+                        request.setAttribute("status", statust);
 
                         RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                         di.forward(request, response);
                         System.out.println("4: " + action);
+                    } else {
+                        request.setAttribute("listTransfer", listRequestPending);
+//                            request.setAttribute("totalApproved", totalPending);
+//                            request.setAttribute("totalApproved", totalTransfer);
+//                            request.setAttribute("totalApproved", totalApproved);
+                        RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                        di.forward(request, response);
                     }
+                    for (String s : arrayId) {
+                        int id = Integer.parseInt(s);
+                        ua.updateReceiveRequestById(id, "Transfer", "Unread");
+//                        int totalPending = ua.sumRequestReceive("Pending");
+//                        int totalTransfer = ua.sumRequestReceive("Transfer");
+//                        int totalApproved = ua.sumRequestReceive("Approved");
+
+                        if (listRequestPending.size() <= 0) {
+                            request.setAttribute("listTransfer", listRequestPending);
+//                            request.setAttribute("totalApproved", totalPending);
+//                            request.setAttribute("totalApproved", totalTransfer);
+//                            request.setAttribute("totalApproved", totalApproved);
+                            System.out.println("Not request pending ");
+                            request.setAttribute("status", statust);
+
+                            RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                            di.forward(request, response);
+                            System.out.println("dgwragwar: " + action);
+                        } else {
+                            request.setAttribute("listTransfer", listRequestPending);
+//                            request.setAttribute("totalApproved", totalPending);
+//                            request.setAttribute("totalApproved", totalTransfer);
+//                            request.setAttribute("totalApproved", totalApproved);
+                            RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                            di.forward(request, response);
+                        }
+
+                    }
+
                 } else if (action.equalsIgnoreCase("Request Transfer")) {
 
                     ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
@@ -83,7 +107,7 @@ public class TransferRequest extends HttpServlet {
 
                     RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                     di.forward(request, response);
-                    System.out.println("5: " + action +"\nPending Count: "+ listRequestPending.size() +"\nTransfer Count: "+ listRequestTransfer.size());
+
                 } else if (action.equalsIgnoreCase("Request Approved")) {
 
                     ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
@@ -93,19 +117,24 @@ public class TransferRequest extends HttpServlet {
 
                     RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
                     di.forward(request, response);
-                    System.out.println("6: " + action);
+
                 }
             } else {
                 ArrayList arrayTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
+                if (arrayTransfer.isEmpty()) {
+                    request.setAttribute("listTransfer", arrayTransfer);
+                    request.setAttribute("status", "Not request pending");
 
-                request.setAttribute("listTransfer", arrayTransfer);
-                RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
-                di.forward(request, response);
-                System.out.println("Update............!");
+                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    di.forward(request, response);
+                } else {
+                    request.setAttribute("listTransfer", arrayTransfer);
+                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    di.forward(request, response);
+                }
             }
-//            }
         } catch (Exception e) {
-            out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             out.close();
         }

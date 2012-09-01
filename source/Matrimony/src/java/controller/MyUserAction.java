@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -41,9 +42,10 @@ public class MyUserAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         try {
+            HttpSession session = request.getSession();
             UserAccess ua = new UserAccess();
             MyUserForm uform = (MyUserForm) form;
-
+            int yourId = Integer.parseInt(session.getAttribute("idUser").toString());
             int receiveID = uform.getReceiveId();
             int sendID = uform.getSendId();
 
@@ -54,10 +56,18 @@ public class MyUserAction extends org.apache.struts.action.Action {
             String friendId = request.getParameter("friendId");
 
             if (friendId != null) {
-
-                ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
-                request.setAttribute("information", arrayInfor);
-                return mapping.findForward("infor");
+                if (ua.checkTwoUserFriend(yourId, Integer.parseInt(friendId))) {
+                    ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
+                    request.setAttribute("information", arrayInfor);
+                    return mapping.findForward("infor");
+                } else {
+                    ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
+                    ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                    request.setAttribute("listFriend", arrayFriend);
+                    request.setAttribute("listReceive", arrayRequest);
+                    request.setAttribute("status", " You do not have this permission");
+                    return mapping.findForward("user");
+                }
             }
             if (btn.equalsIgnoreCase("Accept")) {
 
