@@ -19,37 +19,43 @@
     <body style="background-color: white">
         <c:set var="receive" value="${requestScope.listReceive}"/>
         <c:set var="friend" value="${requestScope.listFriend}"/>
+       
+        <a align="left"> <div style="color: blue">${requestScope.userName}<br/> <b>${requestScope.idUser}</b></div></a>
     <center>
         <table width="100%">
             <tr>
                 <td width="50%">
-                    <table width="100%"> 
-                        <c:forEach var="f" items="${listFriend}">
+                    <h3>List My Friend</h3>
+                    <table width="100%">
+                        <c:forEach var="f" items="${friend}">
                             <html:form action="MyUserAction" method="POST">
                                 <tr>
-                                    <td align="right">
-                                        <a href="MyUserAction.page?friendId=${f.sendUserId}" style="font: underLine "> ${f.images}</a>
-                                    </td>
-                                    <td align="left">${f.fullName}</td>
+                                    <td align="left">
+                                        <a href="MyUserAction.page?friendId=${f.sendUserId}" style="font: underLine ">
+                                            <img src=".${f.images}" height="45px" width="40px"/>${f.fullName}
+                                        </a>
+                                    </td>                                   
                                 </tr>
                             </html:form>
                         </c:forEach>
                     </table>
                 </td>
                 <td width="50%">
+                    <h3>List Friend Pending</h3>
                     <table width="100%">
                         <c:forEach var="r" items="${receive}">
                             <html:form  action="MyUserAction" method="POST">
                                 <tr>
+                                    <td>
+                                        <a href="MyUserAction.page?friendId=${r.sendUserId}" style="font: underLine ">
+                                            <img src=".${r.images}" height="45px" width="40px"/> ${r.fullName}
+                                        </a>
+                                    </td>
                                     <td align="center">
                                         ${r.content}
                                         <html:hidden property="receiveId" value="${r.receiverId}"/>
                                         <html:hidden property="sendId" value="${r.sendId}"/>
-                                    </td>
-                                    <td align="center">
-                                        ${r.fullName}
-                                        ${r.images}
-                                    </td>
+                                    </td>                                   
                                     <td align="center">                         
                                         <html:submit property="btn" value="Accept"/>
                                         <html:submit property="btn" value="Deny"/>
