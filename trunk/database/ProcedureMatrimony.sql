@@ -80,8 +80,8 @@ CREATE PROCEDURE GetAllReceveRequestByStatus/*GetAllReceveRequestByStatus'1','Tr
 	SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
 	ON rr.sendID=sr.sendID WHERE rr.actions=@actions AND rr.userID=@userId
 	
-GO
-/*        select all users want is friends of user to transition management  GetAllReceveRequestTransfer'Transfer'       */
+GO select * from receiveRequest 
+/*        select all users want is friends of user to transition management  GetAllReceveRequestTransfer'Pending'       */
 CREATE PROCEDURE GetAllReceveRequestTransfer/*'Pending' GetInforUserById'2'*/	
 	@actions NVARCHAR(50)
 	AS
@@ -324,6 +324,17 @@ CREATE PROCEDURE CheckUserExpired
 	WHERE userName=@userName AND DATEDIFF(dayofyear,getDate(), expireDate )<=0
 
 Go
+/*        Check two user is friend DROP PROCEDURE CheckTwoUserFriend'1','2'      */
+CREATE PROCEDURE CheckTwoUserFriend
+	@idFriend1 int,
+	@idFriend2 int
+	AS
+	SELECT rr.userID,sr.userID,rr.actions FROM receiveRequest AS rr INNER JOIN sendRequest AS sr ON sr.sendID=rr.sendID
+	WHERE  (rr.actions='Approved' AND rr.userID=@idFriend1 AND sr.userID=@idFriend2) OR(rr.actions='Approved' AND rr.userID=@idFriend2 AND sr.userID=@idFriend1) 
+GO
+select * from receiveRequest
+select * from sendRequest
+select * from sendRequest AS sr INNER JOIN users AS u ON sr.userID=u.userID INNER JOIN receiveRequest AS rr ON u.userID=rr.userID WHERE rr.actions='Approved' AND u.userID=1 AND u.userID=2
 /*
 drop procedure CheckUserExpired
 	Select * from users where userName='chiennv' AND expireDate between (getDate()-5) And expireDate
