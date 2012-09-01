@@ -29,6 +29,10 @@
         <servlet-name>SendmailServlet</servlet-name>
         <servlet-class>controllerAdmin.SendmailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InforServlet</servlet-name>
+        <servlet-class>controllerAdmin.InforServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.page</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>SendmailServlet</servlet-name>
         <url-pattern>/SendmailServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InforServlet</servlet-name>
+        <url-pattern>/InforServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
