@@ -16,7 +16,7 @@ public class MatrimonyManager {
     
     public boolean sendRequest(int senderID, int receiveID) {
         String userName = getUserName(senderID);
-        String content ="Xin Chao, Minh la " + userName + " co the lam quen voi ban khong?";
+        String content =" want to make friends with you ";
         String status = "Pending";
         try {
             ConnectDB conn = new ConnectDB();
