@@ -21,7 +21,7 @@ CREATE PROCEDURE GetAllCity
 		SELECT * FROM city
 	
 GO
-/*        Get password by email DROP GetPasswordByEmail'chiennv_a04470@fpt.aptech.ac.vn'       */
+/*        Get password by email DROP GetPasswordByEmail'vchienbn@gmail.com'       */
 CREATE PROCEDURE GetPasswordByEmail
 @email NVARCHAR(50)
 AS
