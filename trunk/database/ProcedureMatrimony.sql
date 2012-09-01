@@ -21,11 +21,22 @@ CREATE PROCEDURE GetAllCity
 		SELECT * FROM city
 	
 GO
+/*        Get password by email DROP GetPasswordByEmail'chiennv_a04470@fpt.aptech.ac.vn'       */
+CREATE PROCEDURE GetPasswordByEmail
+@email NVARCHAR(50)
+AS
+SELECT password FROM users WHERE email=@email
+GO
 /*        Select all country        */
 CREATE PROCEDURE GetAllCountry
 	AS
 		SELECT * FROM Country
 	
+GO
+/*        Display all user of system DROP PROCEDURE DisplayAllUser   */
+CREATE PROCEDURE DisplayAllUser
+	AS
+	SELECT u.userID,u.userName,i.images,u.fullName,u.email FROM users AS u INNER JOIN images AS i ON u.userID = i.userID WHERE status = 'Paid' AND i.imageID=u.avatar
 GO
 /*        Select all premium        */
 CREATE PROCEDURE GetAllPremium
@@ -73,7 +84,7 @@ CREATE PROCEDURE GetAdminIdByUserName
 	SELECT adminID FROM admin WHERE userName=@userName
 GO
 /*        select all users want is friends of user   drop procedure GetInforRequestBySendUserID      */
-CREATE PROCEDURE GetAllReceveRequestByStatus/*GetAllReceveRequestByStatus'1','Transfer' select *from receiveRequest*/
+CREATE PROCEDURE GetAllReceveRequestByStatus/*GetAllReceveRequestByStatus'3','Approved' select *from receiveRequest*/
 	@userId int,
 	@actions NVARCHAR(50)
 	AS
@@ -93,16 +104,7 @@ CREATE PROCEDURE SumRequestReceive
 	@actions NVARCHAR(50)
 	AS
 	SELECT Count(*) FROM receiveRequest WHERE actions=@actions
-/*
-SELECT  rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
-	ON rr.sendID=sr.sendID  WHERE rr.actions='Approved'
-SELECT rr.receiveID,rr.userID,sr.userID,rr.actions,sr.sendID,sr.contents,rr.status FROM receiveRequest AS rr inner join sendRequest AS sr 
-	ON rr.sendID=sr.sendID WHERE rr.actions='Transfer'
-SELECT Count(*) FROM receiveRequest WHERE actions='Transfer'
-SELECT  Count(*) FROM receiveRequest WHERE actions='Approved'
-select * from receiveRequest
 
-*/	
 GO
 /*        Select information fo a user send request        */
 CREATE PROCEDURE GetInforUserSendByUserID
@@ -144,14 +146,23 @@ CREATE PROCEDURE UpdateSendRequestById/*'1','8/13/2012','Accept'*/
 	FROM sendRequest
 	WHERE sendID=@id
 GO select * from receiveRequest select * from sendRequest
-/*        Select all riend of user drop procedure   GetAllFriend'2','Approved'     */
+/*        Select all riend of user drop procedure   GetAllFriend'3','Approved'     */
 CREATE PROCEDURE GetAllFriend
 	@userId int,
 	@action NVARCHAR(20)
 	AS
 	SELECT u.fullName,i.images,u.userID,sr.userID FROM receiveRequest AS rr inner join sendRequest AS sr 
 	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID INNER JOIN images AS i ON u.userID=i.userID
-	WHERE rr.userId=@userId AND rr.actions=@action
+	WHERE rr.userId=@userId AND rr.actions=@action AND i.imageID=u.avatar
+
+/*        Select all riend of user drop procedure   GetAllFriends'3','Approved'     */
+CREATE PROCEDURE GetAllFriends
+	@userId int,
+	@status NVARCHAR(50)
+	AS
+	SELECT u.fullName,i.images,sr.userID,u.userID FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID INNER JOIN images AS i ON u.userID=i.userID
+	WHERE sr.userID = @userId AND sr.status=@status AND i.imageID = u.avatar
 GO
 /*        All user have friend drop procedure TotalUserHaveFriend      */
 CREATE PROCEDURE TotalUserHaveFriend
@@ -311,7 +322,8 @@ GO
 /*        Get all user expire drop procedure GetAllUserExpired       */
 CREATE PROCEDURE GetAllUserExpired
 	AS
-	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate,u.userName FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate,u.userName
+	FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
 	WHERE  i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
 
 GO
@@ -324,7 +336,7 @@ CREATE PROCEDURE CheckUserExpired
 	WHERE userName=@userName AND DATEDIFF(dayofyear,getDate(), expireDate )<=0
 
 Go
-/*        Check two user is friend DROP PROCEDURE CheckTwoUserFriend'1','2'      */
+/*        Check two user is friend DROP PROCEDURE CheckTwoUserFriend'3','2'      */
 CREATE PROCEDURE CheckTwoUserFriend
 	@idFriend1 int,
 	@idFriend2 int
@@ -332,16 +344,18 @@ CREATE PROCEDURE CheckTwoUserFriend
 	SELECT rr.userID,sr.userID,rr.actions FROM receiveRequest AS rr INNER JOIN sendRequest AS sr ON sr.sendID=rr.sendID
 	WHERE  (rr.actions='Approved' AND rr.userID=@idFriend1 AND sr.userID=@idFriend2) OR(rr.actions='Approved' AND rr.userID=@idFriend2 AND sr.userID=@idFriend1) 
 GO
-select * from receiveRequest
-select * from sendRequest
-select * from sendRequest AS sr INNER JOIN users AS u ON sr.userID=u.userID INNER JOIN receiveRequest AS rr ON u.userID=rr.userID WHERE rr.actions='Approved' AND u.userID=1 AND u.userID=2
 /*
 drop procedure CheckUserExpired
-	Select * from users where userName='chiennv' AND expireDate between (getDate()-5) And expireDate
+	select * from users as u inner join images as i on u.userId=i.userID Inner join receiveRequest as rr
+	On u.userID = rr.userID inner join sendRequest as sr on u.userID = sr.userID Where rr.actions='Approved'
+	AND sr.status='Approved' AND i.imageID=u.avatar
 
-Select u.userID,i.images, u.fullName,u.email from users AS u INNER JOIN images AS i ON u.userID = i.userID where i.imageID=avatar AND expireDate between (getDate()-5) And expireDate
-
-Select userID,fullName from users where userName='tungpt' AND registerDate between (getDate()-5) And registerDate
-select registerDate from users
-select CURDATE()
+create procedure DisplayAllUserHaveFriend drop procedure DisplayAllUserHaveFriend
+AS
+select  distinct(userID) from receiveRequest where  actions= 'Approved' 
+(select * from sendRequest where  status ='Approved')
+sr.status='Approved' 
 */
+select * from users where fullName like 'ng%'OR fullName like '%ng'OR fullName like'%ng%'
+select * from users
+
