@@ -48,7 +48,7 @@ public class MyUserAction extends org.apache.struts.action.Action {
             int yourId = Integer.parseInt(session.getAttribute("idUser").toString());
             int receiveID = uform.getReceiveId();
             int sendID = uform.getSendId();
-
+            String userName = session.getAttribute("userName").toString();
             String btn = uform.getBtn();
             Date dateTemp = new Date();
             DateFormat fr = new SimpleDateFormat("MM/dd/yyy hh:mm:ss");
@@ -61,10 +61,11 @@ public class MyUserAction extends org.apache.struts.action.Action {
                     request.setAttribute("information", arrayInfor);
                     return mapping.findForward("infor");
                 } else {
-                    ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
-                    ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                    ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
+                    ArrayList arrayFriend = (ArrayList) ua.getAllFriendss(yourId);
                     request.setAttribute("listFriend", arrayFriend);
                     request.setAttribute("listReceive", arrayRequest);
+                    request.setAttribute("userName", userName);
                     request.setAttribute("status", " You do not have this permission");
                     return mapping.findForward("user");
                 }
@@ -74,10 +75,11 @@ public class MyUserAction extends org.apache.struts.action.Action {
                 if (ua.updateReceiveRequestById(receiveID, "Approved", "Read")) {
                     if (ua.updateSendRequestById(sendID, date, "Approved")) {
 
-                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
-                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
+                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(yourId);
                         request.setAttribute("listFriend", arrayFriend);
                         request.setAttribute("listReceive", arrayRequest);
+                        request.setAttribute("userName", userName);
                         return mapping.findForward("user");
                     }
                 }
@@ -85,10 +87,11 @@ public class MyUserAction extends org.apache.struts.action.Action {
                 if (ua.updateReceiveRequestById(receiveID, "Deny", "Read")) {
                     if (ua.updateSendRequestById(sendID, date, "Deny")) {
 
-                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(2);
-                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(2);
+                        ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
+                        ArrayList arrayFriend = (ArrayList) ua.getAllFriend(yourId);
                         request.setAttribute("listFriend", arrayFriend);
                         request.setAttribute("listReceive", arrayRequest);
+                        request.setAttribute("userName", userName);
                         return mapping.findForward("user");
                     }
                 }

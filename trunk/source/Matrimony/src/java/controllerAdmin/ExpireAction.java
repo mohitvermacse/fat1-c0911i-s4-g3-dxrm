@@ -40,15 +40,14 @@ public class ExpireAction extends org.apache.struts.action.Action {
             throws Exception {
         ExpireForm ef = (ExpireForm) form;
         UserAccess ua = new UserAccess();
-
-        String d = request.getParameter("dates");
+       
         String fullName = ef.getFullName();
         java.util.Date date = ef.getExpireDa();
         String userName = ef.getUserName();
-
-        String to = "kukaravn@gmail.com";// ef.getEmail();
+        String to =  ef.getEmail();
+        
         String subject = "Expire date account";
-        String content = "Your account <h3 style='font-style: italic; font: bold'> " + userName + "</h3> on matrimony.com expired to the day " + date;
+        String content = "Your account '" + userName + "' on matrimony.com expired to the day " + date;
 
         System.out.println("\nEmail: " + to + "\nFull Name: " + fullName + "\nExpire Date: " + date);
 
@@ -56,6 +55,7 @@ public class ExpireAction extends org.apache.struts.action.Action {
         if (ua.send(to, subject, content)) {
             ArrayList arrayUserExpired = (ArrayList) ua.getAllUserExpired();
             request.setAttribute("listUserExpired", arrayUserExpired);
+            request.setAttribute("status", "sent mail success.");
             return mapping.findForward("success");
         }
         return mapping.findForward("error");
