@@ -166,11 +166,7 @@ public class UserAccess {
                     array.add(u);
                 }
             }
-            db.closeConnect();
-            rs.close();
-            rs1.close();
-            rs2.close();
-            ps.close();
+           
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
@@ -245,11 +241,7 @@ public class UserAccess {
                 }
 
             }
-            db.closeConnect();
-            rs.close();
-            rs1.close();
-            rs2.close();
-            ps.close();
+
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
@@ -346,11 +338,7 @@ public class UserAccess {
                     array.add(u);
                 }
             }
-            db.closeConnect();
-            rs.close();
-            rs1.close();
-            rs2.close();
-            ps.close();
+
         } catch (SQLException e) {
             System.out.println("Please try again!");
         }
@@ -417,9 +405,7 @@ public class UserAccess {
                 u.setBook(rs.getString(10));
                 array.add(u);
             }
-            db.closeConnect();
-            rs.close();
-            ps.close();
+
         } catch (SQLException e) {
             System.out.println("Not found infomation of user. Please try again." + e.getMessage());
         }
@@ -910,5 +896,23 @@ public class UserAccess {
             System.out.println("Not request receive.");
         }
         return total;
+    }
+    /*
+     * Check two user is friend
+     */
+
+    public boolean checkTwoUserFriend(int _id1, int _id2) {
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call CheckTwoUserFriend(?,?)}");
+            ps.setInt(1, _id1);
+            ps.setInt(2, _id2);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
     }
 }
