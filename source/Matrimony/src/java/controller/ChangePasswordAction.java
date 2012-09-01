@@ -7,6 +7,7 @@ package controller;
 import bean.UserAccess;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -36,14 +37,15 @@ public class ChangePasswordAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        HttpSession session = request.getSession();
         ChangePasswordForm change = (ChangePasswordForm) form;
         UserAccess ua = new UserAccess();
         String oldPass = change.getOldPassword();
         String newPass = change.getNewPassword();
-
+        String userName = session.getAttribute("userName").toString();
         String map = null;
         try {
-            if (ua.changePassword("tungpt", oldPass, newPass)) {
+            if (ua.changePassword("userName", oldPass, newPass)) {
                 map = "login";
             }
         } catch (Exception e) {

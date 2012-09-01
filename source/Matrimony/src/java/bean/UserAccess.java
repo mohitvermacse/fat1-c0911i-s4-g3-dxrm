@@ -20,7 +20,7 @@ public class UserAccess {
 
     ConnectDB db = new ConnectDB();
     Connection con;
-    PreparedStatement ps;
+    PreparedStatement ps, ps1;
     ResultSet rs, rs1, rs2;
     /*
      * User login
@@ -68,6 +68,30 @@ public class UserAccess {
             System.out.println("Login fail! Please try again." + e.getMessage());
         }
         return false;
+    }
+    /*
+     * Display all user of system
+     */
+
+    public Collection displayAllUser() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call DisplayAllUser}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setEmail(rs.getString(5));
+                array.add(u);
+            }
+        } catch (SQLException e) {
+            System.out.println("Please try again.");
+        }
+        return array;
     }
     /*
      * Select all city
@@ -166,7 +190,7 @@ public class UserAccess {
                     array.add(u);
                 }
             }
-           
+
         } catch (SQLException ex) {
             System.out.println("Not found Receiver request!");
         }
@@ -298,45 +322,56 @@ public class UserAccess {
      * Select all friend of a user
      */
 
-    public Collection getAllFriend(int _userId) {
+    public Collection getAllFriends(int _userId) {
         ArrayList array = new ArrayList();
         try {
             con = db.getConnect();
-            ps = con.prepareCall("{call GetAllReceveRequestByStatus(?,?)}");
+            ps = con.prepareCall("{call GetAllFriends(?,?)}");
             ps.setInt(1, _userId);
             ps.setString(2, "Approved");
             rs = ps.executeQuery();
             while (rs.next()) {
                 User u = new User();
-                ps = con.prepareCall("{call GetInforUserById(?)}");
+                u.setFullName(rs.getString(1));
+                u.setImages(rs.getString(2));
+                u.setReceiveUserId(rs.getInt(3));
+                u.setSendUserId(rs.getInt(4));
+                array.add(u);
+            }
+        } catch (SQLException e) {
+            System.out.println("Please try again!");
+        }
+        return array;
+    }
 
-                u.setReceiverId(rs.getInt(1));
-                u.setSendUserId(rs.getInt(3));
-                u.setUserId(rs.getInt(2));
-                u.setSendId(rs.getInt(5));
-                u.setContent(rs.getString(6));
+    public Collection getAllFriendss(int _userId) {
+        ArrayList array = null;
+        ArrayList ar = (ArrayList) getAllFriend(_userId);
+        if (ar.size() <= 0) {
+            array = (ArrayList) getAllFriends(_userId);
+        } else {
+            array = (ArrayList) getAllFriend(_userId);
+        }
+        return array;
+    }
 
-                ps.setInt(1, u.getSendUserId());
-                rs1 = ps.executeQuery();
-                while (rs1.next()) {
-                    u.setImages(rs1.getString(2));
-                    u.setFullName(rs1.getString(3));
-                    u.setGender(rs1.getString(5));
-                    u.setCityName(rs1.getString(8));
-                    u.setCountryName(rs1.getString(9));
-                    u.setMaritalStatus(rs1.getString(10));
-                    u.setHeight(rs1.getInt(11));
-                    u.setLanguages(rs1.getString(12));
-                    u.setFamilyDetail(rs1.getString(13));
-                    u.setQualification(rs1.getString(14));
-                    u.setWorkingAt(rs1.getString(15));
-                    u.setHobbies(rs1.getString(16));
-                    u.setFavorite(rs1.getString(17));
-                    u.setMovies(rs1.getString(18));
-                    u.setCuisine(rs1.getString(19));
-                    u.setBook(rs1.getString(20));
-                    array.add(u);
-                }
+    public Collection getAllFriend(int _userId) {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call GetAllFriend(?,?)}");
+            ps.setInt(1, _userId);
+            ps.setString(2, "Approved");
+            rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+                User u = new User();
+                u.setFullName(rs.getString(1));
+                u.setImages(rs.getString(2));
+                u.setReceiveUserId(rs.getInt(3));
+                u.setSendUserId(rs.getInt(4));
+                array.add(u);
             }
 
         } catch (SQLException e) {
@@ -819,7 +854,7 @@ public class UserAccess {
      *
      */
 
-    public boolean send(String mailTo, String subject, String messageText) {
+    public boolean send(String to, String subject, String content) {
         try {
             final String username = "vchienbn@gmail.com";
             final String password = "chienhoa20101984";
@@ -840,9 +875,9 @@ public class UserAccess {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("vchienbn@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(mailTo));
+                    InternetAddress.parse(to));
             message.setSubject(subject);
-            message.setText(messageText);
+            message.setText(content);
 
             Transport.send(message);
             System.out.println("Done");
@@ -914,5 +949,23 @@ public class UserAccess {
         } catch (SQLException e) {
         }
         return false;
+    }
+    /*
+     * Get password by email
+     */
+    public String getPasswordByEmail(String _email){
+        String pass = null;
+        try{
+            con = db.getConnect();
+            ps = con.prepareCall("{call GetPasswordByEmail(?)}");
+            ps.setString(1, _email);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                pass = db.md5(rs.getString(1));
+            }
+        }catch(SQLException e){
+            System.out.println("Not found password of your meail");
+        }
+        return pass;
     }
 }

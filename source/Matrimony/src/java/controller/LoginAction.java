@@ -44,18 +44,25 @@ public class LoginAction extends org.apache.struts.action.Action {
 
         String user = from.getUserName();
         String pas = from.getPassword();
-        System.out.println(user +"\n"+ pas);
+        System.out.println(user + "\n" + pas);
         try {
             if (ua.loginUser(user, pas)) {
                 int id = ua.getIdUserByUserName(user);
                 ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(id);
-                ArrayList arrayFriend = (ArrayList) ua.getAllFriend(id);
+                ArrayList arrayFriend = (ArrayList) ua.getAllFriendss(id);
+                System.out.println("Size friend: " + arrayFriend.size() + id);
+
                 request.setAttribute("listFriend", arrayFriend);
                 request.setAttribute("listReceive", arrayReceive);
-                
+
                 session.setAttribute("idUser", id);
                 session.setAttribute("userName", user);
+                request.setAttribute("idUser", id);
+                request.setAttribute("userName", user);
                 return mapping.findForward("user");
+            } else {
+                session.setAttribute("idUser", 0);
+                session.setAttribute("userName", 0);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
