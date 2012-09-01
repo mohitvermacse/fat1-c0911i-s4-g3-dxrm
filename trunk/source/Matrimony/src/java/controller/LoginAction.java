@@ -38,7 +38,7 @@ public class LoginAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        //HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
         LoginForm from = (LoginForm) form;
         UserAccess ua = new UserAccess();
 
@@ -53,7 +53,8 @@ public class LoginAction extends org.apache.struts.action.Action {
                 request.setAttribute("listFriend", arrayFriend);
                 request.setAttribute("listReceive", arrayReceive);
                 
-                //session.setAttribute("idUser", id);
+                session.setAttribute("idUser", id);
+                session.setAttribute("userName", user);
                 return mapping.findForward("user");
             }
         } catch (Exception e) {
