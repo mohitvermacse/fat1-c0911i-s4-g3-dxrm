@@ -18,7 +18,7 @@
     <body>
         <h1>Choose premium plan</h1>
         <html:errors property="premiumSelect" />
-        <jsp:useBean id="userManager" class="bean.UserManager" scope="session" />
+        <jsp:useBean id="premium" class="bean.UserManager" scope="session" />
         <html:form action="PremiumAction" >
             <table border="1">
                 <tr>
@@ -26,11 +26,11 @@
                     <td>Amount</td>
                     <td>Select</td>
                 </tr>
-                <logic:iterate id="premium" collection="${userManager.premiumPlans}">
+                <logic:iterate id="pre" collection="${premium.premiumPlans}">
                     <tr>
-                        <td>${premium.preType}</td>
-                        <td>${premium.amount} $</td>
-                        <td><html:radio property="premiumSelecter" value="${premium.preId}"/></td>
+                        <td>${pre.preType}</td>
+                        <td>${pre.amount} $</td>
+                        <td><html:radio property="premiumSelecter" value="${pre.preId}"/></td>
                     </tr>
                 </logic:iterate>
                 <tr>

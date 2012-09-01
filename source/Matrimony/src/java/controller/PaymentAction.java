@@ -50,8 +50,7 @@ public class PaymentAction extends org.apache.struts.action.Action {
         if(flag) {
             int premiumID = Integer.parseInt(session.getAttribute("premiumID").toString());
             UserManager userManager = new UserManager();
-           // flag = userManager.upgradeAccount(1, premiumID);
-            flag = userManager.updateExpireDate(1, premiumID);
+            flag = userManager.upgradeAccount(3, premiumID);
             if(flag) {
                 return mapping.findForward("success");
             } else {

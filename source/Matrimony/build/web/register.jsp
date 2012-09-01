@@ -144,7 +144,13 @@
                 </tr>
                 <tr>
                     <td>Marital Status: </td>
-                    <td><html:text property="maritalStatus"/></td>
+                    <td>
+                        <html:select property="maritalStatus" >
+                            <html:option value="Single"/>
+                            <html:option value="Marrie"/>
+                        </html:select>
+                        <font style="color: red">*</font>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>

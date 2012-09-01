@@ -65,9 +65,6 @@
             <forward name="error" path="/error.jsp"/>
             <forward name="register" path="/register.jsp"/>
         </action>
-        <action path="/TempAction" type="controller.TempAction">
-            <forward name="register" path="/register.jsp"/>
-        </action>
         <action path="/ViewAlbum" type="controller.ViewAlbum">
             <forward name="success" path="/album.jsp"/>
         </action>
@@ -95,7 +92,15 @@
             <forward name="homeAdmin" path="/admin/controller.jsp"/>
             <forward name="error" path="/admin/loginAdmin.jsp"/>            
         </action>
-      
+        <action path="/RegisterTemp" type="controller.RegisterTemp">
+            <forward name="register" path="/register.jsp"/>
+        </action>
+        <action path="/ProfileTemp" type="controller.ProfileTemp">
+            <forward name="profile" path="/profile.jsp"/>
+        </action>
+        <action path="/PremiumTemp" type="controller.PremiumTemp">
+            <forward name="premium" path="/premium.jsp"/>
+        </action>
         <action input="/admin/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
             <forward name="expired" path="/admin/expired.jsp"/>
             <forward name="transfer" path="/transferRequest.jsp"/>

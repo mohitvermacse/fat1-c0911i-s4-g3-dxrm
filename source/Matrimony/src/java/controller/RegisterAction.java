@@ -45,6 +45,7 @@ public class RegisterAction extends org.apache.struts.action.Action {
         
         String userName = registerForm.getUserName();
         String password = registerForm.getPassword();
+        int avatar = 1;
         String fullName = registerForm.getFullName();
         String address = registerForm.getAddress();
         String gender = registerForm.getGender();
@@ -67,7 +68,7 @@ public class RegisterAction extends org.apache.struts.action.Action {
         String books = registerForm.getBooks();
         String expireDate = "08/10/2012";
         
-        boolean flag = userManager.addNewUser(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, "Free");
+        boolean flag = userManager.addNewUser(userName, password, avatar, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, "Free");
         if(flag) {
             return mapping.findForward("success");
         } else {

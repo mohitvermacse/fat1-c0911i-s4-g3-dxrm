@@ -16,10 +16,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <html:link page="/TempAction.page">Register</html:link>
+        <html:link page="/RegisterTemp.page">Register</html:link>
         <br>
-        <html:link page="/profile.jsp">Profile</html:link>
+        <html:link page="/ProfileTemp.page">Profile</html:link>
         <br>
-        <html:link page="/premium.jsp">Premium</html:link>
+        <html:link page="/PremiumTemp.page">Premium</html:link>
     </body>
 </html>

@@ -22,7 +22,7 @@ public class ConnectDB {
     public Connection getConnect() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Matrimony", "sa", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Matrimony", "sa", "adminadmin");
         } catch (ClassNotFoundException ex) {
             System.out.println("Unsuccess connect to driver!");
         } catch (SQLException ex) {
