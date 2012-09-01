@@ -21,7 +21,7 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
     /*
      * forward name="success" path=""
      */
-    private static final String SUCCESS = "success";
+    private static final String SUCCESS = "error";
 
     /**
      * This is the action called from the Struts framework.
@@ -42,7 +42,8 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
 
             ControllerAdminForm ad = (ControllerAdminForm) form;
             String action = ad.getAction();
-            System.out.println("ACtion: " + action);
+            System.out.println("Action: " + action);
+
             if (action.equalsIgnoreCase("Manager user Expired")) {
                 System.out.println("ACtion: " + action);
                 ArrayList arrayUserExpired = (ArrayList) ua.getAllUserExpired();
@@ -61,24 +62,33 @@ public class ControllerAdminAction extends org.apache.struts.action.Action {
                 return mapping.findForward("statistic");
 
             } else if (action.equalsIgnoreCase("Manager Request")) {
+                String status = "Not found request pending";
+//                int totalPending = ua.sumRequestReceive("Pending");
+//                int totalTransfer = ua.sumRequestReceive("Transfer");
+//                int totalApproved = ua.sumRequestReceive("Approved");
+                System.out.println("Not request pending 1");
 
+                ArrayList listRequestApproved = (ArrayList) ua.getAllReceveRequestTransfer("Approved");
                 ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
-//                ArrayList listRequestTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Transfer");
-//                ArrayList listRequestApproved = (ArrayList) ua.getAllReceveRequestTransfer("Approved");
+                if (listRequestPending.size() <= 0) {
 
-                int totalPending = ua.sumRequestReceive("Pending");
-                int totalTransfer = ua.sumRequestReceive("Transfer");
-                int totalApproved = ua.sumRequestReceive("Approved");
-
-                request.setAttribute("listTransfer", listRequestPending);
-//                request.setAttribute("listRequestTransfer", listRequestTransfer);
-//                request.setAttribute("listRequestApproved", listRequestApproved);                
-
-                request.setAttribute("totalApproved", totalPending);
-                request.setAttribute("totalApproved", totalTransfer);
-                request.setAttribute("totalApproved", totalApproved);
-
-                return mapping.findForward("transfer");
+                    request.setAttribute("listTransfer", listRequestPending);
+                    request.setAttribute("listRequestApproved", listRequestApproved);
+//                    request.setAttribute("totalApproved", totalPending);
+//                    request.setAttribute("totalApproved", totalTransfer);
+//                    request.setAttribute("totalApproved", totalApproved);
+                    request.setAttribute("status", status);
+                    System.out.println("Not request pending 2 ");
+                    return mapping.findForward("transfer");
+                } else {
+                    request.setAttribute("listTransfer", listRequestPending);
+                    request.setAttribute("listRequestApproved", listRequestApproved);
+//                    request.setAttribute("totalApproved", totalPending);
+//                    request.setAttribute("totalApproved", totalTransfer);
+//                    request.setAttribute("totalApproved", totalApproved);
+                    System.out.println("Not request pending 3 ");
+                    return mapping.findForward("transfer");
+                }
             }
 
         } catch (Exception e) {
