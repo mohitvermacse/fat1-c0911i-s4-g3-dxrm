@@ -4,6 +4,7 @@
  */
 package bean;
 
+
 import entity.*;
 import java.sql.*;
 import java.text.*;
@@ -11,65 +12,63 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import org.slf4j.instrumentation.JavassistHelper;
 
 /**
  *
  * @author SENJURO
  */
 public class UserManager {
-
     ConnectDB conn;
     private ArrayList userList = new ArrayList();
     ArrayList cityList = new ArrayList();
     ArrayList countryList = new ArrayList();
     ArrayList premiumPlans = new ArrayList();
-
-    public boolean addNewUser(String userName, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
+    
+    public boolean addNewUser(String userName, String password, int avatar, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
         boolean flag = false;
         conn = new ConnectDB();
         int cityID = getCityID(cityName);
         int countryID = getCountryID(countryName);
         boolean checkUserName = checkUserName(userName);
         try {
-            String query = "INSERT INTO users(userName, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryID, cityID, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users(userName, password, avatar, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryID, cityID, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, userName);
             prs.setString(2, password);
-            prs.setString(3, fullName);
-            prs.setString(4, address);
-            prs.setString(5, gender);
-            prs.setString(6, birthDay);
-            prs.setString(7, email);
-            prs.setString(8, phoneNumber);
-            prs.setString(9, maritalStatus);
-            prs.setInt(10, height);
-            prs.setInt(11, countryID);
-            prs.setInt(12, cityID);
-            prs.setString(13, languages);
-            prs.setString(14, caste);
-            prs.setString(15, familyDetails);
-            prs.setString(16, qualification);
-            prs.setString(17, workingAt);
-            prs.setString(18, hobbies);
-            prs.setString(19, favoriteMusic);
-            prs.setString(20, movies);
-            prs.setString(21, cuisine);
-            prs.setString(22, books);
-            prs.setString(23, expireDate);
-            prs.setString(24, status);
+            prs.setInt(3, avatar);
+            prs.setString(4, fullName);
+            prs.setString(5, address);
+            prs.setString(6, gender);
+            prs.setString(7, birthDay);
+            prs.setString(8, email);
+            prs.setString(9, phoneNumber);
+            prs.setString(10, maritalStatus);
+            prs.setInt(11, height);
+            prs.setInt(12, countryID);
+            prs.setInt(13, cityID);
+            prs.setString(14, languages);
+            prs.setString(15, caste);
+            prs.setString(16, familyDetails);
+            prs.setString(17, qualification);
+            prs.setString(18, workingAt);
+            prs.setString(19, hobbies);
+            prs.setString(20, favoriteMusic);
+            prs.setString(21, movies);
+            prs.setString(22, cuisine);
+            prs.setString(23, books);
+            prs.setString(24, expireDate);
+            prs.setString(25, status);
             prs.executeUpdate();
             prs.close();
             conn.closeConnect();
             flag = true;
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
             flag = false;
-        }
+        } 
         return flag;
     }
-
+    
     public boolean fillUserProfile(int userID) {
         conn = new ConnectDB();
         boolean flag = false;
@@ -78,7 +77,7 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, userID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt(1));
                 user.setUserName(rs.getString(2));
@@ -112,13 +111,13 @@ public class UserManager {
             rs.close();
             conn.closeConnect();
             flag = true;
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
             flag = false;
-        }
+        } 
         return flag;
     }
-
+    
     public boolean updateProfile(int userID, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
         boolean flag = false;
         conn = new ConnectDB();
@@ -153,48 +152,50 @@ public class UserManager {
             prs.close();
             conn.closeConnect();
             flag = true;
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
             flag = false;
-        }
+        } 
         return flag;
     }
-
+    
     public boolean upgradeAccount(int userID, int premiumID) {
         boolean flag = false;
         conn = new ConnectDB();
         String premiumType = getPremiumType(premiumID);
-
-        if (checkUserStatus(userID)) {
+        
+        if(checkUserStatus(userID)) {
             String d = getUserExpireDate(userID);
-            int month = Integer.parseInt(d.substring(0, 2));
-            int day = Integer.parseInt(d.substring(3, 5));
-            int year = Integer.parseInt(d.substring(6, 10));
-            if (premiumType.equalsIgnoreCase("One Month")) {
-                if (month == 12) {
+            int month = Integer.parseInt(d.substring(5, 7));
+            int day = Integer.parseInt(d.substring(8, 10));
+            int year = Integer.parseInt(d.substring(0, 4));
+            if(premiumType.equalsIgnoreCase("One Month")) {
+                if(month == 12) {
                     month = 1;
                     year = year + 1;
                 } else {
                     month = month + 1;
                 }
             }
-            if (premiumType.equalsIgnoreCase("One Year")) {
+            if(premiumType.equalsIgnoreCase("One Year")) {
                 year = year + 1;
             }
             String expireDate = month + "/" + day + "/" + year;
             try {
-                String query = "UPDATE users SET expireDate = ?, WHERE userID = ?";
+                String query = "UPDATE users SET expireDate = ? WHERE userID = ?";
                 PreparedStatement prs = conn.getConnect().prepareStatement(query);
-                prs.setString(1, expireDate);
+                prs.setString(1, expireDate);   
                 prs.setInt(2, userID);
                 prs.executeUpdate();
                 prs.close();
                 conn.closeConnect();
                 flag = true;
-            } catch (Exception ex) {
+                insertTransaction(userID, premiumID);
+            } catch(Exception ex) {
                 ex.printStackTrace();
                 flag = false;
-            }
+            } 
+            
         } else {
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             java.util.Date now = new java.util.Date();
@@ -203,37 +204,38 @@ public class UserManager {
             int month = Integer.parseInt(d.substring(0, 2));
             int day = Integer.parseInt(d.substring(3, 5));
             int year = Integer.parseInt(d.substring(6, 10));
-            if (premiumType.equalsIgnoreCase("One Month")) {
-                if (month == 12) {
+            if(premiumType.equalsIgnoreCase("One Month")) {
+                if(month == 12) {
                     month = 1;
                     year = year + 1;
                 } else {
                     month = month + 1;
                 }
             }
-            if (premiumType.equalsIgnoreCase("One Year")) {
+            if(premiumType.equalsIgnoreCase("One Year")) {
                 year = year + 1;
             }
             String expireDate = month + "/" + day + "/" + year;
             try {
                 String query = "UPDATE users SET expireDate = ?, status = ? WHERE userID = ?";
                 PreparedStatement prs = conn.getConnect().prepareStatement(query);
-                prs.setString(1, expireDate);
+                prs.setString(1, expireDate);   
                 prs.setString(2, "Paid");
                 prs.setInt(3, userID);
                 prs.executeUpdate();
                 prs.close();
                 conn.closeConnect();
                 flag = true;
-            } catch (Exception ex) {
+                insertTransaction(userID, premiumID);
+            } catch(Exception ex) {
                 ex.printStackTrace();
                 flag = false;
-            }
+            } 
         }
-
+        
         return flag;
     }
-
+    
     public boolean checkUserStatus(int userID) {
         boolean flag = false;
         conn = new ConnectDB();
@@ -242,8 +244,8 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, userID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
-                if (rs.getString(1).equalsIgnoreCase("Paid")) {
+            if(rs.next()) {
+                if(rs.getString(1).equalsIgnoreCase("Paid")) {
                     flag = true;
                 } else {
                     flag = false;
@@ -252,12 +254,27 @@ public class UserManager {
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return flag;
     }
-
+    
+    public void insertTransaction(int userID, int premiumID) {
+        conn = new ConnectDB();
+        try {
+            String query = "INSERT INTO transactions (userID, premiumID) VALUES (?, ?)";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, userID);
+            prs.setInt(2, premiumID);
+            prs.executeUpdate();
+            prs.close();
+            conn.closeConnect();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } 
+    }
+    
     public String getPremiumType(int premiumID) {
         conn = new ConnectDB();
         String premiumType = "";
@@ -266,18 +283,18 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, premiumID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 premiumType = rs.getString(1);
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return premiumType;
     }
-
+    
     public String getUserExpireDate(int userID) {
         conn = new ConnectDB();
         String expireDate = "";
@@ -286,18 +303,18 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, userID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 expireDate = rs.getDate(1).toString();
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return expireDate;
     }
-
+    
     public int getCityID(String cityName) {
         conn = new ConnectDB();
         int cityID = 0;
@@ -306,18 +323,18 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, cityName);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 cityID = rs.getInt(1);
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return cityID;
     }
-
+    
     public String getCityName(int cityID) {
         conn = new ConnectDB();
         String cityName = "";
@@ -326,42 +343,42 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, cityID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 cityName = rs.getString(1);
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return cityName;
     }
-
+    
     public void fillCityList() {
         conn = new ConnectDB();
         try {
             String query = "SELECT cityName FROM city";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
+            while(rs.next()) {
                 cityList.add(rs.getString(1));
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
     }
-
+    
     public void fillPremiumPlan() {
         conn = new ConnectDB();
         try {
             String query = "SELECT * FROM premium";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
+            while(rs.next()) {
                 Premium premium = new Premium();
                 premium.setPreId(rs.getInt(1));
                 premium.setPreType(rs.getString(2));
@@ -371,11 +388,11 @@ public class UserManager {
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
         }
     }
-
+    
     public int getCountryID(String countryName) {
         conn = new ConnectDB();
         int countryID = 0;
@@ -384,18 +401,18 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, countryName);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 countryID = rs.getInt(1);
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return countryID;
     }
-
+    
     public String getCountryName(int countryID) {
         conn = new ConnectDB();
         String countryName = "";
@@ -404,35 +421,35 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, countryID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 countryName = rs.getString(1);
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return countryName;
     }
-
+    
     public void fillCountryList() {
         conn = new ConnectDB();
         try {
             String query = "SELECT countryName FROM country";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
+            while(rs.next()) {
                 countryList.add(rs.getString(1));
             }
             prs.close();
             rs.close();
             conn.closeConnect();
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
     }
-
+    
     public boolean checkUserName(String userName) {
         conn = new ConnectDB();
         try {
@@ -440,18 +457,18 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, userName);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 return false;
             }
             prs.close();
             conn.closeConnect();
-
-        } catch (Exception ex) {
+            
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return true;
     }
-
+    
     public Premium getPremiumDetails(int premiumID) {
         conn = new ConnectDB();
         Premium premium = new Premium();
@@ -460,131 +477,33 @@ public class UserManager {
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setInt(1, premiumID);
             ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
+            if(rs.next()) {
                 premium.setPreId(rs.getInt(1));
                 premium.setPreType(rs.getString(2));
                 premium.setAmount(rs.getInt(3));
             }
             prs.close();
             conn.closeConnect();
-
-        } catch (Exception ex) {
+            
+        } catch(Exception ex) {
             ex.printStackTrace();
-        }
+        } 
         return premium;
     }
-
+    
     public ArrayList getUserList() {
         return userList;
     }
-
+    
     public ArrayList getCityList() {
         return this.cityList;
     }
-
+    
     public ArrayList getPremiumPlans() {
         return this.premiumPlans;
     }
-
+    
     public ArrayList getCountryList() {
         return this.countryList;
-    }
-
-    private java.util.Date sumDateYear(java.util.Date expireDateOld) {
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(expireDateOld);
-        calendar2.add(Calendar.YEAR, 1);
-        java.util.Date ExpireDateNew = calendar2.getTime();
-        return ExpireDateNew;
-    }
-
-    private java.util.Date sumDateMonth(java.util.Date expireDateOld) {
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.setTime(expireDateOld);
-        calendar1.add(Calendar.MONTH, 1);
-
-        java.util.Date dNew = calendar1.getTime();
-        return dNew;
-
-    }
-
-    public boolean updateExpireDate(int userID, int premiumID) {
-        boolean flag = false;
-        conn = new ConnectDB();
-        String premiumType = getPremiumType(premiumID);
-
-
-        if (checkUserStatus(userID)) {
-            java.util.Date newDate = null, oldDate;
-            oldDate = getExpireDate(userID);
-            if (premiumType.equalsIgnoreCase("One Month")) {
-                newDate = sumDateMonth(oldDate);
-            }
-            if (premiumType.equalsIgnoreCase("One Year")) {
-                newDate = sumDateYear(oldDate);
-            }
-            java.sql.Date dateSql = new java.sql.Date(newDate.getTime());
-            try {
-                String query = "UPDATE users SET expireDate = ? WHERE userID = ?";
-                PreparedStatement prs = conn.getConnect().prepareStatement(query);
-                prs.setDate(1, dateSql);
-                prs.setInt(2, userID);
-                prs.executeUpdate();
-                prs.close();
-                conn.closeConnect();
-                flag = true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                flag = false;
-            }
-        } else {
-            java.util.Date now = new java.util.Date();
-            java.sql.Date newDate = null;
-            java.util.Date oldDate;
-            if (premiumType.equalsIgnoreCase("One Month")) {
-                oldDate = sumDateMonth(now);
-                newDate = new java.sql.Date(oldDate.getTime());
-            }
-            if (premiumType.equalsIgnoreCase("One Year")) {
-                oldDate = sumDateYear(now);
-                newDate = new java.sql.Date(oldDate.getTime());
-            }
-            try {
-                String query = "UPDATE users SET expireDate = ?, status = ? WHERE userID = ?";
-                PreparedStatement prs = conn.getConnect().prepareStatement(query);
-                prs.setDate(1, newDate);
-                prs.setString(2, "Paid");
-                prs.setInt(3, userID);
-                prs.executeUpdate();
-                prs.close();
-                conn.closeConnect();
-                flag = true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                flag = false;
-            }
-        }
-
-        return flag;
-    }
-
-    public java.util.Date getExpireDate(int userID) {
-        conn = new ConnectDB();
-        java.util.Date expireDate = null;
-        try {
-            String query = "SELECT expireDate FROM users WHERE userID = ?";
-            PreparedStatement prs = conn.getConnect().prepareStatement(query);
-            prs.setInt(1, userID);
-            ResultSet rs = prs.executeQuery();
-            if (rs.next()) {
-                expireDate = rs.getDate(1);
-            }
-            prs.close();
-            rs.close();
-            conn.closeConnect();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return expireDate;
     }
 }

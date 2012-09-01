@@ -43,11 +43,11 @@
                 </tr>
                 <tr>
                     <td>Premium plan: </td>
-                    <td><input type="text" value="${premiumType}"/></td>
+                    <td><input type="text" value="${premiumType}" disabled="true"/></td>
                 </tr>
                 <tr>
                     <td>Amount: </td>
-                    <td><html:text property="money" value="${amount}"/> $</td>
+                    <td><html:text property="" value="${amount}" disabled="true"/><html:hidden property="money" value="${amount}" />$</td>
                 </tr>
                 <tr>
                     <td><html:submit value="Accept"/></td>

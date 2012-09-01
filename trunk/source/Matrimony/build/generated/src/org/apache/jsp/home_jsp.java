@@ -102,7 +102,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.LinkTag _jspx_th_html_link_0 = (org.apache.struts.taglib.html.LinkTag) _jspx_tagPool_html_link_page.get(org.apache.struts.taglib.html.LinkTag.class);
     _jspx_th_html_link_0.setPageContext(_jspx_page_context);
     _jspx_th_html_link_0.setParent(null);
-    _jspx_th_html_link_0.setPage("/TempAction.page");
+    _jspx_th_html_link_0.setPage("/RegisterTemp.page");
     int _jspx_eval_html_link_0 = _jspx_th_html_link_0.doStartTag();
     if (_jspx_eval_html_link_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_html_link_0 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
@@ -135,7 +135,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.LinkTag _jspx_th_html_link_1 = (org.apache.struts.taglib.html.LinkTag) _jspx_tagPool_html_link_page.get(org.apache.struts.taglib.html.LinkTag.class);
     _jspx_th_html_link_1.setPageContext(_jspx_page_context);
     _jspx_th_html_link_1.setParent(null);
-    _jspx_th_html_link_1.setPage("/profile.jsp");
+    _jspx_th_html_link_1.setPage("/ProfileTemp.page");
     int _jspx_eval_html_link_1 = _jspx_th_html_link_1.doStartTag();
     if (_jspx_eval_html_link_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_html_link_1 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {
@@ -168,7 +168,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.LinkTag _jspx_th_html_link_2 = (org.apache.struts.taglib.html.LinkTag) _jspx_tagPool_html_link_page.get(org.apache.struts.taglib.html.LinkTag.class);
     _jspx_th_html_link_2.setPageContext(_jspx_page_context);
     _jspx_th_html_link_2.setParent(null);
-    _jspx_th_html_link_2.setPage("/premium.jsp");
+    _jspx_th_html_link_2.setPage("/PremiumTemp.page");
     int _jspx_eval_html_link_2 = _jspx_th_html_link_2.doStartTag();
     if (_jspx_eval_html_link_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       if (_jspx_eval_html_link_2 != javax.servlet.jsp.tagext.Tag.EVAL_BODY_INCLUDE) {

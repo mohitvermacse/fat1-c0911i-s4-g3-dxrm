@@ -16,7 +16,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author SENJURO
  */
-public class TempAction extends org.apache.struts.action.Action {
+public class ProfileTemp extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -42,9 +42,8 @@ public class TempAction extends org.apache.struts.action.Action {
         UserManager userManager = new UserManager();
         userManager.fillCityList();
         userManager.fillCountryList();
-        userManager.fillUserProfile(1);
-        userManager.fillPremiumPlan();
+        userManager.fillUserProfile(3);
         session.setAttribute("userManager", userManager);
-        return mapping.findForward("register");
+        return mapping.findForward("profile");
     }
 }
