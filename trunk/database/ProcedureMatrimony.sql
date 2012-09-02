@@ -344,7 +344,64 @@ CREATE PROCEDURE CheckTwoUserFriend
 	SELECT rr.userID,sr.userID,rr.actions FROM receiveRequest AS rr INNER JOIN sendRequest AS sr ON sr.sendID=rr.sendID
 	WHERE  (rr.actions='Approved' AND rr.userID=@idFriend1 AND sr.userID=@idFriend2) OR(rr.actions='Approved' AND rr.userID=@idFriend2 AND sr.userID=@idFriend1) 
 GO
+/*        Search user by job DROP PROCEDURE SearchUserByWorkingAt'doctor'  select * from users        */
+CREATE PROCEDURE SearchUserByWorkingAt
+	@job NVARCHAR(50)
+	AS
+	SELECT userID,userName,avatar,fullName,address,gender,birthDay,height,maritalStatus,workingAt,hobbies,favoriteMusic,movies,cuisine,books,status
+	FROM users
+	WHERE (workingAt LIKE '%'+@job AND status ='Paid')
+		OR(workingAt LIKE '%'+@job+'%'  AND status ='Paid')
+		OR(workingAt LIKE @job+'%'  AND status ='Paid')
+GO
+/*        Search user by marite status DROP PROCEDURE SearchUserByMariteStatust'Single'      */
+CREATE PROCEDURE SearchUserByMariteStatust
+	@status NVARCHAR(50)
+	AS
+	SELECT userID,userName,avatar,fullName,address,gender,birthDay,height,maritalStatus,workingAt,hobbies,favoriteMusic,movies,cuisine,books,status
+	FROM users
+	WHERE (maritalStatus LIKE '%'+@status  AND status ='Paid')
+		OR(maritalStatus LIKE '%'+@status+'%'  AND status ='Paid')
+		OR(maritalStatus LIKE @status+'%'  AND status ='Paid')
+GO
+/*        Search user by age Drop PROCEDURE SearchUserByAge1825        */
+CREATE PROCEDURE SearchUserByAge1825
+	AS
+	SELECT u.userID,u.userName,i.images,u.fullName,u.address,u.gender,u.birthDay,u.height,u.maritalStatus,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books,u.status
+	FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	WHERE DATEDIFF(yy,birthDay,getDate())>=18 AND DATEDIFF(yy,birthDay,getDate())<=25 AND status ='Paid' AND i.imageID = u.avatar
+GO
+/*        Search user by age Drop PROCEDURE SearchUserByAge2530        */
+CREATE PROCEDURE SearchUserByAge2530
+	AS
+	SELECT u.userID,u.userName,i.images,u.fullName,u.address,u.gender,u.birthDay,u.height,u.maritalStatus,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books,u.status
+	FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	WHERE DATEDIFF(yy,birthDay,getDate())>25 AND DATEDIFF(yy,birthDay,getDate())<=30 AND status ='Paid' AND i.imageID = u.avatar
+GO
+/*        Search user by age Drop PROCEDURE SearchUserByAge3040        */
+CREATE PROCEDURE SearchUserByAge3040
+	AS
+	SELECT u.userID,u.userName,i.images,u.fullName,u.address,u.gender,u.birthDay,u.height,u.maritalStatus,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books,u.status
+	FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	WHERE DATEDIFF(yy,birthDay,getDate())>30 AND DATEDIFF(yy,birthDay,getDate())<=40 AND status ='Paid' AND i.imageID = u.avatar
+GO
+/*        Get Image by avatar and userId DROP PROCEDURE GetImagesByAvatar'2','8'       */
+CREATE PROCEDURE GetImagesByAvatar
+@avatar int,
+@userId int
+AS
+SELECT images from images where imageID=@avatar AND userID=@userID
+GO
+/*        Search user by City DROP PROCEDURE SearchUserByCity'TP HCM'        */
+CREATE PROCEDURE SearchUserByCity
+	@cityName NVARCHAR(50)
+	AS
+	SELECT u.userID,u.userName,i.images,u.fullName,u.address,u.gender,u.birthDay,u.height,u.maritalStatus,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books,u.status
+	FROM users AS u INNER JOIN city AS c ON u.cityID = c.cityID INNER JOIN images AS i ON u.userID = i.userID
+	WHERE c.cityName=@cityName AND status ='Paid'
+GO
 /*
+select cityName from city
 drop procedure CheckUserExpired
 	select * from users as u inner join images as i on u.userId=i.userID Inner join receiveRequest as rr
 	On u.userID = rr.userID inner join sendRequest as sr on u.userID = sr.userID Where rr.actions='Approved'
@@ -356,6 +413,4 @@ select  distinct(userID) from receiveRequest where  actions= 'Approved'
 (select * from sendRequest where  status ='Approved')
 sr.status='Approved' 
 */
-select * from users where fullName like 'ng%'OR fullName like '%ng'OR fullName like'%ng%'
-select * from users
 
