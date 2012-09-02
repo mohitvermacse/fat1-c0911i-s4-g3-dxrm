@@ -13,6 +13,8 @@ import java.sql.Date;
 public class User {
 
     private int userId;
+    private int avatar;
+    private Date birthDays;
     private int receiveUserId;
     private String userName;
     private String password;
@@ -30,6 +32,7 @@ public class User {
     private String qualification;
     private String workingAt;
     private String hobbies;
+    
     private String favorite;
     private String movies;
     private String cuisine;
@@ -37,7 +40,7 @@ public class User {
     private Date registerDate;
     private Date expireDate;
     private String status;
-    private String images,sImages;
+    private String images, sImages;
     private String cityName;
     private String countryName;
     private String birthDay;
@@ -56,9 +59,9 @@ public class User {
     private String sCityName;
     private String sCountryName;
     private int sHeight;
-    private int receiverId;   
+    private int receiverId;
     private int sendId;
-    private String action;    
+    private String action;
     private String content;
     private int sendUserId;
 
@@ -763,5 +766,33 @@ public class User {
      */
     public void setReceiveUserId(int receiveUserId) {
         this.receiveUserId = receiveUserId;
+    }
+
+    /**
+     * @return the avatar
+     */
+    public int getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * @param avatar the avatar to set
+     */
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
+
+    /**
+     * @return the birthDays
+     */
+    public Date getBirthDays() {
+        return birthDays;
+    }
+
+    /**
+     * @param birthDays the birthDays to set
+     */
+    public void setBirthDays(Date birthDays) {
+        this.birthDays = birthDays;
     }
 }

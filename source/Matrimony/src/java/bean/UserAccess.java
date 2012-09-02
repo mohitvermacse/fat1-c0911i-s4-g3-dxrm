@@ -523,15 +523,13 @@ public class UserAccess {
             ps.setString(1, _email);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return false;
-            } else {
                 return true;
             }
 
         } catch (SQLException ex) {
             System.out.println("Email wrong.");
         }
-        return true;
+        return false;
     }
     /*
      * Insert new user
@@ -652,18 +650,6 @@ public class UserAccess {
             return false;
         }
         return false;
-    }
-
-    // Calculation age of user
-    public int getAge(java.util.Date birthdate) {
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.setTime(new java.util.Date());
-        int currentYear = calendar.get(Calendar.YEAR);
-
-        calendar.setTime(birthdate);
-        int birthYear = calendar.get(Calendar.YEAR);
-
-        return currentYear - birthYear;
     }
 
     /*
@@ -953,19 +939,253 @@ public class UserAccess {
     /*
      * Get password by email
      */
-    public String getPasswordByEmail(String _email){
+
+    public String getPasswordByEmail(String _email) {
         String pass = null;
-        try{
+        try {
             con = db.getConnect();
             ps = con.prepareCall("{call GetPasswordByEmail(?)}");
             ps.setString(1, _email);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 pass = db.md5(rs.getString(1));
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Not found password of your meail");
         }
         return pass;
+    }
+    /*
+     * Search User By Job
+     */
+
+    public Collection searchUserByJob(String _iob) {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByWorkingAt(?)}");
+            ps.setString(1, _iob);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                ps = con.prepareStatement("{call GetImagesByAvatar(?,?)}");
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setAvatar(rs.getInt(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                ps.setInt(1, u.getAvatar());
+                ps.setInt(2, u.getUserId());
+                rs1 = ps.executeQuery();
+                while (rs1.next()) {
+                    u.setImages(rs.getString(1));
+                    array.add(u);
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Search User By Marital Status
+     */
+
+    public Collection searchUserByMaritalStatus(String _maritalStatus) {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByMariteStatust(?)}");
+            ps.setString(1, _maritalStatus);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                ps = con.prepareStatement("{call GetImagesByAvatar(?,?)}");
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setAvatar(rs.getInt(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                ps.setInt(1, u.getAvatar());
+                ps.setInt(2, u.getUserId());
+                rs1 = ps.executeQuery();
+                while (rs1.next()) {
+                    u.setImages(rs.getString(1));
+                    array.add(u);
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Search User By Age 18 -25
+     */
+
+    public Collection searchUserByAge1825() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByAge1825}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                array.add(u);
+            }
+        } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Search User By Age 25-30
+     */
+
+    public Collection searchUserByAge2530() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByAge2530}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                array.add(u);
+            }
+        } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Search User By Age 30-40
+     */
+
+    public Collection searchUserByAge3040() {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByAge3040}");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                array.add(u);
+            }
+        } catch (SQLException e) {
+        }
+        return array;
+    }
+    /*
+     * Search user By City
+     */
+
+    public Collection searchUserByCity(String _cityName) {
+        ArrayList array = new ArrayList();
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call SearchUserByCity(?)}");
+            ps.setString(1, _cityName);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthDays(rs.getDate(7));
+                u.setHeight(rs.getInt(8));
+                u.setMaritalStatus(rs.getString(9));
+                u.setWorkingAt(rs.getString(10));
+                u.setHobbies(rs.getString(11));
+                u.setFavorite(rs.getString(12));
+                u.setMovies(rs.getString(13));
+                u.setCuisine(rs.getString(14));
+                u.setBook(rs.getString(15));
+                u.setStatus(rs.getString(16));
+
+                array.add(u);
+            }
+        } catch (SQLException e) {
+        }
+        return array;
     }
 }
