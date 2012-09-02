@@ -4,6 +4,8 @@
  */
 package bean;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -93,8 +95,8 @@ public class Validate {
     }
 
     public boolean checkFirstName(String fn) {
-        if (fn == null || fn.length() == 0) {
-            return true;
+        if (fn == null || fn.length() < 1) {
+            return false;
         } else {
             String strPattern = "[^a-zA-Z]";
             Pattern p;
@@ -102,13 +104,17 @@ public class Validate {
             int flag = Pattern.CASE_INSENSITIVE;
             p = Pattern.compile(strPattern, flag);
             m = p.matcher(fn);
-            return m.find();
+            if (!m.find() == false) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
     public boolean checkLastName(String ln) {
         if (ln == null || ln.length() == 0) {
-            return true;
+            return false;
         } else {
             String strPattern = "[^a-zA-Z]";
 
@@ -117,7 +123,12 @@ public class Validate {
             int flag = Pattern.CASE_INSENSITIVE;
             p = Pattern.compile(strPattern, flag);
             m = p.matcher(ln);
-            return m.find();
+
+            if (!m.find() == false) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -130,8 +141,8 @@ public class Validate {
     }
 
     public boolean checkPhone(String phone) {
-        if (phone == null || phone.length() == 0 || phone.length() > 11 || phone.length() < 10) {
-            return true;
+        if (phone == null || phone.length() == 0 || phone.length() <= 9 || phone.length() > 12) {
+            return false;
         } else {
             String strPattern = "[^0-9]";
 
@@ -140,21 +151,64 @@ public class Validate {
             int flag = Pattern.CASE_INSENSITIVE;
             p = Pattern.compile(strPattern, flag);
             m = p.matcher(phone);
-            return m.find();
+            if (!m.find() == false) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public boolean checkHeight(String height) {
+        if (height == null || height.length() == 0 || height.length() < 2) {
+            return false;
+        } else {
+            String strPattern = "[^0-9]";
+
+            Pattern p;
+            Matcher m;
+            int flag = Pattern.CASE_INSENSITIVE;
+            p = Pattern.compile(strPattern, flag);
+            m = p.matcher(height);
+            if (!m.find() == false) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
     public boolean isValidEmailAddress(String email) {
-        Pattern p = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-
-        Matcher m = p.matcher(email);
-        boolean matchFound = m.matches();
-
-        if (matchFound) {
-            return true;
+        if (email == null || email.length() < 5) {
+            return false;
         } else {
-            System.out.println("Your email do not validation... \n Please insert again!");
+            Pattern p = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+
+            Matcher m = p.matcher(email);
+            boolean matchFound = m.matches();
+
+            if (matchFound) {
+                return true;
+            } else {
+                System.out.println("Your email do not validation... \n Please insert again!");
+                return false;
+            }
+        }
+    }
+
+    // Calculation age of user
+    public boolean checkBirthDay(java.util.Date birthdate) {
+
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        int currentYear = calendar.get(Calendar.YEAR);
+
+        calendar.setTime(birthdate);
+        int birthYear = calendar.get(Calendar.YEAR);
+        if ((currentYear - birthYear) < 18) {
             return false;
         }
+        return true;
+
     }
 }

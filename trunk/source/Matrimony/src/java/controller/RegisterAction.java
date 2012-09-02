@@ -5,13 +5,15 @@
 package controller;
 
 import bean.UserManager;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
 
 /**
  *
@@ -38,11 +40,11 @@ public class RegisterAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
+
         HttpSession session = request.getSession(false);
         UserManager userManager = new UserManager();
         RegisterForm registerForm = (RegisterForm) form;
-        
+
         String userName = registerForm.getUserName();
         String password = registerForm.getPassword();
         int avatar = 1;
@@ -66,10 +68,11 @@ public class RegisterAction extends org.apache.struts.action.Action {
         String movies = registerForm.getMovies();
         String cuisine = registerForm.getCuisine();
         String books = registerForm.getBooks();
-        String expireDate = "08/10/2012";
         
+        String expireDate = "08/10/2012";
+       
         boolean flag = userManager.addNewUser(userName, password, avatar, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books, expireDate, "Free");
-        if(flag) {
+        if (flag) {
             return mapping.findForward("success");
         } else {
             return mapping.findForward("error");

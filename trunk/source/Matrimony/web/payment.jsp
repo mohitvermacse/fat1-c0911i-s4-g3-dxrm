@@ -18,9 +18,10 @@
     <body>
         <h1>Payment Gateway</h1>
         <html:form action="PaymentAction">
-            <html:errors property="balanceError" />
-            <html:errors property="cardNumberError" />
-            
+            <div style="color: red"> 
+                <html:errors property="balanceError" />
+                <html:errors property="cardNumberError" />
+            </div>
             <table>
                 <tr>
                     <td>Your card account: </td>
@@ -28,18 +29,22 @@
                         <html:text property="identityNumber" />
                     </td>
                     <td>
-                        <html:errors property="identityNumberError" />
+                        <div style="color: red"> 
+                            <html:errors property="identityNumberError" />
+                        </div>
                     </td>                    
                 </tr>
                 <tr>
                     <td>Password: </td>
                     <td>
-                        <html:text property="password" />
+                        <html:password property="password" />
                     </td>
                     <td>
-                        <html:errors property="passwordError" />
+                        <div style="color: red"> 
+                            <html:errors property="passwordError" />
+                        </div>
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td>Premium plan: </td>
