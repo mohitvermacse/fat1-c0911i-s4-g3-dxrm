@@ -42,7 +42,6 @@ public class ProfileAction extends org.apache.struts.action.Action {
         UserManager userManager = new UserManager();
         ProfileForm profileForm = (ProfileForm) form;
         
-        String password = profileForm.getPassword();
         String fullName = profileForm.getFullName();
         String address = profileForm.getAddress();
         String gender = profileForm.getGender();
@@ -63,8 +62,12 @@ public class ProfileAction extends org.apache.struts.action.Action {
         String movies = profileForm.getMovies();
         String cuisine = profileForm.getCuisine();
         String books = profileForm.getBooks();
-        boolean flag = userManager.updateProfile(1, password, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books);
+        boolean flag = userManager.updateProfile(3, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books);
         if(flag) {
+            userManager.fillCityList();
+            userManager.fillCountryList();
+            userManager.fillUserProfile(3);
+            session.setAttribute("userManager", userManager);
             return mapping.findForward("success");
         } else {
             return mapping.findForward("error");

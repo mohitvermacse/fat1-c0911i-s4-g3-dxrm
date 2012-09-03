@@ -4,6 +4,15 @@
  */
 package controller;
 
+import bean.UserAccess;
+import bean.UserManager;
+import bean.Validate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -20,7 +29,6 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
     private int number;
     private String submit;
     private String userName;
-    private String password;
     private String fullName;
     private String address;
     private String gender;
@@ -87,29 +95,58 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
      */
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        /*if (getName() == null || getName().length() < 1) {
+        UserManager userManager = new UserManager();
+        UserAccess ua = new UserAccess();
+        Validate v = new Validate();
+        
+        DateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+        java.util.Date birth = null;
+        
+        if (getSubmit() == null || getSubmit().length() < 1) {
             errors.add("name", new ActionMessage("error.name.required"));
             // TODO: add 'error.name.required' key to your resources
+        }
+        
+        /*if (!v.checkFirstName(fullName)) {
+            errors.add("fullNameError", new ActionMessage("error.fullNameError.required"));
+            return errors;
         }*/
-        
-        
-        if (getPassword() == null || getPassword().length() < 6) {
-            errors.add("passwordError", new ActionMessage("error.password.required"));
-            return errors;
-        }
-        
-        if (getFullName() == null || getFullName().length() < 4) {
-            errors.add("fullNameError", new ActionMessage("error.fullName.required"));
-            return errors;
-        }
-        
         if (getAddress() == null || getAddress().length() < 5) {
-            errors.add("addressError", new ActionMessage("error.address.required"));
+            errors.add("addressError", new ActionMessage("error.Address.required"));
             return errors;
         }
-        
-        if (getGender() == null) {
-            errors.add("genderError", new ActionMessage("error.gender.required"));
+        if (getGender() == null || getGender().length() < 1) {
+            errors.add("genderError", new ActionMessage("error.genderError.required"));
+            return errors;
+        }
+        try {
+            if (getBirthDay() == null || getBirthDay().length() < 1) {
+                errors.add("birthdayError", new ActionMessage("error.birthdayError.required"));
+                
+            } else {
+                birth = (Date) formatter.parse(birthDay);
+                if (!v.checkBirthDay(birth)) {
+                    errors.add("birthdayInvalid", new ActionMessage("error.birthdayError.invalid"));
+                }                
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+              
+        if (!v.isValidEmailAddress(email)) {
+            errors.add("invalidEmail", new ActionMessage("error.invalidEmail.invalid"));
+        }
+        if (!userManager.checkEmail(email)) {
+            errors.add("emailExisted", new ActionMessage("errors.emailExisted.existed"));
+            return errors;
+        }  
+        if (!v.checkPhone(phoneNumber)) {
+            System.out.println(phoneNumber);
+            errors.add("phoneInvalid", new ActionMessage("error.phoneinvalid.invalid"));
+            return errors;
+        }
+        if (!v.checkHeight(height)) {
+            errors.add("heightInvalid", new ActionMessage("error.heightInvalid.invalid"));
             return errors;
         }
         return errors;
@@ -141,20 +178,6 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
      */
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
