@@ -9,13 +9,61 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html:html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Matrimony</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+        <style type="text/css">@import "jquery.datepick.package-4.0.6/jquery.datepick.css";</style> 
+        <style type="text/css">
+            label { width: 10em; float: left; }
+            label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+        </style>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.validate.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.js"></script>
+        <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.validation.js"></script>
+        <script type="text/javascript">            
+            function customRange(dates) { 
+                if (this.id == 'startPicker') { 
+                    $('#endPicker').datepick('option', 'minDate', dates[0] || null); 
+                } 
+                else { 
+                    $('#startPicker').datepick('option', 'maxDate', dates[0] || null); 
+                } 
+            }
+            $(function() {                
+                $('#startPicker').datepick({onSelect:customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#endPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'}); 
+                $('#aDayPicker').datepick({showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#aMonthPicker').datepick({onSelect: customRange, showTrigger: '#calImg', dateFormat: 'mm/dd/yyyy'});
+                $('#validateForm').validate({ 
+                    errorPlacement: $.datepick.errorPlacement, 
+                    rules: { 
+                        startPicker: { 
+                            required: true, 
+                            dpDate: true 
+                        },
+                        endPicker: { 
+                            required: true, 
+                            dpDate: true 
+                        }
+       
+                    }, 
+                    messages: {                         
+                        startPicker: 'Please enter a valid date',
+                        endPicker: 'Please enter a valid date'
+                    }});
+                
+            });
+        </script>
     </head>
     <body>
+        <div style="display: none;">
+            <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
+        </div>
         <h1>Profile</h1>
         <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
         <html:form action="ProfileAction" >
@@ -23,51 +71,101 @@
                 <table>
                     <tr>
                         <td>UserName: </td>
-                        <td><html:text property="userName" value="${p.userName}" disabled="true"/></td>
                         <td>
+                            <html:text property="userName" value="${p.userName}" disabled="true"/>
                         </td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Password: </td>
-                        <td><html:text property="password" value="${p.password}" disabled="true"/></td>
-                        <td><html:errors property="passwordError" /></td>
+                        <td></td>
+                        <td><html:link page="/changePassword.jsp"><b>Change your password</b></html:link></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Full Name: </td>
-                        <td><html:text property="fullName" value="${p.fullName}"/></td>
-                        <td><html:errors property="fullNameError" /></td>
+                        <td>
+                            <html:text property="fullName" value="${p.fullName}"/>
+                            <font style="color: red">*</font>
+                        </td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="fullNameError" />
+                            </font>
+                        </td>
                     </tr>
                     <tr>
                         <td>Address: </td>
-                        <td><html:text property="address" value="${p.address}"/></td>
-                        <td><html:errors property="addressError" /></td>
+                        <td>
+                            <html:text property="address" value="${p.address}"/>
+                            <font style="color: red">*</font>
+                        </td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="addressError" />
+                            </font>
+                        </td>
                     </tr>
                     <tr>
                         <td>Gender: </td>
                         <td>
                             Male <html:radio property="gender" value="Male"/>
                             Female <html:radio property="gender" value="Female"/>
+                            <font style="color: red">*</font>
                         </td>
-                        <td><html:errors property="genderError" /></td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="genderError" />
+                            </font>
+                        </td>
                     </tr>
                     <tr>
-                        <td>BirthDay: </td>
-                        <td><html:text property="birthDay" value="${p.birthDay}"/></td>
-                        <td></td>
-                    </tr>
+                    <td>BirthDay: </td>
+                    <td>
+                        <html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate" value="${p.birthDay}"/>                        
+                        <font style="color: red">*</font> Format: mm/dd/yyyy
+                    </td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="birthdayError" />                        
+                            <html:errors property="birthdayInvalid" />
+                        </font>    
+                    </td>
+                </tr>
                     <tr>
                         <td>Email: </td>
-                        <td><html:text property="email" value="${p.email}"/></td>
-                        <td></td>
+                        <td>
+                            <html:text property="email" value="${p.email}"/>
+                            <font style="color: red">*</font>
+                        </td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="emailExisted" />
+                                <html:errors property="invalidEmail" />
+                            </font>
+                        </font>
+                        </td>
                     </tr>
                     <tr>
                         <td>Phone Number: </td>
-                        <td><html:text property="phoneNumber" value="${p.phoneNumber}"/></td>
-                        <td></td>
+                        <td>
+                            <html:text property="phoneNumber" value="${p.phoneNumber}"/>
+                            <font style="color: red">*</font>
+                        </td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="phoneInvalid" />
+                            </font>
+                        </td>
                     </tr>
                     <tr>
                         <td>Marital Status: </td>
-                        <td><html:text property="maritalStatus" value="${p.maritalStatus}"/></td>
+                        <td>
+                            <html:select property="maritalStatus" >
+                                <html:option value="Single"/>
+                                <html:option value="Marrie"/>
+                            </html:select>
+                            <font style="color: red">*</font>
+                        </td>
                         <td></td>
                     </tr>
                     <tr>
@@ -78,6 +176,7 @@
                                     <html:option value="${country}"/>
                                 </logic:iterate>
                             </html:select>
+                            <font style="color: red">*</font>
                         </td>
                         <td></td>
                     </tr>
@@ -89,13 +188,21 @@
                                     <html:option value="${city}"/>
                                 </logic:iterate>
                             </html:select>
+                            <font style="color: red">*</font>
                         </td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>Height: </td>
-                        <td><html:text property="height" value="${p.height}"/></td>
-                        <td></td>
+                    <td>Height: </td>
+                        <td>
+                            <html:text property="height"/> Cm 
+                            <font style="color: red">*</font>
+                        </td>
+                        <td>
+                            <font style="color: red">
+                                <html:errors property="heightInvalid" />
+                            </font>    
+                        </td>
                     </tr>
                     <tr>
                         <td>Languages: </td>
@@ -171,4 +278,4 @@
             </logic:iterate>
         </html:form>
     </body>
-</html>
+</html:html>

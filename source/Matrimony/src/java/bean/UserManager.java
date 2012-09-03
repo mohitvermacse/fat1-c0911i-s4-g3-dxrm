@@ -120,36 +120,35 @@ public class UserManager {
         return flag;
     }
 
-    public boolean updateProfile(int userID, String password, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
+    public boolean updateProfile(int userID, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
         boolean flag = false;
         conn = new ConnectDB();
         int cityID = getCityID(cityName);
         int countryID = getCountryID(countryName);
         try {
-            String query = "UPDATE users SET password = ?, fullName = ?, address = ?, gender = ?, birthDay = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
+            String query = "UPDATE users SET fullName = ?, address = ?, gender = ?, birthDay = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
-            prs.setString(1, db.md5(password));
-            prs.setString(2, fullName);
-            prs.setString(3, address);
-            prs.setString(4, gender);
-            prs.setString(5, birthDay);
-            prs.setString(6, email);
-            prs.setString(7, phoneNumber);
-            prs.setString(8, maritalStatus);
-            prs.setInt(9, height);
-            prs.setInt(10, countryID);
-            prs.setInt(11, cityID);
-            prs.setString(12, languages);
-            prs.setString(13, caste);
-            prs.setString(14, familyDetails);
-            prs.setString(15, qualification);
-            prs.setString(16, workingAt);
-            prs.setString(17, hobbies);
-            prs.setString(18, favoriteMusic);
-            prs.setString(19, movies);
-            prs.setString(20, cuisine);
-            prs.setString(21, books);
-            prs.setInt(22, userID);
+            prs.setString(1, fullName);
+            prs.setString(2, address);
+            prs.setString(3, gender);
+            prs.setString(4, birthDay);
+            prs.setString(5, email);
+            prs.setString(6, phoneNumber);
+            prs.setString(7, maritalStatus);
+            prs.setInt(8, height);
+            prs.setInt(9, countryID);
+            prs.setInt(10, cityID);
+            prs.setString(11, languages);
+            prs.setString(12, caste);
+            prs.setString(13, familyDetails);
+            prs.setString(14, qualification);
+            prs.setString(15, workingAt);
+            prs.setString(16, hobbies);
+            prs.setString(17, favoriteMusic);
+            prs.setString(18, movies);
+            prs.setString(19, cuisine);
+            prs.setString(20, books);
+            prs.setInt(21, userID);
             prs.executeUpdate();
             prs.close();
             conn.closeConnect();
@@ -458,6 +457,25 @@ public class UserManager {
             String query = "SELECT userID FROM users WHERE userName = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, userName);
+            ResultSet rs = prs.executeQuery();
+            if (rs.next()) {
+                return false;
+            }
+            prs.close();
+            conn.closeConnect();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
+    
+    public boolean checkEmail(String email) {
+        conn = new ConnectDB();
+        try {
+            String procedure = "{call CheckExistEmail(?)}";
+            PreparedStatement prs = conn.getConnect().prepareCall(procedure);
+            prs.setString(1, email);
             ResultSet rs = prs.executeQuery();
             if (rs.next()) {
                 return false;

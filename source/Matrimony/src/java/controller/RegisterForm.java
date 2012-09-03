@@ -30,6 +30,7 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
     private String submit;
     private String userName;
     private String password;
+    private String rePassword;
     private String fullName;
     private String address;
     private String gender;
@@ -140,6 +141,10 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
             errors.add("passwordError", new ActionMessage("error.password.required"));
             return errors;
         }
+        if (!v.checkpassword(password, rePassword)) {
+            errors.add("passwordNotMatch", new ActionMessage("error.password.reType"));
+            return errors;
+        }
         if (!v.checkFirstName(fullName)) {
             errors.add("fullNameError", new ActionMessage("error.fullNameError.required"));
             return errors;
@@ -165,10 +170,10 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
         } catch (ParseException ex) {
             Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (ua.checkEmail(email)) {
+        /*if (!userManager.checkEmail(email)) {
             errors.add("emailExisted", new ActionMessage("errors.emailExisted.existed"));
             return errors;
-        }        
+        }      */  
         if (!v.isValidEmailAddress(email)) {
             errors.add("invalidEmail", new ActionMessage("error.invalidEmail.invalid"));
         }
@@ -491,5 +496,19 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
      */
     public void setCountryName(String countryName) {
         this.countryName = countryName;
+    }
+
+    /**
+     * @return the rePassword
+     */
+    public String getRePassword() {
+        return rePassword;
+    }
+
+    /**
+     * @param rePassword the rePassword to set
+     */
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
     }
 }

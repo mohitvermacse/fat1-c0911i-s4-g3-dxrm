@@ -76,8 +76,8 @@
                     </td>
                     <td>
                         <font style="color: red">
-                        <html:errors property="userNameError" />
-                        <html:errors property="existed" />
+                            <html:errors property="userNameError" />
+                            <html:errors property="existed" />
                         </font>
                     </td>
                 </tr>
@@ -88,7 +88,21 @@
                         <font style="color: red">*</font>
                     </td>
                     <td>
-                        <font style="color: red"><html:errors property="passwordError" /></font>
+                        <font style="color: red">
+                            <html:errors property="passwordError" />
+                        </font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Re-enter passwword: </td>
+                    <td>
+                        <html:password property="rePassword"/>
+                        <font style="color: red">*</font>
+                    </td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="passwordNotMatch" />
+                        </font>
                     </td>
                 </tr>
                 <tr>
@@ -98,7 +112,9 @@
                         <font style="color: red">*</font>
                     </td>
                     <td>
-                        <font style="color: red"><html:errors property="fullNameError" /></font>
+                        <font style="color: red">
+                            <html:errors property="fullNameError" />
+                        </font>
                     </td>
                 </tr>
                 <tr>
@@ -108,7 +124,9 @@
                         <font style="color: red">*</font>
                     </td>
                     <td>
-                        <font style="color: red"><html:errors property="addressError" /></font>
+                        <font style="color: red">
+                            <html:errors property="addressError" />
+                        </font>
                     </td>
                 </tr>
                 <tr>
@@ -117,46 +135,50 @@
                         Male <html:radio property="gender" value="Male"/>
                         Female <html:radio property="gender" value="Female"/>
                         <font style="color: red">*</font>
-                        <font style="color: red"><html:errors property="genderError" /></font>
                     </td>
-                    <td></td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="genderError" />
+                        </font>
+                    </td>
                 </tr>
                 <tr>
                     <td>BirthDay: </td>
                     <td>
                         <html:text property="birthDay" styleId="aDayPicker" size="12" styleClass="dpDate"/>                        
                         <font style="color: red">*</font> Format: mm/dd/yyyy
-                        <font style="color: red">
-                        <html:errors property="birthdayError" />                        
-                        <html:errors property="birthdayInvalid" />
-                        </font>
-
                     </td>
-                    <td></td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="birthdayError" />                        
+                            <html:errors property="birthdayInvalid" />
+                        </font>    
+                    </td>
                 </tr>
                 <tr>
                     <td>Email: </td>
                     <td>
                         <html:text property="email"/> 
                         <font style="color: red">*</font> Exam: luka@org.com.vn
+                    </td>
+                    <td>
                         <font style="color: red">
-                        <html:errors property="emailExisted" />
-                        <html:errors property="invalidEmail" />
-
-
+                            <html:errors property="emailExisted" />
+                            <html:errors property="invalidEmail" />
                         </font>
                     </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>Phone Number: </td>
                     <td>
                         <html:text property="phoneNumber"/>
                         <font style="color: red">*</font>
-                        <font style="color: red"><html:errors property="phoneInvalid" /></font>
-
                     </td>
-                    <td></td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="phoneInvalid" />
+                        </font>
+                    </td>
                 </tr>
                 <tr>
                     <td>Marital Status: </td>
@@ -198,9 +220,12 @@
                     <td>
                         <html:text property="height"/> Cm 
                         <font style="color: red">*</font>
-                        <font style="color: red"><html:errors property="heightInvalid" /></font>                        
                     </td>
-                    <td></td>
+                    <td>
+                        <font style="color: red">
+                            <html:errors property="heightInvalid" />
+                        </font>    
+                    </td>
                 </tr>
                 <tr>
                     <td>Languages: </td>
