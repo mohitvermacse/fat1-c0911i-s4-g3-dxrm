@@ -72,7 +72,8 @@
                     <tr>
                         <td>UserName: </td>
                         <td>
-                            <html:text property="userName" value="${p.userName}" disabled="true"/>
+                            <html:text property="" value="${p.userName}" disabled="true"/>
+                            <html:hidden property="userName" value="${p.userName}" />
                         </td>
                         <td></td>
                     </tr>
