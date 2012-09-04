@@ -136,10 +136,12 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
         if (!v.isValidEmailAddress(email)) {
             errors.add("invalidEmail", new ActionMessage("error.invalidEmail.invalid"));
         }
-        if (!userManager.checkEmail(email)) {
-            errors.add("emailExisted", new ActionMessage("errors.emailExisted.existed"));
-            return errors;
-        }  
+        if (!userManager.getEmail(userName).equalsIgnoreCase(email)) {
+            if (!userManager.checkEmail(email)) {
+                errors.add("emailExisted", new ActionMessage("errors.emailExisted.existed"));
+                return errors;
+            } 
+        }
         if (!v.checkPhone(phoneNumber)) {
             System.out.println(phoneNumber);
             errors.add("phoneInvalid", new ActionMessage("error.phoneinvalid.invalid"));

@@ -470,6 +470,26 @@ public class UserManager {
         return true;
     }
     
+    public String getEmail(String userName) {
+        conn = new ConnectDB();
+        String email = "";
+        try {
+            String procedure = "{call GetEmail(?)}";
+            PreparedStatement prs = conn.getConnect().prepareCall(procedure);
+            prs.setString(1, userName);
+            ResultSet rs = prs.executeQuery();
+            if (rs.next()) {
+                email = rs.getString(1);
+            }
+            prs.close();
+            conn.closeConnect();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return email;
+    }
+    
     public boolean checkEmail(String email) {
         conn = new ConnectDB();
         try {
