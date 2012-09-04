@@ -44,7 +44,7 @@ public class RegisterAction extends org.apache.struts.action.Action {
 
         String userName = registerForm.getUserName();
         String password = registerForm.getPassword();
-        int avatar = 1;
+        int avatar = 0;
         String fullName = registerForm.getFullName();
         String address = registerForm.getAddress();
         String gender = registerForm.getGender();

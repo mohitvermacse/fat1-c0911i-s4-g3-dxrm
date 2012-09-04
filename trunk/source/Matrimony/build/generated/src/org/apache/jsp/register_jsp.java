@@ -17,6 +17,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_errors_property_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_password_property_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_radio_value_property_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_select_property;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_option_value_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_logic_iterate_id_collection;
@@ -35,6 +36,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_tagPool_html_errors_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_password_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_radio_value_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_select_property = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_option_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_logic_iterate_id_collection = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
@@ -48,6 +50,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     _jspx_tagPool_html_errors_property_nobody.release();
     _jspx_tagPool_html_password_property_nobody.release();
     _jspx_tagPool_html_radio_value_property_nobody.release();
+    _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody.release();
     _jspx_tagPool_html_select_property.release();
     _jspx_tagPool_html_option_value_nobody.release();
     _jspx_tagPool_logic_iterate_id_collection.release();
@@ -181,11 +184,11 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    </td>\n");
               out.write("                    <td>\n");
               out.write("                        <font style=\"color: red\">\n");
-              out.write("                        ");
+              out.write("                            ");
               if (_jspx_meth_html_errors_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write("\n");
-              out.write("                        ");
+              out.write("                            ");
               if (_jspx_meth_html_errors_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write("\n");
@@ -202,10 +205,30 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                        <font style=\"color: red\">*</font>\n");
               out.write("                    </td>\n");
               out.write("                    <td>\n");
-              out.write("                        <font style=\"color: red\">");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
               if (_jspx_meth_html_errors_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
-              out.write("</font>\n");
+              out.write("\n");
+              out.write("                        </font>\n");
+              out.write("                    </td>\n");
+              out.write("                </tr>\n");
+              out.write("                <tr>\n");
+              out.write("                    <td>Re-enter passwword: </td>\n");
+              out.write("                    <td>\n");
+              out.write("                        ");
+              if (_jspx_meth_html_password_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        <font style=\"color: red\">*</font>\n");
+              out.write("                    </td>\n");
+              out.write("                    <td>\n");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        </font>\n");
               out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
@@ -218,10 +241,12 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                        <font style=\"color: red\">*</font>\n");
               out.write("                    </td>\n");
               out.write("                    <td>\n");
-              out.write("                        <font style=\"color: red\">");
-              if (_jspx_meth_html_errors_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
-              out.write("</font>\n");
+              out.write("\n");
+              out.write("                        </font>\n");
               out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
@@ -234,10 +259,12 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                        <font style=\"color: red\">*</font>\n");
               out.write("                    </td>\n");
               out.write("                    <td>\n");
-              out.write("                        <font style=\"color: red\">");
-              if (_jspx_meth_html_errors_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_5((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
-              out.write("</font>\n");
+              out.write("\n");
+              out.write("                        </font>\n");
               out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
@@ -252,61 +279,77 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
                 return;
               out.write("\n");
               out.write("                        <font style=\"color: red\">*</font>\n");
-              out.write("                        <font style=\"color: red\">");
-              if (_jspx_meth_html_errors_5((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-                return;
-              out.write("</font>\n");
               out.write("                    </td>\n");
-              out.write("                    <td></td>\n");
+              out.write("                    <td>\n");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        </font>\n");
+              out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
               out.write("                    <td>BirthDay: </td>\n");
               out.write("                    <td>\n");
               out.write("                        ");
-              out.write("\n");
-              out.write("                        <input type=\"text\" styleId=\"aDayPicker\" size=\"12\" styleClass=\"dpDate\" name=\"birth\"/>\n");
+              if (_jspx_meth_html_text_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("                        \n");
               out.write("                        <font style=\"color: red\">*</font> Format: mm/dd/yyyy\n");
               out.write("                    </td>\n");
-              out.write("                    <td></td>\n");
+              out.write("                    <td>\n");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_7((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("                        \n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        </font>    \n");
+              out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
               out.write("                    <td>Email: </td>\n");
               out.write("                    <td>\n");
               out.write("                        ");
-              if (_jspx_meth_html_text_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              if (_jspx_meth_html_text_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write(" \n");
               out.write("                        <font style=\"color: red\">*</font> Exam: luka@org.com.vn\n");
+              out.write("                    </td>\n");
+              out.write("                    <td>\n");
               out.write("                        <font style=\"color: red\">\n");
-              out.write("                        ");
-              if (_jspx_meth_html_errors_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              out.write("                            ");
+              if (_jspx_meth_html_errors_9((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write("\n");
-              out.write("                        ");
-              if (_jspx_meth_html_errors_7((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              out.write("                            ");
+              if (_jspx_meth_html_errors_10((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
-              out.write("\n");
-              out.write("                       \n");
               out.write("\n");
               out.write("                        </font>\n");
               out.write("                    </td>\n");
-              out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
               out.write("                    <td>Phone Number: </td>\n");
               out.write("                    <td>\n");
               out.write("                        ");
-              if (_jspx_meth_html_text_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              if (_jspx_meth_html_text_5((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write("\n");
               out.write("                        <font style=\"color: red\">*</font>\n");
-              out.write("                        <font style=\"color: red\">");
-              if (_jspx_meth_html_errors_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-                return;
-              out.write("</font>\n");
-              out.write("                        \n");
               out.write("                    </td>\n");
-              out.write("                    <td></td>\n");
+              out.write("                    <td>\n");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_11((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        </font>\n");
+              out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
               out.write("                    <td>Marital Status: </td>\n");
@@ -463,27 +506,22 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td>Height: </td>\n");
               out.write("                    <td>\n");
               out.write("                        ");
-              if (_jspx_meth_html_text_5((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+              if (_jspx_meth_html_text_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write(" Cm \n");
               out.write("                        <font style=\"color: red\">*</font>\n");
-              out.write("                        <font style=\"color: red\">");
-              if (_jspx_meth_html_errors_9((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-                return;
-              out.write("</font>                        \n");
               out.write("                    </td>\n");
-              out.write("                    <td></td>\n");
+              out.write("                    <td>\n");
+              out.write("                        <font style=\"color: red\">\n");
+              out.write("                            ");
+              if (_jspx_meth_html_errors_12((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("\n");
+              out.write("                        </font>    \n");
+              out.write("                    </td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
               out.write("                    <td>Languages: </td>\n");
-              out.write("                    <td>");
-              if (_jspx_meth_html_text_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-                return;
-              out.write("</td>\n");
-              out.write("                    <td></td>\n");
-              out.write("                </tr>\n");
-              out.write("                <tr>\n");
-              out.write("                    <td>Caste: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_7((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -491,7 +529,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Family Details: </td>\n");
+              out.write("                    <td>Caste: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -499,7 +537,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Qualification: </td>\n");
+              out.write("                    <td>Family Details: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_9((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -507,7 +545,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Working At: </td>\n");
+              out.write("                    <td>Qualification: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_10((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -515,7 +553,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Hobbies: </td>\n");
+              out.write("                    <td>Working At: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_11((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -523,7 +561,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Favorite Music: </td>\n");
+              out.write("                    <td>Hobbies: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_12((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -531,7 +569,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Movies: </td>\n");
+              out.write("                    <td>Favorite Music: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_13((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -539,7 +577,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Cuisine: </td>\n");
+              out.write("                    <td>Movies: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_14((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
@@ -547,9 +585,17 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
               out.write("                    <td></td>\n");
               out.write("                </tr>\n");
               out.write("                <tr>\n");
-              out.write("                    <td>Books: </td>\n");
+              out.write("                    <td>Cuisine: </td>\n");
               out.write("                    <td>");
               if (_jspx_meth_html_text_15((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+                return;
+              out.write("</td>\n");
+              out.write("                    <td></td>\n");
+              out.write("                </tr>\n");
+              out.write("                <tr>\n");
+              out.write("                    <td>Books: </td>\n");
+              out.write("                    <td>");
+              if (_jspx_meth_html_text_16((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
                 return;
               out.write("</td>\n");
               out.write("                    <td></td>\n");
@@ -690,6 +736,42 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
+  private boolean _jspx_meth_html_password_1(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:password
+    org.apache.struts.taglib.html.PasswordTag _jspx_th_html_password_1 = (org.apache.struts.taglib.html.PasswordTag) _jspx_tagPool_html_password_property_nobody.get(org.apache.struts.taglib.html.PasswordTag.class);
+    _jspx_th_html_password_1.setPageContext(_jspx_page_context);
+    _jspx_th_html_password_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_password_1.setProperty("rePassword");
+    int _jspx_eval_html_password_1 = _jspx_th_html_password_1.doStartTag();
+    if (_jspx_th_html_password_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_password_property_nobody.reuse(_jspx_th_html_password_1);
+      return true;
+    }
+    _jspx_tagPool_html_password_property_nobody.reuse(_jspx_th_html_password_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_3(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_3 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_3.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_3.setProperty("passwordNotMatch");
+    int _jspx_eval_html_errors_3 = _jspx_th_html_errors_3.doStartTag();
+    if (_jspx_th_html_errors_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
+    return false;
+  }
+
   private boolean _jspx_meth_html_text_1(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -708,21 +790,21 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_html_errors_3(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+  private boolean _jspx_meth_html_errors_4(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  html:errors
-    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_3 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
-    _jspx_th_html_errors_3.setPageContext(_jspx_page_context);
-    _jspx_th_html_errors_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_3.setProperty("fullNameError");
-    int _jspx_eval_html_errors_3 = _jspx_th_html_errors_3.doStartTag();
-    if (_jspx_th_html_errors_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_4 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_4.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_4.setProperty("fullNameError");
+    int _jspx_eval_html_errors_4 = _jspx_th_html_errors_4.doStartTag();
+    if (_jspx_th_html_errors_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_4);
       return true;
     }
-    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_4);
     return false;
   }
 
@@ -744,21 +826,21 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_html_errors_4(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+  private boolean _jspx_meth_html_errors_5(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  html:errors
-    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_4 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
-    _jspx_th_html_errors_4.setPageContext(_jspx_page_context);
-    _jspx_th_html_errors_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_4.setProperty("addressError");
-    int _jspx_eval_html_errors_4 = _jspx_th_html_errors_4.doStartTag();
-    if (_jspx_th_html_errors_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_4);
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_5 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_5.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_5.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_5.setProperty("addressError");
+    int _jspx_eval_html_errors_5 = _jspx_th_html_errors_5.doStartTag();
+    if (_jspx_th_html_errors_5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_5);
       return true;
     }
-    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_4);
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_5);
     return false;
   }
 
@@ -800,42 +882,6 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_html_errors_5(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:errors
-    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_5 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
-    _jspx_th_html_errors_5.setPageContext(_jspx_page_context);
-    _jspx_th_html_errors_5.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_5.setProperty("genderError");
-    int _jspx_eval_html_errors_5 = _jspx_th_html_errors_5.doStartTag();
-    if (_jspx_th_html_errors_5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_5);
-      return true;
-    }
-    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_5);
-    return false;
-  }
-
-  private boolean _jspx_meth_html_text_3(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:text
-    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_3 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
-    _jspx_th_html_text_3.setPageContext(_jspx_page_context);
-    _jspx_th_html_text_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_3.setProperty("email");
-    int _jspx_eval_html_text_3 = _jspx_th_html_text_3.doStartTag();
-    if (_jspx_th_html_text_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_3);
-      return true;
-    }
-    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_3);
-    return false;
-  }
-
   private boolean _jspx_meth_html_errors_6(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -844,13 +890,34 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_6 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
     _jspx_th_html_errors_6.setPageContext(_jspx_page_context);
     _jspx_th_html_errors_6.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_6.setProperty("emailExisted");
+    _jspx_th_html_errors_6.setProperty("genderError");
     int _jspx_eval_html_errors_6 = _jspx_th_html_errors_6.doStartTag();
     if (_jspx_th_html_errors_6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_6);
       return true;
     }
     _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_6);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_text_3(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:text
+    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_3 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
+    _jspx_th_html_text_3.setPageContext(_jspx_page_context);
+    _jspx_th_html_text_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_text_3.setProperty("birthDay");
+    _jspx_th_html_text_3.setStyleId("aDayPicker");
+    _jspx_th_html_text_3.setSize("12");
+    _jspx_th_html_text_3.setStyleClass("dpDate");
+    int _jspx_eval_html_text_3 = _jspx_th_html_text_3.doStartTag();
+    if (_jspx_th_html_text_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody.reuse(_jspx_th_html_text_3);
+      return true;
+    }
+    _jspx_tagPool_html_text_styleId_styleClass_size_property_nobody.reuse(_jspx_th_html_text_3);
     return false;
   }
 
@@ -862,31 +929,13 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_7 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
     _jspx_th_html_errors_7.setPageContext(_jspx_page_context);
     _jspx_th_html_errors_7.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_7.setProperty("invalidEmail");
+    _jspx_th_html_errors_7.setProperty("birthdayError");
     int _jspx_eval_html_errors_7 = _jspx_th_html_errors_7.doStartTag();
     if (_jspx_th_html_errors_7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_7);
       return true;
     }
     _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_7);
-    return false;
-  }
-
-  private boolean _jspx_meth_html_text_4(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:text
-    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_4 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
-    _jspx_th_html_text_4.setPageContext(_jspx_page_context);
-    _jspx_th_html_text_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_4.setProperty("phoneNumber");
-    int _jspx_eval_html_text_4 = _jspx_th_html_text_4.doStartTag();
-    if (_jspx_th_html_text_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_4);
-      return true;
-    }
-    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_4);
     return false;
   }
 
@@ -898,13 +947,103 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_8 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
     _jspx_th_html_errors_8.setPageContext(_jspx_page_context);
     _jspx_th_html_errors_8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_8.setProperty("phoneInvalid");
+    _jspx_th_html_errors_8.setProperty("birthdayInvalid");
     int _jspx_eval_html_errors_8 = _jspx_th_html_errors_8.doStartTag();
     if (_jspx_th_html_errors_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_8);
       return true;
     }
     _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_8);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_text_4(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:text
+    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_4 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
+    _jspx_th_html_text_4.setPageContext(_jspx_page_context);
+    _jspx_th_html_text_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_text_4.setProperty("email");
+    int _jspx_eval_html_text_4 = _jspx_th_html_text_4.doStartTag();
+    if (_jspx_th_html_text_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_4);
+      return true;
+    }
+    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_4);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_9(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_9 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_9.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_9.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_9.setProperty("emailExisted");
+    int _jspx_eval_html_errors_9 = _jspx_th_html_errors_9.doStartTag();
+    if (_jspx_th_html_errors_9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_9);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_9);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_10(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_10 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_10.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_10.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_10.setProperty("invalidEmail");
+    int _jspx_eval_html_errors_10 = _jspx_th_html_errors_10.doStartTag();
+    if (_jspx_th_html_errors_10.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_10);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_10);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_text_5(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:text
+    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_5 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
+    _jspx_th_html_text_5.setPageContext(_jspx_page_context);
+    _jspx_th_html_text_5.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_text_5.setProperty("phoneNumber");
+    int _jspx_eval_html_text_5 = _jspx_th_html_text_5.doStartTag();
+    if (_jspx_th_html_text_5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_5);
+      return true;
+    }
+    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_5);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_11(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_11 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_11.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_11.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_11.setProperty("phoneInvalid");
+    int _jspx_eval_html_errors_11 = _jspx_th_html_errors_11.doStartTag();
+    if (_jspx_th_html_errors_11.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_11);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_11);
     return false;
   }
 
@@ -1022,42 +1161,6 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_html_text_5(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:text
-    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_5 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
-    _jspx_th_html_text_5.setPageContext(_jspx_page_context);
-    _jspx_th_html_text_5.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_5.setProperty("height");
-    int _jspx_eval_html_text_5 = _jspx_th_html_text_5.doStartTag();
-    if (_jspx_th_html_text_5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_5);
-      return true;
-    }
-    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_5);
-    return false;
-  }
-
-  private boolean _jspx_meth_html_errors_9(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:errors
-    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_9 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
-    _jspx_th_html_errors_9.setPageContext(_jspx_page_context);
-    _jspx_th_html_errors_9.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_errors_9.setProperty("heightInvalid");
-    int _jspx_eval_html_errors_9 = _jspx_th_html_errors_9.doStartTag();
-    if (_jspx_th_html_errors_9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_9);
-      return true;
-    }
-    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_9);
-    return false;
-  }
-
   private boolean _jspx_meth_html_text_6(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -1066,13 +1169,31 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_6 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_6.setPageContext(_jspx_page_context);
     _jspx_th_html_text_6.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_6.setProperty("languages");
+    _jspx_th_html_text_6.setProperty("height");
     int _jspx_eval_html_text_6 = _jspx_th_html_text_6.doStartTag();
     if (_jspx_th_html_text_6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_6);
       return true;
     }
     _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_6);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_12(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_12 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_12.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_12.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_12.setProperty("heightInvalid");
+    int _jspx_eval_html_errors_12 = _jspx_th_html_errors_12.doStartTag();
+    if (_jspx_th_html_errors_12.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_12);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_12);
     return false;
   }
 
@@ -1084,7 +1205,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_7 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_7.setPageContext(_jspx_page_context);
     _jspx_th_html_text_7.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_7.setProperty("caste");
+    _jspx_th_html_text_7.setProperty("languages");
     int _jspx_eval_html_text_7 = _jspx_th_html_text_7.doStartTag();
     if (_jspx_th_html_text_7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_7);
@@ -1102,7 +1223,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_8 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_8.setPageContext(_jspx_page_context);
     _jspx_th_html_text_8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_8.setProperty("familyDetails");
+    _jspx_th_html_text_8.setProperty("caste");
     int _jspx_eval_html_text_8 = _jspx_th_html_text_8.doStartTag();
     if (_jspx_th_html_text_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_8);
@@ -1120,7 +1241,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_9 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_9.setPageContext(_jspx_page_context);
     _jspx_th_html_text_9.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_9.setProperty("qualification");
+    _jspx_th_html_text_9.setProperty("familyDetails");
     int _jspx_eval_html_text_9 = _jspx_th_html_text_9.doStartTag();
     if (_jspx_th_html_text_9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_9);
@@ -1138,7 +1259,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_10 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_10.setPageContext(_jspx_page_context);
     _jspx_th_html_text_10.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_10.setProperty("workingAt");
+    _jspx_th_html_text_10.setProperty("qualification");
     int _jspx_eval_html_text_10 = _jspx_th_html_text_10.doStartTag();
     if (_jspx_th_html_text_10.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_10);
@@ -1156,7 +1277,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_11 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_11.setPageContext(_jspx_page_context);
     _jspx_th_html_text_11.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_11.setProperty("hobbies");
+    _jspx_th_html_text_11.setProperty("workingAt");
     int _jspx_eval_html_text_11 = _jspx_th_html_text_11.doStartTag();
     if (_jspx_th_html_text_11.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_11);
@@ -1174,7 +1295,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_12 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_12.setPageContext(_jspx_page_context);
     _jspx_th_html_text_12.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_12.setProperty("favoriteMusic");
+    _jspx_th_html_text_12.setProperty("hobbies");
     int _jspx_eval_html_text_12 = _jspx_th_html_text_12.doStartTag();
     if (_jspx_th_html_text_12.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_12);
@@ -1192,7 +1313,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_13 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_13.setPageContext(_jspx_page_context);
     _jspx_th_html_text_13.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_13.setProperty("movies");
+    _jspx_th_html_text_13.setProperty("favoriteMusic");
     int _jspx_eval_html_text_13 = _jspx_th_html_text_13.doStartTag();
     if (_jspx_th_html_text_13.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_13);
@@ -1210,7 +1331,7 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_14 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_14.setPageContext(_jspx_page_context);
     _jspx_th_html_text_14.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_14.setProperty("cuisine");
+    _jspx_th_html_text_14.setProperty("movies");
     int _jspx_eval_html_text_14 = _jspx_th_html_text_14.doStartTag();
     if (_jspx_th_html_text_14.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_14);
@@ -1228,13 +1349,31 @@ public final class register_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.struts.taglib.html.TextTag _jspx_th_html_text_15 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
     _jspx_th_html_text_15.setPageContext(_jspx_page_context);
     _jspx_th_html_text_15.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_text_15.setProperty("books");
+    _jspx_th_html_text_15.setProperty("cuisine");
     int _jspx_eval_html_text_15 = _jspx_th_html_text_15.doStartTag();
     if (_jspx_th_html_text_15.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_15);
       return true;
     }
     _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_15);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_text_16(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:text
+    org.apache.struts.taglib.html.TextTag _jspx_th_html_text_16 = (org.apache.struts.taglib.html.TextTag) _jspx_tagPool_html_text_property_nobody.get(org.apache.struts.taglib.html.TextTag.class);
+    _jspx_th_html_text_16.setPageContext(_jspx_page_context);
+    _jspx_th_html_text_16.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_text_16.setProperty("books");
+    int _jspx_eval_html_text_16 = _jspx_th_html_text_16.doStartTag();
+    if (_jspx_th_html_text_16.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_16);
+      return true;
+    }
+    _jspx_tagPool_html_text_property_nobody.reuse(_jspx_th_html_text_16);
     return false;
   }
 
