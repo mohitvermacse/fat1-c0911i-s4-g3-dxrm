@@ -405,7 +405,17 @@ CREATE PROCEDURE UpdateUserExpired
 	AS
 	UPDATE users SET status='Free'
 	WHERE userName=@userName
+GO
 
+CREATE PROCEDURE CheckExistEmail
+	@email NVARCHAR(50)
+	AS
+	SELECT email FROM users WHERE email = @email
+GO
+CREATE PROCEDURE GetEmail
+	@userName NVARCHAR(50)
+	AS
+	SELECT email FROM users WHERE userName = @userName
 
 
 /*
@@ -421,3 +431,4 @@ select  distinct(userID) from receiveRequest where  actions= 'Approved'
 (select * from sendRequest where  status ='Approved')
 sr.status='Approved' 
 */
+
