@@ -19,7 +19,6 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
 
     private String userName;
     private String password;
-    
 
     /**
      *
@@ -40,20 +39,22 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
         UserAccess ua = new UserAccess();
-        
+
         if (getUserName() == null || getUserName().length() < 1) {
             errors.add("use", new ActionMessage("error.userName.requireds"));
-            // TODO: add 'error.name.required' key to your resources
         }
         if (getPassword() == null || getPassword().length() < 1) {
             errors.add("pas", new ActionMessage("error.password.requireds"));
-            // TODO: add 'error.name.required' key to your resources
         }
-            if (!ua.loginUser(userName, password)) {
-                errors.add("logUser", new ActionMessage("error.loginUser.requireds"));
-                // TODO: add 'error.name.required' key to your resources
-            }
+        if (!ua.loginUser(userName, password)) {
 
+            errors.add("logUser", new ActionMessage("error.loginUser.requireds"));
+        }
+        if (ua.checkUserExpired(userName)) {
+            if (ua.updateUserExpireDate(userName)) {
+                errors.add("userExpireDate", new ActionMessage("error.userExpireDate.invalid"));
+            }
+        }
         return errors;
     }
 
@@ -84,5 +85,4 @@ public class LoginForm extends org.apache.struts.action.ActionForm {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

@@ -7,6 +7,8 @@ package controller;
 import bean.StatBean;
 import bean.StatBus;
 import bean.UserAccess;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,14 +50,18 @@ public class StatistAction extends org.apache.struts.action.Action {
             stBe.setTodaySum(stBu.getTodayTotal());
             stBe.setMonthSum(stBu.getMonthTotal());
             if (form != null) {
-                StatistForm statsForm = (StatistForm) form;
-                stBe.setArrS(stBu.getCustomStats(statsForm.getStartDate(), statsForm.getEndDate()));
+                StatistForm sf = (StatistForm) form;
+                stBe.setArrS(stBu.getCustomStats(sf.getStartDate(), sf.getEndDate()));
 
-                String aDay = "Total new user of a day " + statsForm.getaDay() + " : " + ua.getTotalNewUserToday(statsForm.getaDay());
-                ArrayList arrayNewUser = (ArrayList) ua.getInforNewUserToday(statsForm.getaDay());
-                String aMonth = "Total new user of a month " + statsForm.getaMonth() + " : " + ua.getTotalNewUserAMonth(statsForm.getaMonth());
-                ArrayList arrayNewUserAmonth = (ArrayList) ua.getInforNewUserAMonth(statsForm.getaMonth());
-                String totalSystem = ua.getTotalUser();
+                String aDay = "Total new user of a day " + sf.getaDay() + " : " + ua.getTotalNewUserToday(sf.getaDay());
+                ArrayList arrayNewUser = (ArrayList) ua.getInforNewUserToday(sf.getaDay());
+
+                String aMonth = "Total new user of a month " + sf.getaMonth() + " : " + ua.getTotalNewUserAMonth(sf.getaMonth());
+             
+
+                ArrayList arrayNewUserAmonth = (ArrayList) ua.getInforNewUserAMonth(sf.getaMonth());
+
+                int totalSystem = ua.getTotalUser();
                 String totalfriend = ua.getAllUserHaveFriend();
                 request.setAttribute("friend", totalfriend);
                 request.setAttribute("total", totalSystem);
@@ -64,11 +70,12 @@ public class StatistAction extends org.apache.struts.action.Action {
                 request.setAttribute("listNewUser", arrayNewUser);
                 request.setAttribute("totalUser", aDay);
 
-                System.out.println("A Day: " + statsForm.getaDay());
+                System.out.println("A Day: " + sf.getaDay());
+                System.out.println("A Month: " + sf.getaMonth());
             }
             session.setAttribute("statBean", stBe);
         } catch (Exception e) {
-            System.out.println("" + e.getMessage());
+            System.out.println("Error Hi: " + e.getMessage());
         }
 
         return mapping.findForward(SUCCESS);

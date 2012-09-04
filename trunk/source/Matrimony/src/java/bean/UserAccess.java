@@ -224,42 +224,54 @@ public class UserAccess {
                 rs1 = ps.executeQuery();
                 while (rs1.next()) {
                     ps = con.prepareCall("{call GetInforUserById(?)}");
+
                     u.setImages(rs1.getString(2));
-                    u.setFullName(rs1.getString(3));
-                    u.setGender(rs1.getString(5));
-                    u.setCityName(rs1.getString(8));
-                    u.setCountryName(rs1.getString(9));
-                    u.setMaritalStatus(rs1.getString(10));
-                    u.setHeight(rs1.getInt(11));
-                    u.setLanguages(rs1.getString(12));
-                    u.setFamilyDetail(rs1.getString(13));
-                    u.setQualification(rs1.getString(14));
-                    u.setWorkingAt(rs1.getString(15));
-                    u.setHobbies(rs1.getString(16));
-                    u.setFavorite(rs1.getString(17));
-                    u.setMovies(rs1.getString(18));
-                    u.setCuisine(rs1.getString(19));
-                    u.setBook(rs1.getString(20));
+                    u.setUserName(rs1.getString(3));
+                    u.setFullName(rs1.getString(4));
+                    u.setAddress(rs1.getString(5));
+                    u.setGender(rs1.getString(6));
+                    u.setEmail(rs1.getString(7));
+                    u.setPhoneNumber(rs1.getString(8));
+                    u.setCityName(rs1.getString(9));
+                    u.setCountryName(rs1.getString(10));
+                    u.setMaritalStatus(rs1.getString(11));
+                    u.setHeight(rs1.getInt(12));
+                    u.setLanguages(rs1.getString(13));
+                    u.setCaste(rs1.getString(14));
+                    u.setFamilyDetail(rs1.getString(15));
+                    u.setQualification(rs1.getString(16));
+                    u.setWorkingAt(rs1.getString(17));
+                    u.setHobbies(rs1.getString(18));
+                    u.setFavorite(rs1.getString(19));
+                    u.setMovies(rs1.getString(20));
+                    u.setCuisine(rs1.getString(21));
+                    u.setBook(rs1.getString(22));
 
                     ps.setInt(1, u.getUserId());
                     rs2 = ps.executeQuery();
                     while (rs2.next()) {
+
                         u.setsImages(rs2.getString(2));
-                        u.setsFullName(rs2.getString(3));
-                        u.setsGender(rs2.getString(5));
-                        u.setsCityName(rs2.getString(8));
-                        u.setsCountryName(rs2.getString(9));
-                        u.setsMaritalStatus(rs2.getString(10));
-                        u.setsHeight(rs2.getInt(11));
-                        u.setsLanguages(rs2.getString(12));
-                        u.setsFamilyDetails(rs2.getString(13));
-                        u.setsQualification(rs2.getString(14));
-                        u.setsWorkingAt(rs2.getString(15));
-                        u.setsHobbies(rs2.getString(16));
-                        u.setsFavorite(rs2.getString(17));
-                        u.setsMovies(rs2.getString(18));
-                        u.setsCuisine(rs2.getString(19));
-                        u.setsBook(rs2.getString(20));
+                        u.setsUserName(rs2.getString(3));
+                        u.setsFullName(rs2.getString(4));
+                        u.setsAddress(rs2.getString(5));
+                        u.setsGender(rs2.getString(6));
+                        u.setsEmail(rs2.getString(7));
+                        u.setsPhoneNumber(rs2.getString(8));
+                        u.setsCityName(rs2.getString(9));
+                        u.setsCountryName(rs2.getString(10));
+                        u.setsMaritalStatus(rs2.getString(11));
+                        u.setsHeight(rs2.getInt(12));
+                        u.setsLanguages(rs2.getString(13));
+                        u.setsCaste(rs2.getString(14));
+                        u.setsFamilyDetail(rs2.getString(15));
+                        u.setsQualification(rs2.getString(16));
+                        u.setsWorkingAt(rs2.getString(17));
+                        u.setsHobbies(rs2.getString(18));
+                        u.setsFavorite(rs2.getString(19));
+                        u.setsMovies(rs2.getString(20));
+                        u.setsCuisine(rs2.getString(21));
+                        u.setsBook(rs2.getString(22));
                         array.add(u);
                     }
                 }
@@ -416,33 +428,37 @@ public class UserAccess {
             ps.setInt(1, _userId);
             rs = ps.executeQuery();
             while (rs.next()) {
+
                 User u = new User();
+
                 u.setUserId(rs.getInt(1));
                 u.setImages(rs.getString(2));
-                u.setFullName(rs.getString(3));
-                u.setAddress(rs.getString(4));
-                u.setGender(rs.getString(5));
-                u.setEmail(rs.getString(6));
-                u.setPhoneNumber(rs.getString(7));
-                u.setCityName(rs.getString(8));
-                u.setCountryName(rs.getString(8));
-                u.setMaritalStatus(rs.getString(9));
-                u.setHeight(rs.getInt(10));
-                u.setLanguages(rs.getString(11));
-                u.setCaste(rs.getString(12));
-                u.setFamilyDetail(rs.getString(13));
-                u.setQualification(rs.getString(14));
-                u.setWorkingAt(rs.getString(15));
-                u.setHobbies(rs.getString(16));
-                u.setFavorite(rs.getString(17));
-                u.setMovies(rs.getString(18));
-                u.setCuisine(rs.getString(19));
-                u.setBook(rs.getString(10));
+                u.setUserName(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setAddress(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setEmail(rs.getString(7));
+                u.setPhoneNumber(rs.getString(8));
+                u.setCityName(rs.getString(9));
+                u.setCountryName(rs.getString(10));
+                u.setMaritalStatus(rs.getString(11));
+                u.setHeight(rs.getInt(12));
+                u.setLanguages(rs.getString(13));
+                u.setCaste(rs.getString(14));
+                u.setFamilyDetail(rs.getString(15));
+                u.setQualification(rs.getString(16));
+                u.setWorkingAt(rs.getString(17));
+                u.setHobbies(rs.getString(18));
+                u.setFavorite(rs.getString(19));
+                u.setMovies(rs.getString(20));
+                u.setCuisine(rs.getString(21));
+                u.setBook(rs.getString(22));
+
                 array.add(u);
             }
 
         } catch (SQLException e) {
-            System.out.println("Not found infomation of user. Please try again." + e.getMessage());
+            System.out.println("Not found infomation of user. Please try again. " + e.getMessage());
         }
         return array;
     }
@@ -471,18 +487,16 @@ public class UserAccess {
      * Count all user of system
      */
 
-    public String getTotalUser() {
-        String total = null;
+    public int getTotalUser() {
+        int total = 0;
         try {
             con = db.getConnect();
             ps = con.prepareCall("{call TotalUser}");
             rs = ps.executeQuery();
             while (rs.next()) {
-                total = rs.getString(1);
+                total = rs.getInt(1);
             }
-            db.closeConnect();
-            rs.close();
-            ps.close();
+            
         } catch (SQLException e) {
             System.out.println("System have not user.");
         }
@@ -671,9 +685,7 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getString(1);
             }
-            rs.close();
-            ps.close();
-            db.closeConnect();
+            
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -699,14 +711,13 @@ public class UserAccess {
             while (rs.next()) {
                 User u = new User();
                 u.setUserId(rs.getInt(1));
-                u.setImages(rs.getString(2));
-                u.setFullName(rs.getString(3));
-                u.setEmail(rs.getString(4));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setEmail(rs.getString(5));
                 array.add(u);
             }
-            rs.close();
-            ps.close();
-            db.closeConnect();
+            
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -735,9 +746,7 @@ public class UserAccess {
             if (rs.next()) {
                 total = rs.getString(1);
             }
-            rs.close();
-            ps.close();
-            db.closeConnect();
+           
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -766,14 +775,13 @@ public class UserAccess {
             while (rs.next()) {
                 User u = new User();
                 u.setUserId(rs.getInt(1));
-                u.setImages(rs.getString(2));
-                u.setFullName(rs.getString(3));
-                u.setEmail(rs.getString(4));
+                u.setUserName(rs.getString(2));
+                u.setImages(rs.getString(3));
+                u.setFullName(rs.getString(4));
+                u.setEmail(rs.getString(5));
                 array.add(u);
             }
-            rs.close();
-            ps.close();
-            db.closeConnect();
+           
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -1187,5 +1195,23 @@ public class UserAccess {
         } catch (SQLException e) {
         }
         return array;
+    }
+    /*
+     * 
+     */
+
+    public boolean updateUserExpireDate(String _userName) {
+        try {
+            con = db.getConnect();
+            ps = con.prepareCall("{call UpdateUserExpired(?)}");
+            ps.setString(1, _userName);
+            int check = ps.executeUpdate();
+            if (check > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("update fail! Please try again. " + e.getMessage());
+        }
+        return false;
     }
 }

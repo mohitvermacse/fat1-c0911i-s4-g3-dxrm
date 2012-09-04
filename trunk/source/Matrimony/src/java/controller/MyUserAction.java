@@ -59,6 +59,7 @@ public class MyUserAction extends org.apache.struts.action.Action {
                 if (ua.checkTwoUserFriend(yourId, Integer.parseInt(friendId))) {
                     ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
                     request.setAttribute("information", arrayInfor);
+                    System.out.println("Friend ID: " + friendId +"\n Size Infor: "+ arrayInfor.size());
                     return mapping.findForward("infor");
                 } else {
                     ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
@@ -67,6 +68,7 @@ public class MyUserAction extends org.apache.struts.action.Action {
                     request.setAttribute("listReceive", arrayRequest);
                     request.setAttribute("userName", userName);
                     request.setAttribute("status", " You do not have this permission");
+                    System.out.println("Friend ID 1: " + friendId);
                     return mapping.findForward("user");
                 }
             }

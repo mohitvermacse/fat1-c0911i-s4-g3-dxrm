@@ -36,31 +36,35 @@ public class HomeServlet extends HttpServlet {
             /* TODO output your page here*/
             HttpSession session = request.getSession();
             UserAccess ua = new UserAccess();
-
-            ArrayList allUser = (ArrayList) ua.displayAllUser();
-            session.setAttribute("allUser", allUser);
-            request.setAttribute("allUser", allUser);
-
-            RequestDispatcher dis = request.getRequestDispatcher("homepage.jsp");
-            dis.forward(request, response);
-            int id = Integer.parseInt(request.getParameter("id"));
-            int user = Integer.parseInt(session.getAttribute("userName").toString());
-            int idUser = Integer.parseInt(session.getAttribute("idUser").toString());
-
-            if (ua.checkTwoUserFriend(id, idUser)) {
-                ArrayList infor = (ArrayList) ua.getInforUserByID(id);
-                request.setAttribute("information", infor);
-                RequestDispatcher di = request.getRequestDispatcher("infor.jsp");
-                di.forward(request, response);
-            } else {
-//                ArrayList allUser = (ArrayList) ua.displayAllUser();
+           // String userName = session.getAttribute("userName").toString();
+           // if (session.getAttribute("userName") == null) {
+                ArrayList allUser = (ArrayList) ua.displayAllUser();
                 session.setAttribute("allUser", allUser);
                 request.setAttribute("allUser", allUser);
-                request.setAttribute("status", " You do not have this permission");
-                RequestDispatcher di = request.getRequestDispatcher("homepage.jsp");
-                di.forward(request, response);
-            }
 
+                RequestDispatcher dis = request.getRequestDispatcher("homepage.jsp");
+                dis.forward(request, response);
+          //  } else {
+                             
+                int id = Integer.parseInt(request.getParameter("id"));
+                int idUser = Integer.parseInt(session.getAttribute("idUser").toString());
+                if (ua.checkTwoUserFriend(id, idUser)) {
+                    System.out.println("ID: " + id);
+                    ArrayList infor = (ArrayList) ua.getInforUserByID(id);
+                    request.setAttribute("information", infor);
+                    RequestDispatcher di = request.getRequestDispatcher("infor.jsp");
+                    di.forward(request, response);
+                } else {
+                 //   ArrayList allUser = (ArrayList) ua.displayAllUser();
+                    System.out.println("ID 1: " + id);
+
+                    session.setAttribute("allUser", allUser);
+                    request.setAttribute("allUser", allUser);
+                    request.setAttribute("status", " You do not have this permission");
+                    RequestDispatcher di = request.getRequestDispatcher("login.jsp");
+                    di.forward(request, response);
+                }
+           // }
         } finally {
             out.close();
         }
