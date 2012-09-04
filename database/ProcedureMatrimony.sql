@@ -114,13 +114,11 @@ CREATE PROCEDURE GetInforUserSendByUserID
 	FROM users AS u inner join images AS i ON u.userID=i.userID
 	WHERE u.userID=@sendUserID
 Go
-/*        Select information of a user 
-drop procedure GetInforUserById
-        */
+/*        Select information of a user drop procedure GetInforUserById'2'        */
 CREATE PROCEDURE GetInforUserById /*'4'*/
 	@userId int 
 	AS
-	SELECT u.userID,i.images,u.fullName,u.address,u.gender,u.email,u.phoneNumber,c.cityName,ct.countryName,u.maritalStatus,u.height,u.languages
+	SELECT u.userID,i.images,u.userName,u.fullName,u.address,u.gender,u.email,u.phoneNumber,c.cityName,ct.countryName,u.maritalStatus,u.height,u.languages
 		  ,u.caste,u.familyDetails,u.qualification,u.workingAt,u.hobbies,u.favoriteMusic,u.movies,u.cuisine,u.books
 	FROM images AS i INNER JOIN users AS u  ON u.userID=i.userId INNER JOIN city AS c ON u.cityID=c.cityID INNER JOIN country
 	AS ct ON c.countryID=ct.countryID
@@ -181,27 +179,27 @@ CREATE PROCEDURE TotalNewUserToday/*'7/13/2012 0:00:00','7/13/2012 23:59:59'*/
 	AS
 	select COUNT(*) FROM users WHERE status!='Free'AND registerDate BETWEEN @date AND @date1
 GO
-/*        Select Infor of new users a today  drop procedure  InforNewUserToday       */
-CREATE PROCEDURE InforNewUserToday/*'08/28/2012 0:00:00','08/28/2012 23:59:59'*/
+/*        Select Infor of new users a today  drop procedure  InforNewUserToday'08/28/2012 0:00:00','08/28/2012 23:59:59'       */
+CREATE PROCEDURE InforNewUserToday
 	@date NVARCHAR(50),
 	@date1 NVARCHAR(50)	
 	AS
-	SELECT u.userID,i.images, u.fullName,u.email FROM users AS u INNER JOIN images AS i	ON u.userID = i.userID 
+	SELECT u.userID,u.userName,i.images, u.fullName,u.email FROM users AS u INNER JOIN images AS i	ON u.userID = i.userID 
 	where u.status!='Free' AND i.imageID=avatar AND u.registerDate BETWEEN @date AND @date1
 GO
-/*        Total new user by month drop procedure TotalNewUserMonth       */
+/*        Total new user by month drop procedure TotalNewUserMonth'8','2012'       */
 CREATE PROCEDURE TotalNewUserMonth/*'8','2012'*/
 	@month NVARCHAR(50),
 	@year NVARCHAR(50)
 	AS
 	select COUNT(*) FROM users WHERE registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+'' AND status!='Free'
 GO
-/*        Select infor of new user a month   drop procedure InforNewUserAMonth      */
-CREATE PROCEDURE InforNewUserAMonth/*'8','2012'*/
+/*        Select infor of new user a month   drop procedure InforNewUserAMonth'8','2012'      */
+CREATE PROCEDURE InforNewUserAMonth
 	@month NVARCHAR(50),
 	@year NVARCHAR(50)
 	AS
-	select u.userID,i.images, u.fullName,u.email  FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
+	select u.userID,u.userName,i.images, u.fullName,u.email  FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
 	WHERE u.status!='Free' AND i.imageID=avatar AND registerDate >= ''+@month+''+'/1/'+''+@year+'' and registerDate <=''+@month+''+'/30/'+''+@year+''
 GO
 /*        Insert user        */
@@ -269,8 +267,8 @@ CREATE PROCEDURE CheckOldPassword
 	SELECT * FROM users WHERE userName=@userName AND password=@password
 GO
 
-/*        Get total money of system        */
-CREATE PROC GetCustomPayment/* '08/16/2012 0:00:00','08/17/2012 23:59:59'*/
+/*        Get total money of system GetCustomPayment'08/16/2012 0:00:00','09/4/2012 23:59:59'       */
+CREATE PROC GetCustomPayment
 	@date1 nvarchar(50),
 	@date2 nvarchar(50)
 	AS
@@ -324,7 +322,7 @@ CREATE PROCEDURE GetAllUserExpired
 	AS
 	SELECT u.userID,i.images,u.fullName,u.address,u.email,u.phoneNumber,u.registerDate,u.expireDate,u.userName
 	FROM users AS u INNER JOIN images AS i ON u.userID = i.userID
-	WHERE  i.imageID=u.avatar AND DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>0
+	WHERE i.imageID=u.avatar AND  DATEDIFF(dayofyear,getDate(), expireDate )<=5 AND DATEDIFF(dayofyear,getDate(), expireDate )>=0
 
 GO
 /*        Check user expired  drop procedure CheckUserExpired'chiennv'    */
@@ -333,7 +331,7 @@ CREATE PROCEDURE CheckUserExpired
 	@userName NVARCHAR(50)
 	AS
 	SELECT * FROM users
-	WHERE userName=@userName AND DATEDIFF(dayofyear,getDate(), expireDate )<=0
+	WHERE userName=@userName AND DATEDIFF(dayofyear,getDate(), expireDate )<0
 
 Go
 /*        Check two user is friend DROP PROCEDURE CheckTwoUserFriend'3','2'      */
@@ -400,6 +398,16 @@ CREATE PROCEDURE SearchUserByCity
 	FROM users AS u INNER JOIN city AS c ON u.cityID = c.cityID INNER JOIN images AS i ON u.userID = i.userID
 	WHERE c.cityName=@cityName AND status ='Paid'
 GO
+/*        Update user expireDate DROP PROCEDURE UpdateUserExpired'chiennv'        */ 
+GO
+CREATE PROCEDURE UpdateUserExpired
+	@userName NVARCHAR(50)
+	AS
+	UPDATE users SET status='Free'
+	WHERE userName=@userName
+
+
+
 /*
 select cityName from city
 drop procedure CheckUserExpired
@@ -413,4 +421,3 @@ select  distinct(userID) from receiveRequest where  actions= 'Approved'
 (select * from sendRequest where  status ='Approved')
 sr.status='Approved' 
 */
-
