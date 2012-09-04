@@ -145,10 +145,10 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
             errors.add("passwordNotMatch", new ActionMessage("error.password.reType"));
             return errors;
         }
-        if (!v.checkFirstName(fullName)) {
+        /*if (!v.checkFirstName(fullName)) {
             errors.add("fullNameError", new ActionMessage("error.fullNameError.required"));
             return errors;
-        }
+        }*/
         if (getAddress() == null || getAddress().length() < 5) {
             errors.add("addressError", new ActionMessage("error.Address.required"));
             return errors;
@@ -170,10 +170,10 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
         } catch (ParseException ex) {
             Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*if (!userManager.checkEmail(email)) {
+        if (!userManager.checkEmail(email)) {
             errors.add("emailExisted", new ActionMessage("errors.emailExisted.existed"));
             return errors;
-        }      */  
+        }  
         if (!v.isValidEmailAddress(email)) {
             errors.add("invalidEmail", new ActionMessage("error.invalidEmail.invalid"));
         }
