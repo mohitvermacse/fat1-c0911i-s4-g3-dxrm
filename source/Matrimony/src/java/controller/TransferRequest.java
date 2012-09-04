@@ -41,8 +41,7 @@ public class TransferRequest extends HttpServlet {
         try {
             UserAccess ua = new UserAccess();
             String action;
-            action = request.getParameter("action");
-////         
+            action = request.getParameter("action");         
             if (action != null) {
 
                 if (action.equalsIgnoreCase("Transfer")) {
@@ -98,24 +97,24 @@ public class TransferRequest extends HttpServlet {
 
                     }
 
-                } else if (action.equalsIgnoreCase("Request Transfer")) {
+                } else if (action.equalsIgnoreCase("Display All Transfer")) {
 
                     ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
                     ArrayList listRequestTransfer = (ArrayList) ua.getAllReceveRequestTransfer("Transfer");
                     request.setAttribute("listTransfer", listRequestPending);
                     request.setAttribute("listRequestTransfer", listRequestTransfer);
 
-                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    RequestDispatcher di = request.getRequestDispatcher("transfer.jsp");
                     di.forward(request, response);
 
-                } else if (action.equalsIgnoreCase("Request Approved")) {
+                } else if (action.equalsIgnoreCase("Display All Approved")) {
 
                     ArrayList listRequestPending = (ArrayList) ua.getAllReceveRequestTransfer("Pending");
                     ArrayList listRequestApproved = (ArrayList) ua.getAllReceveRequestTransfer("Approved");
                     request.setAttribute("listTransfer", listRequestPending);
                     request.setAttribute("listRequestApproved", listRequestApproved);
 
-                    RequestDispatcher di = request.getRequestDispatcher("transferRequest.jsp");
+                    RequestDispatcher di = request.getRequestDispatcher("transfer.jsp");
                     di.forward(request, response);
 
                 }

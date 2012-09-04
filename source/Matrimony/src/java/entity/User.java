@@ -44,6 +44,7 @@ public class User {
     private String cityName;
     private String countryName;
     private String birthDay;
+    private String sUserName,sAddress,sEmail,sPhoneNumber,sCaste,sFamilyDetail;
     private String sFullName;
     private String sGender;
     private String sMaritalStatus;
@@ -794,5 +795,89 @@ public class User {
      */
     public void setBirthDays(Date birthDays) {
         this.birthDays = birthDays;
+    }
+
+    /**
+     * @return the sUserName
+     */
+    public String getsUserName() {
+        return sUserName;
+    }
+
+    /**
+     * @param sUserName the sUserName to set
+     */
+    public void setsUserName(String sUserName) {
+        this.sUserName = sUserName;
+    }
+
+    /**
+     * @return the sAddress
+     */
+    public String getsAddress() {
+        return sAddress;
+    }
+
+    /**
+     * @param sAddress the sAddress to set
+     */
+    public void setsAddress(String sAddress) {
+        this.sAddress = sAddress;
+    }
+
+    /**
+     * @return the sEmail
+     */
+    public String getsEmail() {
+        return sEmail;
+    }
+
+    /**
+     * @param sEmail the sEmail to set
+     */
+    public void setsEmail(String sEmail) {
+        this.sEmail = sEmail;
+    }
+
+    /**
+     * @return the sPhoneNumber
+     */
+    public String getsPhoneNumber() {
+        return sPhoneNumber;
+    }
+
+    /**
+     * @param sPhoneNumber the sPhoneNumber to set
+     */
+    public void setsPhoneNumber(String sPhoneNumber) {
+        this.sPhoneNumber = sPhoneNumber;
+    }
+
+    /**
+     * @return the sCaste
+     */
+    public String getsCaste() {
+        return sCaste;
+    }
+
+    /**
+     * @param sCaste the sCaste to set
+     */
+    public void setsCaste(String sCaste) {
+        this.sCaste = sCaste;
+    }
+
+    /**
+     * @return the sFamilyDetail
+     */
+    public String getsFamilyDetail() {
+        return sFamilyDetail;
+    }
+
+    /**
+     * @param sFamilyDetail the sFamilyDetail to set
+     */
+    public void setsFamilyDetail(String sFamilyDetail) {
+        this.sFamilyDetail = sFamilyDetail;
     }
 }

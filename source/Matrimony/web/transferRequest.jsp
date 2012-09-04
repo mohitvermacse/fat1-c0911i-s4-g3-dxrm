@@ -71,10 +71,15 @@
                             <input type="checkbox" name="list" value="${t.receiverId}"/>
                         </td><td align="center">
                             <a href="InforServlet?id=${t.sendUserId}">
-                                <img src=".${t.images}" height="40px" width="35px"/>${t.fullName}
+                                <img src=".${t.images}" height="40px" width="35px"/>${t.userName}
                                 <input type="hidden" name="receiveID" value="${t.receiverId}"/>
                             </a>
-                        </td> <td align="center">${t.content}</td> <td align="center"><img src=".${t.sImages}" height="45px" width="40px"/>${t.sFullName}</td> 
+                        </td> <td align="center">${t.content}</td> 
+                        <td align="center">
+                            <a href="InforServlet?id=${t.userId}">
+                                <img src=".${t.sImages}" height="45px" width="40px"/>${t.sUserName}
+                            </a>
+                        </td> 
                     </tr>
                 </c:forEach>
             </table>
@@ -89,11 +94,16 @@
                         <tr>
                             <td align="center">
                                 <a href="InforServlet?id=${t.sendUserId}" style="font: underLine ">
-                                    <img src=".${t.images}"  height="45px" width="40px"/>${t.fullName}
+                                    <img src=".${t.images}"  height="45px" width="40px"/>${t.userName}
                                 </a>
                                 <input type="hidden" name="receiveID" value="${t.receiverId}"/></td>
                             <td align="center">${t.content}</td>
-                            <td align="center"><img src=".${t.sImages}"  height="45px" width="40px"/>${t.sFullName}</td>
+                            <td align="center">
+                                <a href="InforServlet?id=${t.userId}">
+                                    <img src=".${t.sImages}"  height="45px" width="40px"/>${t.sUserName}
+                                </a>
+                            </td>
+
                         </tr>
                     </form>
                 </c:forEach>
@@ -109,12 +119,16 @@
                         <tr>
                             <td align="center">
                                 <a href="InforServlet?id=${t.sendUserId}" style="font: underLine ">
-                                    <img src=".${t.images}"  height="45px" width="40px"/>${t.fullName}
+                                    <img src=".${t.images}"  height="45px" width="40px"/>${t.userName}
                                 </a>
                                 <input type="hidden" name="receiveID" value="${t.receiverId}"/>
                             </td>                               
                             <td align="center">${t.content}</td>
-                            <td align="center"><img src=".${t.sImages}"  height="45px" width="40px"/>${t.sFullName}</td>           
+                            <td align="center">
+                                <a href="InforServlet?id=${t.userId}">
+                                    <img src=".${t.sImages}"  height="45px" width="40px"/>${t.sUserName}
+                                </a>
+                            </td>           
                         </tr>
                     </form>
                 </c:forEach>

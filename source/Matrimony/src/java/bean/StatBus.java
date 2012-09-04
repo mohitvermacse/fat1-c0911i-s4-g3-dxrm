@@ -29,8 +29,7 @@ public class StatBus {
         System.out.print("date" +strDate);
         int amount = 0;
         try {
-            ps = da.getConnect().prepareCall("{call GetSum(?,?)}");
-            //ps = da.getConnect().prepareStatement("SELECT sum(p.amount) AS TotalMoney FROM premium as p inner join transactions as t	on t.premiumID=p.premiumID WHERE t.dates BETWEEN ? AND ?");
+            ps = da.getConnect().prepareCall("{call GetSum(?,?)}");          
             ps.setString(1, strDate + " 0:00:00");
             ps.setString(2, strDate + " 23:59:59");
             rs = ps.executeQuery();
@@ -40,7 +39,7 @@ public class StatBus {
             ps.close();
             da.closeConnect();
         } catch (SQLException ex) {
-            Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Not found customer today. "+ ex.getMessage());
         }
         return amount;
     }
@@ -61,7 +60,7 @@ public class StatBus {
             ps.close();
             da.closeConnect();
         } catch (SQLException ex) {
-            Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+           System.out.println("Not found customer month. "+ ex.getMessage());
         }
         return amount;
     }
@@ -80,7 +79,7 @@ public class StatBus {
             ps.close();
             da.closeConnect();
         } catch (SQLException ex) {
-            Logger.getLogger(StatBean.class.getName()).log(Level.SEVERE, null, ex);
+           System.out.println("Not found customer customdate. "+ ex.getMessage());
         }
         return arrCS;
     }

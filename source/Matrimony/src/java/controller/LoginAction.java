@@ -45,7 +45,7 @@ public class LoginAction extends org.apache.struts.action.Action {
         String user = from.getUserName();
         String pas = from.getPassword();
         System.out.println(user + "\n" + pas);
-        try {
+        try {            
             if (ua.loginUser(user, pas)) {
                 int id = ua.getIdUserByUserName(user);
                 ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(id);

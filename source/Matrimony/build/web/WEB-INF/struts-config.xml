@@ -25,9 +25,7 @@
         <form-bean name="ControllerAdminForm" type="controllerAdmin.ControllerAdminForm"/>
         <form-bean name="logAdminForm" type="controllerAdmin.logAdminForm"/>
         <form-bean name="StatistForm" type="controller.StatistForm"/>
-        <form-bean name="PhotoForm" type="controller.PhotoForm"/>
-        
-       
+        <form-bean name="PhotoForm" type="controller.PhotoForm"/>      
     </form-beans>
     
     <global-exceptions>
@@ -48,9 +46,7 @@
             <forward name="user" path="/myUser.jsp"/>
             <forward name="infor" path="/infor.jsp"/>           
         </action>
-        <action input="/statistic.jsp" name="StatisticForm" path="/StatisticAction" scope="session" type="controller.StatisticAction">
-            <forward name="sta" path="/statistic.jsp"/>
-        </action>
+       
         <action input="/changePassword.jsp" name="ChangePasswordForm" path="/ChangePasswordAction" scope="session" type="controller.ChangePasswordAction">
             <forward name="login" path="/login.jsp"/>
         </action>
@@ -89,9 +85,9 @@
         <action input="/statist.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction">
             <forward name="sta" path="/statist.jsp"/>
         </action>
-        <action input="/admin/loginAdmin.jsp" name="logAdminForm" path="/LogAdminAction" scope="session" type="controllerAdmin.LogAdminAction">
-            <forward name="homeAdmin" path="/admin/controller.jsp"/>
-            <forward name="error" path="/admin/loginAdmin.jsp"/>            
+        <action input="/loginAdmin.jsp" name="logAdminForm" path="/LogAdminAction" scope="session" type="controllerAdmin.LogAdminAction">
+            <forward name="homeAdmin" path="/controller.jsp"/>
+            <forward name="error" path="/loginAdmin.jsp"/>            
         </action>
         <action path="/RegisterTemp" type="controller.RegisterTemp">
             <forward name="register" path="/register.jsp"/>
@@ -102,13 +98,13 @@
         <action path="/PremiumTemp" type="controller.PremiumTemp">
             <forward name="premium" path="/premium.jsp"/>
         </action>
-        <action input="/admin/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
-            <forward name="expired" path="/admin/expired.jsp"/>
-            <forward name="transfer" path="/transferRequest.jsp"/>
+        <action input="/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
+            <forward name="expired" path="/expired.jsp"/>
+            <forward name="transfer" path="/transfer.jsp"/>
             <forward name="statistic" path="/statist.jsp"/>               
         </action>
-        <action input="/admin/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction">
-            <forward name="success" path="/admin/expired.jsp"/>              
+        <action input="/expired.jsp" name="ExpireForm" path="/ExpireAction" scope="session" type="controllerAdmin.ExpireAction">
+            <forward name="success" path="/expired.jsp"/>              
         </action>
         <action input="/forgotPassword.jsp" name="ForgotPasswordForm" path="/ForgotPasswordAction" scope="session" type="controller.ForgotPasswordAction">
             <forward name="success" path="/login.jsp"/>
