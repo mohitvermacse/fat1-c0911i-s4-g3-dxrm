@@ -14,33 +14,30 @@
 
 <html:html lang="true">
     <head>      
-        <title>Matrimony</title>      
+        <title>Admin Login</title>
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/structure.css">
     </head>
-    <body style="background-color: white">
-        <html:form action="LogAdminAction" method="POST">
-            <table>
-                <tr>
-                    <td align="right">UserName:</td>
-                    <td align="left"> <html:text property="userName"/></td>
-                    <td><div style="color: red"> <html:errors property="use"/></div></td>
-                </tr>
-                <tr>
-                    <td align="right">Password:</td>
-                    <td align="left"><html:password property="password"/></td>
-                    <td><div style="color: red"><html:errors property="pas"/></div></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="left">
-                        <html:submit value="Log in"/>
-                        <html:submit value="Log out"/>
-                    </td>
-                </tr>
-            </table> 
-            <div style="color: red"> 
+    <body>
+        <html:form action="LogAdminAction" method="POST" styleClass="box login">
+            <fieldset class="boxBody">
+                <label>Username</label>
+                <html:text property="userName"/>
+                <label>Password</label>
+                <html:password property="password"/> 	  
+            </fieldset>
+            <footer>
+                <html:submit value="Login" styleClass="btnLogin"/>
+                <div style="color: red"> 
+                    <div style="color: red"> <html:errors property="use"/> </div>
+                    <div style="color: red"><html:errors property="pas"/></div>
+                    <html:errors property="logUser"/>
+                </div>
+            </footer>            
 
-                <html:errors property="logUser"/>
-            </div>     
         </html:form>
+        <footer id="main">
+            Chim to vcl
+        </footer>
     </body>
 </html:html>
