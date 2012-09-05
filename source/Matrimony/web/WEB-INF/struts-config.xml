@@ -98,6 +98,9 @@
         <action path="/PremiumTemp" type="controller.PremiumTemp">
             <forward name="premium" path="/premium.jsp"/>
         </action>
+        <action path="/FriendTemp" type="controller.FriendTemp">
+            <forward name="friend" path="/friendList.jsp"/>
+        </action>
         <action input="/controller.jsp" name="ControllerAdminForm" path="/ControllerAdminAction" scope="session" type="controllerAdmin.ControllerAdminAction">
             <forward name="expired" path="/expired.jsp"/>
             <forward name="transfer" path="/transfer.jsp"/>

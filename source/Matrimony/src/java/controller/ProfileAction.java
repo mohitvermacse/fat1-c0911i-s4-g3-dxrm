@@ -39,6 +39,7 @@ public class ProfileAction extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(false);
+        int userID = Integer.parseInt(session.getAttribute("idUser").toString());
         UserManager userManager = new UserManager();
         ProfileForm profileForm = (ProfileForm) form;
         
@@ -50,8 +51,14 @@ public class ProfileAction extends org.apache.struts.action.Action {
         String phoneNumber = profileForm.getPhoneNumber();
         String maritalStatus = profileForm.getMaritalStatus();
         int height = Integer.parseInt(profileForm.getHeight());
-        String countryName = profileForm.getCountryName();
+        String countryID = profileForm.getCountryID();
         String cityName = profileForm.getCityName();
+        if(countryID.equalsIgnoreCase("empty")) {
+            countryID = profileForm.getCountryIDTemp();
+        }
+        if(cityName.equalsIgnoreCase("empty")) {
+            cityName = "" + userManager.getCityID(profileForm.getCityNameTemp());
+        }
         String languages = profileForm.getLanguages();
         String caste = profileForm.getCaste();
         String familyDetails = profileForm.getFamilyDetails();
@@ -62,7 +69,7 @@ public class ProfileAction extends org.apache.struts.action.Action {
         String movies = profileForm.getMovies();
         String cuisine = profileForm.getCuisine();
         String books = profileForm.getBooks();
-        boolean flag = userManager.updateProfile(3, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryName, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books);
+        boolean flag = userManager.updateProfile(userID, fullName, address, gender, birthDay, email, phoneNumber, maritalStatus, height, countryID, cityName, languages, caste, familyDetails, qualification, workingAt, hobbies, favoriteMusic, movies, cuisine, books);
         if(flag) {
             userManager.fillCityList();
             userManager.fillCountryList();

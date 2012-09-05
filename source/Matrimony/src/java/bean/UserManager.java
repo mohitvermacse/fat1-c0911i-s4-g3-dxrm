@@ -23,6 +23,7 @@ public class UserManager {
     ArrayList cityList = new ArrayList();
     ArrayList countryList = new ArrayList();
     ArrayList premiumPlans = new ArrayList();
+    ArrayList friendList = new ArrayList();
     ConnectDB db = new ConnectDB();
 
     public boolean addNewUser(String userName, String password, int avatar, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
@@ -84,6 +85,7 @@ public class UserManager {
                 user.setUserId(rs.getInt(1));
                 user.setUserName(rs.getString(2));
                 user.setPassword(db.md5(rs.getString(3)));
+                user.setAvatarLink(getImageLink(rs.getInt(4), rs.getString(7)));
                 user.setFullName(rs.getString(5));
                 user.setAddress(rs.getString(6));
                 user.setGender(rs.getString(7));
@@ -92,7 +94,7 @@ public class UserManager {
                 user.setPhoneNumber(rs.getString(10));
                 user.setMaritalStatus(rs.getString(11));
                 user.setHeight(rs.getInt(12));
-                user.setCountryName(getCountryName(rs.getInt(13)));
+                user.setCountryName(getCountryName(rs.getString(13)));
                 user.setCityName(getCityName(rs.getInt(14)));
                 user.setLanguages(rs.getString(15));
                 user.setCaste(rs.getString(16));
@@ -119,12 +121,81 @@ public class UserManager {
         }
         return flag;
     }
+    
+    public boolean fillFriendList(int userID) {
+        conn = new ConnectDB();
+        String action = "Approved";
+        boolean flag = false;
+        try {
+            String procedure = "{call GetRequestFriends(?, ?)}";
+            PreparedStatement prs = conn.getConnect().prepareCall(procedure);
+            prs.setInt(1, userID);
+            prs.setString(2, action);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setGender(rs.getString(3));
+                /*if (rs.getInt(4) == 0) {
+                    if (rs.getString(3).equalsIgnoreCase("Male")) {
+                        user.setAvatarImage("img/male.gif");
+                    } else {
+                        user.setAvatarImage("img/female.gif");
+                    }
+                } else {
+                    user.setAvatarImage(getImageLink(rs.getInt(4), rs.getString(3)));
+                }*/
+                user.setAvatarLink(getImageLink(rs.getInt(4), rs.getString(3)));
+                friendList.add(user);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+            flag = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            flag = false;
+        }
+        try {
+            String procedure = "{call GetReceiveFriends(?, ?)}";
+            PreparedStatement prs = conn.getConnect().prepareCall(procedure);
+            prs.setInt(1, userID);
+            prs.setString(2, action);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setGender(rs.getString(3));
+                /*if (rs.getInt(4) == 0) {
+                    if (rs.getString(3).equalsIgnoreCase("Male")) {
+                        user.setAvatarImage("img/male.gif");
+                    } else {
+                        user.setAvatarImage("img/female.gif");
+                    }
+                } else {
+                    
+                }*/
+                user.setAvatarLink(getImageLink(rs.getInt(4), rs.getString(3)));
+                friendList.add(user);
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+            flag = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            flag = false;
+        }
+        return flag;
+    }
 
-    public boolean updateProfile(int userID, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
+    public boolean updateProfile(int userID, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryID, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books) {
         boolean flag = false;
         conn = new ConnectDB();
-        int cityID = getCityID(cityName);
-        int countryID = getCountryID(countryName);
+        int cityID = Integer.parseInt(cityName);
+        //String countryID = getCountryID(countryName);
         try {
             String query = "UPDATE users SET fullName = ?, address = ?, gender = ?, birthDay = ?, email = ?, phoneNumber = ?, maritalStatus = ?, height = ?, countryID = ?, cityID = ?, languages = ?, caste = ?, familyDetails = ?, qualification = ?, workingAt = ?, hobbies = ?, favoriteMusic = ?, movies = ?, cuisine = ?, books = ? WHERE userID = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
@@ -136,7 +207,7 @@ public class UserManager {
             prs.setString(6, phoneNumber);
             prs.setString(7, maritalStatus);
             prs.setInt(8, height);
-            prs.setInt(9, countryID);
+            prs.setString(9, countryID);
             prs.setInt(10, cityID);
             prs.setString(11, languages);
             prs.setString(12, caste);
@@ -394,16 +465,16 @@ public class UserManager {
         }
     }
 
-    public int getCountryID(String countryName) {
+    public String getCountryID(String countryName) {
         conn = new ConnectDB();
-        int countryID = 0;
+        String countryID = "";
         try {
             String query = "SELECT countryID FROM country WHERE countryName = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
             prs.setString(1, countryName);
             ResultSet rs = prs.executeQuery();
             if (rs.next()) {
-                countryID = rs.getInt(1);
+                countryID = rs.getString(1);
             }
             prs.close();
             rs.close();
@@ -414,13 +485,13 @@ public class UserManager {
         return countryID;
     }
 
-    public String getCountryName(int countryID) {
+    public String getCountryName(String countryID) {
         conn = new ConnectDB();
         String countryName = "";
         try {
             String query = "SELECT countryName FROM country WHERE countryID = ?";
             PreparedStatement prs = conn.getConnect().prepareStatement(query);
-            prs.setInt(1, countryID);
+            prs.setString(1, countryID);
             ResultSet rs = prs.executeQuery();
             if (rs.next()) {
                 countryName = rs.getString(1);
@@ -432,6 +503,32 @@ public class UserManager {
             ex.printStackTrace();
         }
         return countryName;
+    }
+    
+    public String getImageLink(int imageID, String gender) {
+        conn = new ConnectDB();
+        String imageLink = "";
+        try {
+            String query = "SELECT images FROM images WHERE imageID = ?";
+            PreparedStatement prs = conn.getConnect().prepareStatement(query);
+            prs.setInt(1, imageID);
+            ResultSet rs = prs.executeQuery();
+            if (rs.next()) {
+                imageLink = rs.getString(1);
+            } else {
+                if (gender.equalsIgnoreCase("Male")) {
+                    imageLink = "img/male.gif";
+                } else {
+                    imageLink = "img/female.gif";
+                }
+            }
+            prs.close();
+            rs.close();
+            conn.closeConnect();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return imageLink;
     }
 
     public void fillCountryList() {
@@ -545,5 +642,9 @@ public class UserManager {
 
     public ArrayList getCountryList() {
         return this.countryList;
+    }
+    
+    public ArrayList getFriendList() {
+        return this.friendList;
     }
 }

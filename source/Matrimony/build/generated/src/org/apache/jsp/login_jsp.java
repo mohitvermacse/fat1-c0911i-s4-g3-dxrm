@@ -163,7 +163,9 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     if (_jspx_eval_html_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("   \n");
-        out.write("                    <h2 class=\"formHeader\">Partner Search</h2>\n");
+        out.write("                    ");
+        out.write("\n");
+        out.write("                    <h2 class=\"formHeader\">Partner Login</h2>\n");
         out.write("                    <label>UserName:</label>  ");
         if (_jspx_meth_html_text_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
@@ -181,8 +183,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
           return true;
         out.write("</div>\n");
         out.write("                    <br class=\"spacer\" />\n");
-        out.write("                    <input name=\"btn\" class=\"goBtn1\" type=\"submit\" value=\"Log in\"/>\n");
-        out.write("                    <input name=\"btn\" class=\"goBtn\" type=\"submit\" value=\"Log out\"/>\n");
+        out.write("                    <input name=\"btn\" class=\"goBtn1\" type=\"submit\" value=\"Log in\"/>                  \n");
+        out.write("                    <a class=\"a\" href=\"/Matrimony/forgotPassword.jsp\">forgot password</a>\n");
         out.write("                    <br class=\"spacer\" />\n");
         out.write("                    <div style=\"color: red\">\n");
         out.write("                        ");

@@ -34,14 +34,15 @@
         <div id="body">
             <div id="leftPanel">
                 <html:form action="LoginAction" method="post" enctype="multipart/form-data">   
-                    <h2 class="formHeader">Partner Search</h2>
+                    <%-- <h2 class=" ">Partner Search</h2> 	--%>
+                    <h2 class="formHeader">Partner Login</h2>
                     <label>UserName:</label>  <html:text property="userName"/><br class="spacer" />
                     <div style="color: red"><html:errors property="use"/></div>
                     <label>Password:</label> <html:password property="password"/><br class="spacer" />
                     <div style="color: red"><html:errors property="pas"/></div>
                     <br class="spacer" />
-                    <input name="btn" class="goBtn1" type="submit" value="Log in"/>
-                    <input name="btn" class="goBtn" type="submit" value="Log out"/>
+                    <input name="btn" class="goBtn1" type="submit" value="Log in"/>                  
+                    <a class="a" href="/Matrimony/forgotPassword.jsp">forgot password</a>
                     <br class="spacer" />
                     <div style="color: red">
                         <html:errors property="logUser"/>

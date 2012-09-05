@@ -4,8 +4,6 @@
  */
 package controller;
 
-import bean.CountryBean;
-import bean.CountryBus;
 import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +14,9 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  *
- * @author SENJURO
+ * @author TungPT
  */
-public class ProfileTemp extends org.apache.struts.action.Action {
+public class FriendTemp extends org.apache.struts.action.Action {
 
     /*
      * forward name="success" path=""
@@ -39,18 +37,11 @@ public class ProfileTemp extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
         HttpSession session = request.getSession(false);
         int userID = Integer.parseInt(session.getAttribute("idUser").toString());
         UserManager userManager = new UserManager();
-        /*userManager.fillCityList();
-        userManager.fillCountryList();*/
-        userManager.fillUserProfile(userID);
-        CountryBus cBus = new CountryBus();
-        CountryBean cBean = new CountryBean();
-        cBean.setAr(cBus.GetAllCountry());
-        request.setAttribute("countryList", cBean);
-        session.setAttribute("userManager", userManager);
-        return mapping.findForward("profile");
+        userManager.fillFriendList(userID);
+        session.setAttribute("friendList", userManager);
+        return mapping.findForward("friend");
     }
 }

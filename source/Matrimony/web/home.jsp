@@ -21,5 +21,7 @@
         <html:link page="/ProfileTemp.page">Profile</html:link>
         <br>
         <html:link page="/PremiumTemp.page">Premium</html:link>
+        <br>
+        <html:link page="/FriendTemp.page">Friend</html:link>
     </body>
 </html>

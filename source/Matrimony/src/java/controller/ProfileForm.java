@@ -37,8 +37,10 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
     private String phoneNumber;
     private String maritalStatus;
     private String height;
-    private String countryName;
+    private String countryID;
+    private String countryIDTemp;
     private String cityName;
+    private String cityNameTemp;
     private String languages;
     private String caste;
     private String familyDetails;
@@ -297,15 +299,15 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
     /**
      * @return the countryName
      */
-    public String getCountryName() {
-        return countryName;
+    public String getCountryID() {
+        return countryID;
     }
 
     /**
      * @param countryName the countryName to set
      */
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCountryID(String countryID) {
+        this.countryID = countryID;
     }
 
     /**
@@ -460,5 +462,33 @@ public class ProfileForm extends org.apache.struts.action.ActionForm {
      */
     public void setBooks(String books) {
         this.books = books;
+    }
+
+    /**
+     * @return the countryNameTemp
+     */
+    public String getCountryIDTemp() {
+        return countryIDTemp;
+    }
+
+    /**
+     * @param countryNameTemp the countryNameTemp to set
+     */
+    public void setCountryIDTemp(String countryIDTemp) {
+        this.countryIDTemp = countryIDTemp;
+    }
+
+    /**
+     * @return the cityNameTemp
+     */
+    public String getCityNameTemp() {
+        return cityNameTemp;
+    }
+
+    /**
+     * @param cityNameTemp the cityNameTemp to set
+     */
+    public void setCityNameTemp(String cityNameTemp) {
+        this.cityNameTemp = cityNameTemp;
     }
 }

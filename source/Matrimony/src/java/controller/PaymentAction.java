@@ -41,6 +41,7 @@ public class PaymentAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         HttpSession session = request.getSession(false);
+        int userID = Integer.parseInt(session.getAttribute("idUser").toString());
         PaymentForm paymentForm = (PaymentForm) form;
         String adminBankAccount = "08282012001";
         float amount = Float.parseFloat(paymentForm.getMoney());
@@ -50,7 +51,7 @@ public class PaymentAction extends org.apache.struts.action.Action {
         if(flag) {
             int premiumID = Integer.parseInt(session.getAttribute("premiumID").toString());
             UserManager userManager = new UserManager();
-            flag = userManager.upgradeAccount(3, premiumID);
+            flag = userManager.upgradeAccount(userID, premiumID);
             if(flag) {
                 return mapping.findForward("success");
             } else {

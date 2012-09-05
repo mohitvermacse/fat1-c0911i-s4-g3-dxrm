@@ -51,15 +51,16 @@ public class MyUserAction extends org.apache.struts.action.Action {
             String userName = session.getAttribute("userName").toString();
             String btn = uform.getBtn();
             Date dateTemp = new Date();
-            DateFormat fr = new SimpleDateFormat("MM/dd/yyy hh:mm:ss");
+            DateFormat fr = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
             String date = (fr.format(dateTemp));
+
             String friendId = request.getParameter("friendId");
 
             if (friendId != null) {
                 if (ua.checkTwoUserFriend(yourId, Integer.parseInt(friendId))) {
                     ArrayList arrayInfor = (ArrayList) ua.getInforUserByID(Integer.parseInt(friendId));
                     request.setAttribute("information", arrayInfor);
-                    System.out.println("Friend ID: " + friendId +"\n Size Infor: "+ arrayInfor.size());
+                    System.out.println("Friend ID: " + friendId + "\n Size Infor: " + arrayInfor.size());
                     return mapping.findForward("infor");
                 } else {
                     ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
@@ -68,15 +69,17 @@ public class MyUserAction extends org.apache.struts.action.Action {
                     request.setAttribute("listReceive", arrayRequest);
                     request.setAttribute("userName", userName);
                     request.setAttribute("status", " You do not have this permission");
-                    System.out.println("Friend ID 1: " + friendId);
+                    System.out.println("Friend ID 1: " + friendId + " Your ID: " + yourId);
                     return mapping.findForward("user");
                 }
             }
             if (btn.equalsIgnoreCase("Accept")) {
-
+                System.out.println("Receive ID: " + receiveID);
                 if (ua.updateReceiveRequestById(receiveID, "Approved", "Read")) {
+                    System.out.println("Send ID: " + sendID +" Date: "+ date);
                     if (ua.updateSendRequestById(sendID, date, "Approved")) {
-
+                        System.out.println("Send ID 1: " + sendID);
+                        
                         ArrayList arrayRequest = (ArrayList) ua.getAllReceiveRequestByStatus(yourId);
                         ArrayList arrayFriend = (ArrayList) ua.getAllFriend(yourId);
                         request.setAttribute("listFriend", arrayFriend);

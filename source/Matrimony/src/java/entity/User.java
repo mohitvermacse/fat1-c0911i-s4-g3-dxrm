@@ -893,4 +893,5 @@ public class User {
     public void setAvatarLink(String avatarLink) {
         this.avatarLink = avatarLink;
     }
+
 }
