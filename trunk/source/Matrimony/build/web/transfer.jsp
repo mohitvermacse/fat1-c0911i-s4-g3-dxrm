@@ -70,7 +70,7 @@
         <%--Boby Start--%>
         <div id="body">
             <div id="leftPanel">               
-                <jsp:include page="template/leftPanel.jsp"></jsp:include>
+                <jsp:include page="template/leftBody2.jsp"></jsp:include>
             </div>
             <div id="rightPanel">
                 <h2 class="welcomeHeader">Welcome to Matrimony Online</h2>

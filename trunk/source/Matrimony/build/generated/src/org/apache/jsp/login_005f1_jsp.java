@@ -1,22 +1,20 @@
-package org.apache.jsp.admin;
+package org.apache.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class login_005f1_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.Vector _jspx_dependants;
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_html_lang;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_form_method_action;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_form_method_enctype_action;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_text_property_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_errors_property_nobody;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_password_property_nobody;
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_html_submit_value_nobody;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -25,21 +23,17 @@ public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
   }
 
   public void _jspInit() {
-    _jspx_tagPool_html_html_lang = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_html_form_method_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_html_form_method_enctype_action = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_text_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_errors_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_html_password_property_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-    _jspx_tagPool_html_submit_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
-    _jspx_tagPool_html_html_lang.release();
-    _jspx_tagPool_html_form_method_action.release();
+    _jspx_tagPool_html_form_method_enctype_action.release();
     _jspx_tagPool_html_text_property_nobody.release();
     _jspx_tagPool_html_errors_property_nobody.release();
     _jspx_tagPool_html_password_property_nobody.release();
-    _jspx_tagPool_html_submit_value_nobody.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -75,10 +69,64 @@ public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n");
+      out.write("<html xmlns=\"http://www.w3.org/1999/xhtml\">\n");
+      out.write("    <head>\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n");
+      out.write("        <title>Matrimony Online</title>\n");
+      out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "template/meta.jsp", out, false);
       out.write("\n");
-      if (_jspx_meth_html_html_0(_jspx_page_context))
+      out.write("\n");
+      out.write("    </head>\n");
+      out.write("    <body>\n");
+      out.write("\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        <div id=\"header\">\n");
+      out.write("            ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "template/header.jsp", out, false);
+      out.write("\n");
+      out.write("            <ul>\n");
+      out.write("                ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "template/ul.jsp", out, false);
+      out.write("\n");
+      out.write("            </ul>\n");
+      out.write("        </div>\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        <div id=\"body\">\n");
+      out.write("            <div id=\"leftPanel\">\n");
+      out.write("                ");
+      if (_jspx_meth_html_form_0(_jspx_page_context))
         return;
-      out.write('\n');
+      out.write(" <br class=\"spacer\" />  \n");
+      out.write("                ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "template/leftPanel.jsp", out, false);
+      out.write("\n");
+      out.write("            </div>\n");
+      out.write("            <div id=\"rightPanel\">\n");
+      out.write("                \n");
+      out.write("            </div>\n");
+      out.write("            <br class=\"spacer\" />\n");
+      out.write("        </div>\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        ");
+      out.write("\n");
+      out.write("        <div id=\"footer\">\n");
+      out.write("            ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "template/footer.jsp", out, false);
+      out.write("\n");
+      out.write("        </div> \n");
+      out.write("        ");
+      out.write("\n");
+      out.write("    </body>\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -92,110 +140,65 @@ public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
     }
   }
 
-  private boolean _jspx_meth_html_html_0(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:html
-    org.apache.struts.taglib.html.HtmlTag _jspx_th_html_html_0 = (org.apache.struts.taglib.html.HtmlTag) _jspx_tagPool_html_html_lang.get(org.apache.struts.taglib.html.HtmlTag.class);
-    _jspx_th_html_html_0.setPageContext(_jspx_page_context);
-    _jspx_th_html_html_0.setParent(null);
-    _jspx_th_html_html_0.setLang(true);
-    int _jspx_eval_html_html_0 = _jspx_th_html_html_0.doStartTag();
-    if (_jspx_eval_html_html_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-      do {
-        out.write("\n");
-        out.write("    <head>      \n");
-        out.write("        <title>Matrimony</title>      \n");
-        out.write("    </head>\n");
-        out.write("    <body style=\"background-color: white\">\n");
-        out.write("        ");
-        if (_jspx_meth_html_form_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_html_0, _jspx_page_context))
-          return true;
-        out.write("\n");
-        out.write("    </body>\n");
-        int evalDoAfterBody = _jspx_th_html_html_0.doAfterBody();
-        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-          break;
-      } while (true);
-    }
-    if (_jspx_th_html_html_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_html_lang.reuse(_jspx_th_html_html_0);
-      return true;
-    }
-    _jspx_tagPool_html_html_lang.reuse(_jspx_th_html_html_0);
-    return false;
-  }
-
-  private boolean _jspx_meth_html_form_0(javax.servlet.jsp.tagext.JspTag _jspx_th_html_html_0, PageContext _jspx_page_context)
+  private boolean _jspx_meth_html_form_0(PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
     JspWriter out = _jspx_page_context.getOut();
     //  html:form
-    org.apache.struts.taglib.html.FormTag _jspx_th_html_form_0 = (org.apache.struts.taglib.html.FormTag) _jspx_tagPool_html_form_method_action.get(org.apache.struts.taglib.html.FormTag.class);
+    org.apache.struts.taglib.html.FormTag _jspx_th_html_form_0 = (org.apache.struts.taglib.html.FormTag) _jspx_tagPool_html_form_method_enctype_action.get(org.apache.struts.taglib.html.FormTag.class);
     _jspx_th_html_form_0.setPageContext(_jspx_page_context);
-    _jspx_th_html_form_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_html_0);
-    _jspx_th_html_form_0.setAction("LogAdminAction");
-    _jspx_th_html_form_0.setMethod("POST");
+    _jspx_th_html_form_0.setParent(null);
+    _jspx_th_html_form_0.setAction("LoginAction");
+    _jspx_th_html_form_0.setMethod("post");
+    _jspx_th_html_form_0.setEnctype("multipart/form-data");
     int _jspx_eval_html_form_0 = _jspx_th_html_form_0.doStartTag();
     if (_jspx_eval_html_form_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
+        out.write("   \n");
+        out.write("                    ");
         out.write("\n");
-        out.write("            <table>\n");
-        out.write("                <tr>\n");
-        out.write("                    <td align=\"right\">UserName:</td>\n");
-        out.write("                    <td align=\"left\"> ");
+        out.write("                    <h2 class=\"formHeader\">Partner Login</h2>\n");
+        out.write("                    <label>UserName:</label>  ");
         if (_jspx_meth_html_text_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
-        out.write("</td>\n");
-        out.write("                    <td><div style=\"color: red\"> ");
+        out.write("<br class=\"spacer\" />\n");
+        out.write("                    <div style=\"color: red\">");
         if (_jspx_meth_html_errors_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
-        out.write("</div></td>\n");
-        out.write("                </tr>\n");
-        out.write("                <tr>\n");
-        out.write("                    <td align=\"right\">Password:</td>\n");
-        out.write("                    <td align=\"left\">");
+        out.write("</div>\n");
+        out.write("                    <label>Password:</label> ");
         if (_jspx_meth_html_password_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
-        out.write("</td>\n");
-        out.write("                    <td><div style=\"color: red\">");
+        out.write("<br class=\"spacer\" />\n");
+        out.write("                    <div style=\"color: red\">");
         if (_jspx_meth_html_errors_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
-        out.write("</div></td>\n");
-        out.write("                </tr>\n");
-        out.write("                <tr>\n");
-        out.write("                    <td></td>\n");
-        out.write("                    <td align=\"left\">\n");
+        out.write("</div>\n");
+        out.write("                    <br class=\"spacer\" />\n");
+        out.write("                    <input name=\"btn\" class=\"goBtn1\" type=\"submit\" value=\"Log in\"/>                  \n");
+        out.write("                    <a class=\"a\" href=\"/Matrimony/forgotPassword.jsp\">forgot password</a>\n");
+        out.write("                    <br class=\"spacer\" />\n");
+        out.write("                    <div style=\"color: red\">\n");
         out.write("                        ");
-        if (_jspx_meth_html_submit_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-          return true;
-        out.write("\n");
-        out.write("                        ");
-        if (_jspx_meth_html_submit_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
-          return true;
-        out.write("\n");
-        out.write("                    </td>\n");
-        out.write("                </tr>\n");
-        out.write("            </table> \n");
-        out.write("            <div style=\"color: red\"> \n");
-        out.write("\n");
-        out.write("                ");
         if (_jspx_meth_html_errors_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
           return true;
         out.write("\n");
-        out.write("            </div>     \n");
-        out.write("        ");
+        out.write("                        ");
+        if (_jspx_meth_html_errors_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_html_form_0, _jspx_page_context))
+          return true;
+        out.write("\n");
+        out.write("                    </div>\n");
+        out.write("                ");
         int evalDoAfterBody = _jspx_th_html_form_0.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
           break;
       } while (true);
     }
     if (_jspx_th_html_form_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_form_method_action.reuse(_jspx_th_html_form_0);
+      _jspx_tagPool_html_form_method_enctype_action.reuse(_jspx_th_html_form_0);
       return true;
     }
-    _jspx_tagPool_html_form_method_action.reuse(_jspx_th_html_form_0);
+    _jspx_tagPool_html_form_method_enctype_action.reuse(_jspx_th_html_form_0);
     return false;
   }
 
@@ -271,42 +274,6 @@ public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
     return false;
   }
 
-  private boolean _jspx_meth_html_submit_0(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:submit
-    org.apache.struts.taglib.html.SubmitTag _jspx_th_html_submit_0 = (org.apache.struts.taglib.html.SubmitTag) _jspx_tagPool_html_submit_value_nobody.get(org.apache.struts.taglib.html.SubmitTag.class);
-    _jspx_th_html_submit_0.setPageContext(_jspx_page_context);
-    _jspx_th_html_submit_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_submit_0.setValue("Log in");
-    int _jspx_eval_html_submit_0 = _jspx_th_html_submit_0.doStartTag();
-    if (_jspx_th_html_submit_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_submit_value_nobody.reuse(_jspx_th_html_submit_0);
-      return true;
-    }
-    _jspx_tagPool_html_submit_value_nobody.reuse(_jspx_th_html_submit_0);
-    return false;
-  }
-
-  private boolean _jspx_meth_html_submit_1(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  html:submit
-    org.apache.struts.taglib.html.SubmitTag _jspx_th_html_submit_1 = (org.apache.struts.taglib.html.SubmitTag) _jspx_tagPool_html_submit_value_nobody.get(org.apache.struts.taglib.html.SubmitTag.class);
-    _jspx_th_html_submit_1.setPageContext(_jspx_page_context);
-    _jspx_th_html_submit_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
-    _jspx_th_html_submit_1.setValue("Log out");
-    int _jspx_eval_html_submit_1 = _jspx_th_html_submit_1.doStartTag();
-    if (_jspx_th_html_submit_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-      _jspx_tagPool_html_submit_value_nobody.reuse(_jspx_th_html_submit_1);
-      return true;
-    }
-    _jspx_tagPool_html_submit_value_nobody.reuse(_jspx_th_html_submit_1);
-    return false;
-  }
-
   private boolean _jspx_meth_html_errors_2(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
           throws Throwable {
     PageContext pageContext = _jspx_page_context;
@@ -322,6 +289,24 @@ public final class loginAdmin_jsp extends org.apache.jasper.runtime.HttpJspBase
       return true;
     }
     _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_2);
+    return false;
+  }
+
+  private boolean _jspx_meth_html_errors_3(javax.servlet.jsp.tagext.JspTag _jspx_th_html_form_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  html:errors
+    org.apache.struts.taglib.html.ErrorsTag _jspx_th_html_errors_3 = (org.apache.struts.taglib.html.ErrorsTag) _jspx_tagPool_html_errors_property_nobody.get(org.apache.struts.taglib.html.ErrorsTag.class);
+    _jspx_th_html_errors_3.setPageContext(_jspx_page_context);
+    _jspx_th_html_errors_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_html_form_0);
+    _jspx_th_html_errors_3.setProperty("userExpireDate");
+    int _jspx_eval_html_errors_3 = _jspx_th_html_errors_3.doStartTag();
+    if (_jspx_th_html_errors_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
+      return true;
+    }
+    _jspx_tagPool_html_errors_property_nobody.reuse(_jspx_th_html_errors_3);
     return false;
   }
 }

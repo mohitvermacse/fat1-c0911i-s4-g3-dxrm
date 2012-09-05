@@ -45,13 +45,15 @@ public class LoginAction extends org.apache.struts.action.Action {
         String user = from.getUserName();
         String pas = from.getPassword();
         System.out.println(user + "\n" + pas);
-        try {            
+        try {
             if (ua.loginUser(user, pas)) {
                 int id = ua.getIdUserByUserName(user);
                 ArrayList arrayReceive = (ArrayList) ua.getAllReceiveRequestByStatus(id);
                 ArrayList arrayFriend = (ArrayList) ua.getAllFriendss(id);
-                System.out.println("Size friend: " + arrayFriend.size() + id);
-
+                System.out.println("Size friend: " + arrayReceive.size() +" ID: "+ id);
+                ArrayList listCity = (ArrayList) ua.getAllCity();
+                session.setAttribute("listCity", listCity);
+                
                 request.setAttribute("listFriend", arrayFriend);
                 request.setAttribute("listReceive", arrayReceive);
 
