@@ -25,6 +25,23 @@
         <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.js"></script>
         <script type="text/javascript" src="jquery.datepick.package-4.0.6/jquery.datepick.validation.js"></script>
+                    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#country").change(function(){
+                    $id = $(this).val();
+                    $.ajax({
+                        type:"Post",
+                        url:"LoadCity.page",
+                        data:"id="+$id,
+                        cache:"false",
+                        success:function(html){
+                            $("#city").html(html);
+                        }
+                    });
+                });
+            });
+        </script>
         <script type="text/javascript">            
             function customRange(dates) { 
                 if (this.id == 'startPicker') { 
@@ -59,13 +76,15 @@
                 
             });
         </script>
+        
     </head>
     <body>
         <div style="display: none;">
             <img id="calImg" src="jquery.datepick.package-4.0.6/calendar.gif" alt="Popup" class="trigger">
         </div>
         <h1>Register</h1>
-        <jsp:useBean id="userManager" class="bean.UserManager" scope="session"/>
+
+        <jsp:useBean scope="request" id="coutryList" class="bean.CountryBean"/>
         <html:form action="RegisterAction" styleId="validateForm" >
             <table>
                 <tr>
@@ -76,8 +95,8 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="userNameError" />
-                            <html:errors property="existed" />
+                        <html:errors property="userNameError" />
+                        <html:errors property="existed" />
                         </font>
                     </td>
                 </tr>
@@ -89,7 +108,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="passwordError" />
+                        <html:errors property="passwordError" />
                         </font>
                     </td>
                 </tr>
@@ -101,7 +120,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="passwordNotMatch" />
+                        <html:errors property="passwordNotMatch" />
                         </font>
                     </td>
                 </tr>
@@ -113,7 +132,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="fullNameError" />
+                        <html:errors property="fullNameError" />
                         </font>
                     </td>
                 </tr>
@@ -125,7 +144,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="addressError" />
+                        <html:errors property="addressError" />
                         </font>
                     </td>
                 </tr>
@@ -138,7 +157,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="genderError" />
+                        <html:errors property="genderError" />
                         </font>
                     </td>
                 </tr>
@@ -150,8 +169,8 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="birthdayError" />                        
-                            <html:errors property="birthdayInvalid" />
+                        <html:errors property="birthdayError" />                        
+                        <html:errors property="birthdayInvalid" />
                         </font>    
                     </td>
                 </tr>
@@ -163,8 +182,8 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="emailExisted" />
-                            <html:errors property="invalidEmail" />
+                        <html:errors property="emailExisted" />
+                        <html:errors property="invalidEmail" />
                         </font>
                     </td>
                 </tr>
@@ -176,7 +195,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="phoneInvalid" />
+                        <html:errors property="phoneInvalid" />
                         </font>
                     </td>
                 </tr>
@@ -194,11 +213,13 @@
                 <tr>
                     <td>Country: </td>
                     <td>
-                        <html:select property="countryName">
-                            <logic:iterate id="country" collection="${userManager.countryList}">
-                                <html:option value="${country}"/>
-                            </logic:iterate>
+                        <html:select property="countryName" styleId="country" >
+                            <html:option value="">Select Country</html:option>
+                            <c:forEach var="item" items="${countryList.ar}">
+                                <html:option value="${item.countryId}">${item.countryName}</html:option>
+                            </c:forEach>
                         </html:select>
+
                         <font style="color: red">*</font>
                     </td>
                     <td></td>
@@ -206,11 +227,9 @@
                 <tr>
                     <td>City: </td>
                     <td>
-                        <html:select property="cityName">
-                            <logic:iterate id="city" collection="${userManager.cityList}">
-                                <html:option value="${city}"/>
-                            </logic:iterate>
-                        </html:select>
+                        <html:select property="cityName" styleId="city">
+                            <html:option value="">Select Country First</html:option>
+                        </html:select>                        
                         <font style="color: red">*</font>
                     </td>
                     <td></td>
@@ -223,7 +242,7 @@
                     </td>
                     <td>
                         <font style="color: red">
-                            <html:errors property="heightInvalid" />
+                        <html:errors property="heightInvalid" />
                         </font>    
                     </td>
                 </tr>

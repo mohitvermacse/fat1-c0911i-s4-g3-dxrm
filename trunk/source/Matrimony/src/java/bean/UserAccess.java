@@ -106,7 +106,7 @@ public class UserAccess {
             while (rs.next()) {
                 City c = new City();
                 c.setCityId(rs.getInt(1));
-                c.setCountryId(rs.getInt(2));
+                c.setCountryId(rs.getString(2));
                 c.setCityName(rs.getString(3));
                 array.add(c);
             }
@@ -130,7 +130,7 @@ public class UserAccess {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Country c = new Country();
-                c.setCountryId(rs.getInt(1));
+                c.setCountryId(rs.getString(1));
                 c.setCountryName(rs.getString(2));
                 array.add(c);
             }
@@ -496,7 +496,7 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getInt(1);
             }
-            
+
         } catch (SQLException e) {
             System.out.println("System have not user.");
         }
@@ -685,7 +685,7 @@ public class UserAccess {
             while (rs.next()) {
                 total = rs.getString(1);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -717,7 +717,7 @@ public class UserAccess {
                 u.setEmail(rs.getString(5));
                 array.add(u);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -746,7 +746,7 @@ public class UserAccess {
             if (rs.next()) {
                 total = rs.getString(1);
             }
-           
+
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -781,7 +781,7 @@ public class UserAccess {
                 u.setEmail(rs.getString(5));
                 array.add(u);
             }
-           
+
         } catch (SQLException ex) {
             System.out.println("System have not users of in a day.");
         }
@@ -1213,5 +1213,67 @@ public class UserAccess {
             System.out.println("update fail! Please try again. " + e.getMessage());
         }
         return false;
+    }
+
+    /*
+     * Get avatar
+     */
+    public boolean fillFriendList(int userID) {
+
+        String action = "Approved";
+        boolean flag = false;
+        try {
+            PreparedStatement prs = con.prepareCall("call GetRequestFriends(?, ?)");
+            prs.setInt(1, userID);
+            prs.setString(2, action);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                if (rs.getInt(4) == 0) {
+                    if (rs.getString(3).equalsIgnoreCase("Male")) {
+                        user.setAvatarLink("img/male.gif");
+                    } else {
+                        user.setAvatarLink("img/female.gif");
+                    }
+                } else {
+                    user.setAvatarLink(getImageLink(rs.getInt(4), rs.getString(3)));
+                }
+
+            }
+          
+            flag = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            flag = false;
+        }
+        return flag;
+    }
+
+    public String getImageLink(int imageID, String gender) {
+       
+        String imageLink = "";
+        try {          
+            PreparedStatement prs = con.prepareStatement("SELECT images FROM images WHERE imageID = ?");
+            prs.setInt(1, imageID);
+            ResultSet rs = prs.executeQuery();
+            User user = new User();
+            if (rs.next()) {
+                imageLink = rs.getString(1);
+            } else {
+                if (gender.equalsIgnoreCase("Male")) {
+                    user.setAvatarLink("img/male.gif");
+                } else {
+                    user.setAvatarLink("imgfemale.gif");
+                }
+            }
+            prs.close();
+            rs.close();
+            con.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return imageLink;
     }
 }

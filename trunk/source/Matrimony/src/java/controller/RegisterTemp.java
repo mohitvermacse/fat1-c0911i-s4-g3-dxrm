@@ -4,6 +4,8 @@
  */
 package controller;
 
+import bean.CountryBean;
+import bean.CountryBus;
 import bean.UserManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,10 +41,14 @@ public class RegisterTemp extends org.apache.struts.action.Action {
             throws Exception {
         
         HttpSession session = request.getSession(false);
-        UserManager userManager = new UserManager();
-        userManager.fillCityList();
-        userManager.fillCountryList();
-        session.setAttribute("userManager", userManager);
+//        UserManager userManager = new UserManager();
+//        userManager.fillCityList();
+//        userManager.fillCountryList();
+//        session.setAttribute("userManager", userManager);
+        CountryBus cBus = new CountryBus();
+        CountryBean cBean = new CountryBean();
+        cBean.setAr(cBus.GetAllCountry());
+        request.setAttribute("countryList", cBean);
         return mapping.findForward("register");
     }
 }

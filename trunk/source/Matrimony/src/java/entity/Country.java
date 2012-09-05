@@ -9,21 +9,26 @@ package entity;
  * @author nvc
  */
 public class Country {
-    private int countryId;
+    private String countryId;
     private String countryName;
     public Country(){}
+
+    public Country(String countryId, String countryName) {
+        this.countryId = countryId;
+        this.countryName = countryName;
+    }
 
     /**
      * @return the countryId
      */
-    public int getCountryId() {
+    public String getCountryId() {
         return countryId;
     }
 
     /**
      * @param countryId the countryId to set
      */
-    public void setCountryId(int countryId) {
+    public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
 
