@@ -123,19 +123,19 @@ public class RegisterForm extends org.apache.struts.action.ActionForm {
             // TODO: add 'error.name.required' key to your resources
         }
 
-//        if (getUserName() == null || getUserName().length() < 6) {
-//            errors.add("userNameError", new ActionMessage("errors.userName.error"));
-//            return errors;
-//        }
+        if (getUserName() == null || getUserName().length() < 6) {
+            errors.add("userNameError", new ActionMessage("errors.userName.error"));
+            return errors;
+        }
         if (!userManager.checkUserName(userName)) {
             errors.add("existed", new ActionMessage("errors.userName.existed"));
             return errors;
         }
         
-        if (!v.checkUserName(userName)) {
-            errors.add("userNameError", new ActionMessage("errors.userName.error"));
-            return errors;
-        }
+//        if (!v.checkUserName(userName)) {
+//            errors.add("userNameError", new ActionMessage("errors.userName.error"));
+//            return errors;
+//        }
         
         if (!v.checkPassword(password)) {
             errors.add("passwordError", new ActionMessage("error.password.required"));

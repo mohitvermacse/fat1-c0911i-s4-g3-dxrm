@@ -48,7 +48,7 @@
                         <html:errors property="userExpireDate"/>
                     </div>
                 </html:form> <br class="spacer" />  
-                <jsp:include page="template/leftPanel.jsp"></jsp:include>
+                <jsp:include page="template/leftBody2.jsp"></jsp:include>
             </div>
             <div id="rightPanel">
                 <jsp:include page="template/rightBody1.jsp"></jsp:include>

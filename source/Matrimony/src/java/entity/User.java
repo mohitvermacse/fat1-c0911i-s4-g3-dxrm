@@ -23,7 +23,7 @@ public class User {
     private String gender;
     private String email;
     private String phoneNumber;
-    private String maritalStatus;
+    private String maritalStatus,avatarLink;
     private int height;
     private int cityId;
     private String languages;
@@ -31,8 +31,7 @@ public class User {
     private String familyDetail;
     private String qualification;
     private String workingAt;
-    private String hobbies;
-    
+    private String hobbies;    
     private String favorite;
     private String movies;
     private String cuisine;
@@ -879,5 +878,19 @@ public class User {
      */
     public void setsFamilyDetail(String sFamilyDetail) {
         this.sFamilyDetail = sFamilyDetail;
+    }
+
+    /**
+     * @return the avatarLink
+     */
+    public String getAvatarLink() {
+        return avatarLink;
+    }
+
+    /**
+     * @param avatarLink the avatarLink to set
+     */
+    public void setAvatarLink(String avatarLink) {
+        this.avatarLink = avatarLink;
     }
 }

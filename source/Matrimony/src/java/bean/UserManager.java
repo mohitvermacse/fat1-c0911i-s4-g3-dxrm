@@ -28,8 +28,8 @@ public class UserManager {
     public boolean addNewUser(String userName, String password, int avatar, String fullName, String address, String gender, String birthDay, String email, String phoneNumber, String maritalStatus, int height, String countryName, String cityName, String languages, String caste, String familyDetails, String qualification, String workingAt, String hobbies, String favoriteMusic, String movies, String cuisine, String books, String expireDate, String status) {
         boolean flag = false;
         conn = new ConnectDB();
-        int cityID = getCityID(cityName);
-        int countryID = getCountryID(countryName);
+        int cityID = Integer.parseInt(cityName);
+        //int countryID = getCountryID(countryName);
         boolean checkUserName = checkUserName(userName);
         String pass = db.md5(password);
         try {
@@ -46,7 +46,7 @@ public class UserManager {
             prs.setString(9, phoneNumber);
             prs.setString(10, maritalStatus);
             prs.setInt(11, height);
-            prs.setInt(12, countryID);
+            prs.setString(12, countryName);
             prs.setInt(13, cityID);
             prs.setString(14, languages);
             prs.setString(15, caste);

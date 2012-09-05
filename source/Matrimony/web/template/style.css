@@ -65,6 +65,9 @@ img {border:none;}
 #leftPanel form input.goBtn {
 	width:50px; height:25px; margin:3px 0 0 10px; float:none;
 }
+#leftPanel form input.goBtn3 {
+	width:50px; height:25px; margin:3px 0 0 105px; float:none;
+}
 #leftPanel form input.goBtn1 {
 	width:50px; height:25px; margin:3px 0 0 97px; float:none;
 }

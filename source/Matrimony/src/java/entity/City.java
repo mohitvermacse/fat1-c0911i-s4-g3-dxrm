@@ -10,8 +10,14 @@ package entity;
  */
 public class City {
     private int cityId;
-    private int countryId;
+    private String countryId;
     private String cityName;
+
+    public City(int cityId, String countryId, String cityName) {
+        this.cityId = cityId;
+        this.countryId = countryId;
+        this.cityName = cityName;
+    }
     
     public City(){}
 
@@ -32,14 +38,14 @@ public class City {
     /**
      * @return the countryId
      */
-    public int getCountryId() {
+    public String getCountryId() {
         return countryId;
     }
 
     /**
      * @param countryId the countryId to set
      */
-    public void setCountryId(int countryId) {
+    public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
 
