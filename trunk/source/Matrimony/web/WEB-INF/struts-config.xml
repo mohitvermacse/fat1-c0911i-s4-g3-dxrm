@@ -82,8 +82,8 @@
         <action path="/ManagePhoto" type="controller.ManagePhoto">
             <forward name="success" path="/managepic.jsp"/>
         </action>
-        <action input="/statist.jsp" name="StatistForm" path="/StatistAction" scope="session" type="controller.StatistAction">
-            <forward name="sta" path="/statist.jsp"/>
+        <action input="/admin/statist.jsp" name="StatistForm" path="/admin/Statistics" scope="session" type="controller.StatistAction">
+            <forward name="sta" path="/admin/statist.jsp"/>
         </action>
         <action input="/loginAdmin.jsp" name="logAdminForm" path="/LogAdminAction" scope="session" type="controllerAdmin.LogAdminAction">
             <forward name="homeAdmin" path="/controller.jsp"/>

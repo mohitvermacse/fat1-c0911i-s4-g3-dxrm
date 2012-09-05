@@ -42,41 +42,48 @@ public class StatistAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        try {
-            HttpSession session = request.getSession(false);
-            UserAccess ua = new UserAccess();
-            StatBean stBe = new StatBean();
-            StatBus stBu = new StatBus();
-            stBe.setTodaySum(stBu.getTodayTotal());
-            stBe.setMonthSum(stBu.getMonthTotal());
-            if (form != null) {
-                StatistForm sf = (StatistForm) form;
-                stBe.setArrS(stBu.getCustomStats(sf.getStartDate(), sf.getEndDate()));
 
-                String aDay = "Total new user of a day " + sf.getaDay() + " : " + ua.getTotalNewUserToday(sf.getaDay());
-                ArrayList arrayNewUser = (ArrayList) ua.getInforNewUserToday(sf.getaDay());
+        HttpSession session = request.getSession(false);
+        UserAccess ua = new UserAccess();
+        StatBean stBe = new StatBean();
+        StatBus stBu = new StatBus();
+        stBe.setTodaySum(stBu.getTodayTotal());
+        stBe.setMonthSum(stBu.getMonthTotal());
 
-                String aMonth = "Total new user of a month " + sf.getaMonth() + " : " + ua.getTotalNewUserAMonth(sf.getaMonth());
-             
-
-                ArrayList arrayNewUserAmonth = (ArrayList) ua.getInforNewUserAMonth(sf.getaMonth());
-
-                int totalSystem = ua.getTotalUser();
-                String totalfriend = ua.getAllUserHaveFriend();
-                request.setAttribute("friend", totalfriend);
-                request.setAttribute("total", totalSystem);
-                request.setAttribute("totalUserAMonth", aMonth);
-                request.setAttribute("listNewUserAmonth", arrayNewUserAmonth);
-                request.setAttribute("listNewUser", arrayNewUser);
-                request.setAttribute("totalUser", aDay);
-
-                System.out.println("A Day: " + sf.getaDay());
-                System.out.println("A Month: " + sf.getaMonth());
-            }
-            session.setAttribute("statBean", stBe);
-        } catch (Exception e) {
-            System.out.println("Error Hi: " + e.getMessage());
+        StatistForm sf = (StatistForm) form;
+        if (sf.getStartDate()!=null && sf.getEndDate()!=null) {
+            if (!sf.getStartDate().equals("") && !sf.getEndDate().equals(""))
+            stBe.setArrS(stBu.getCustomStats(sf.getStartDate(), sf.getEndDate()));
         }
+        if (sf.getaDay()!=null)
+        if (!sf.getaDay().equals(""))
+        {
+            String aDay = "Total new user of a day " + sf.getaDay() + " : " + ua.getTotalNewUserToday(sf.getaDay());
+            ArrayList arrayNewUser = (ArrayList) ua.getInforNewUserToday(sf.getaDay());
+            request.setAttribute("totalUser", aDay);
+            request.setAttribute("listNewUser", arrayNewUser);
+        }
+        if (sf.getaMonth()!=null)
+        if (!sf.getaMonth().equals("")) {
+            String aMonth = "Total new user of a month " + sf.getaMonth() + " : " + ua.getTotalNewUserAMonth(sf.getaMonth());
+            ArrayList arrayNewUserAmonth = (ArrayList) ua.getInforNewUserAMonth(sf.getaMonth());
+            request.setAttribute("totalUserAMonth", aMonth);
+            request.setAttribute("listNewUserAmonth", arrayNewUserAmonth);
+        }
+        int totalSystem = ua.getTotalUser();
+        String totalfriend = ua.getAllUserHaveFriend();
+        request.setAttribute("friend", totalfriend);
+        request.setAttribute("total", totalSystem);
+
+
+
+
+
+//        System.out.println("A Day: " + sf.getaDay());
+//        System.out.println("A Month: " + sf.getaMonth());
+
+        session.setAttribute("statBean", stBe);
+
 
         return mapping.findForward(SUCCESS);
     }
