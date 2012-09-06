@@ -431,6 +431,24 @@ CREATE PROCEDURE GetEmail
 	AS
 		SELECT email FROM users WHERE userName = @userName
 GO
+CREATE PROCEDURE GetRequestFriends
+	@userId int,
+	@action NVARCHAR(20)
+	AS
+	SELECT u.userID, u.userName, u.gender, u.avatar FROM receiveRequest AS rr inner join sendRequest AS sr 
+	ON rr.sendID=sr.sendID INNER JOIN users AS u ON rr.userID=u.userID
+	WHERE sr.userID =@userId AND rr.actions=@action
+
+GO
+CREATE PROCEDURE GetReceiveFriends 
+	@userId int,
+	@action NVARCHAR(20)
+	AS
+	SELECT sendRequest.userID, users.userName, users.gender, users.avatar
+	FROM users INNER JOIN sendRequest
+	ON sendRequest.userID = users.userID INNER JOIN receiveRequest
+	ON receiveRequest.sendID = sendRequest.sendID
+	WHERE receiveRequest.userID = @userId AND sendRequest.status=@action
 
 /*
 drop
